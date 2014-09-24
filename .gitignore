@@ -1,0 +1,10 @@
+kds_workspace
+
+**/*.g_c
+**/*.g_x
+**/*.cwGeneratedFileSetLog
+**/ProjectInfo.xml
+**/Generated_Code
+**/Documentation
+**/Static_Code
+**/Debug
