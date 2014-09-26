@@ -39,6 +39,7 @@
 #include "BitIoLdd2.h"
 #include "LED3.h"
 #include "BitIoLdd3.h"
+#include "WAIT1.h"
 #include "LED1.h"
 
 #ifdef __cplusplus

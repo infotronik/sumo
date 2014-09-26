@@ -18,10 +18,10 @@
   #define PL_NOF_LEDS       (3)
      /*!< FRDM board has up to 3 LEDs (RGB) */
 #elif PL_IS_ROBO
-  #define PL_NOF_LEDS       (0)
+  #define PL_NOF_LEDS       (2)
      /*!< We have up to 2 LED's on the robo board */
 #else
-  #error "unknown configuration?"
+  //#error "unknown configuration?"
 #endif
 
 /*!
