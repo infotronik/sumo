@@ -1,26 +1,101 @@
-\section{Syncronisation}
-\subsection{Übersicht}
+\section{Syncronization}
+\subsection{Why synchronization}
 \begin{frame}
-    \frametitle{Frametitle}
+    \frametitle{Why synchronization?}
     \framesubtitle{Framesubtitle}
-    Content
+    Computer operates in different time scale
     \begin{itemize}
-        \item List
-        \item with two items
+        \item if slower than reality: Result too late $\Rightarrow$ INCORRECT
+        \item if faster than reality: Result too early $\Rightarrow$ INCORRECT
     \end{itemize}
+    Computer has to synchronize with process
+    \begin{figure}
+        \includegraphics[width=0.5\textwidth]{fig/synchronization.png}
+        \caption{Synchronization}
+    \end{figure}
 \end{frame}
 
-\subsection{Funktionsweise}
+\subsection{Realtime Synchronization}
 \begin{frame}
-    \frametitle{Another Frame}
+    \frametitle{Realtime Synchronization}
     \framesubtitle{Anotherframesubtitle}
-    \begin{block}{Blocktitle}
-        This is a regular Block
-    \end{block}
-    \begin{alertblock}{Blocktitle}
-        This is an alert Block
-    \end{alertblock}
-    \begin{exampleblock}{Blocktitle}
-        This is an example Block
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth]{fig/realtime.png}
+        \caption{Realtime Synchronization}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Realtime Synchronization}
+    \framesubtitle{Anotherframesubtitle}
+        \begin{exampleblock}{+}
+        \begin{itemize}
+			\item easy to implement         
+    	\end{itemize}
     \end{exampleblock}
+    \begin{alertblock}{-}
+        \begin{itemize}
+			\item Inefficient        
+        	\item Needed waiting time?
+        	\item Different Compiler
+        	\item Different clock rate
+    	\end{itemize}
+    \end{alertblock}
+\end{frame}
+
+\subsection{Gadfly Synchronization}
+\begin{frame}
+    \frametitle{Gadfly Synchronization}
+    \framesubtitle{Anotherframesubtitle}
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth]{fig/gadfly.png}
+        \caption{Gadfly Synchronization}
+    \end{figure}
+        
+\end{frame}
+
+\begin{frame}
+    \frametitle{Gadfly Synchronization}
+    \framesubtitle{Anotherframesubtitle}
+	\begin{exampleblock}{+}
+        \begin{itemize}
+			\item easy to implement
+			\item lowers the system latency (reading data when it is available)         
+    	\end{itemize}
+   	\end{exampleblock}	
+	\begin{alertblock}{-}    
+    	\begin{itemize}
+			\item Active waiting/polling (Flags)
+			\item Processing power needed 
+			\item Blocks further execution 
+	     \end{itemize}
+	\end{alertblock}   
+\end{frame}
+
+\subsection{Interrupt Synchronization}
+\begin{frame}
+    \frametitle{Interrupt Synchronization}
+    \framesubtitle{Anotherframesubtitle}
+    \begin{figure}
+        \includegraphics[width=0.6\textwidth]{fig/interrupt.png}
+        \caption{Interrupt Synchronization}
+    \end{figure}
+        
+\end{frame}
+
+\begin{frame}
+    \frametitle{Interrupt Synchronization}
+    \framesubtitle{Anotherframesubtitle}
+	\begin{exampleblock}{+}
+        \begin{itemize}
+			\item No waiting
+			\item Better Performance (consider overhead)         
+    	\end{itemize}
+   	\end{exampleblock}	
+	\begin{alertblock}{-}    
+    	\begin{itemize}
+			\item Can easily get complicated
+	     \end{itemize}
+	\end{alertblock}
+        
 \end{frame}
