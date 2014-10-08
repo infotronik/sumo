@@ -4,5 +4,6 @@
 *.out
 *.snm
 *.toc
+*.gz
 
 recap.pdf
