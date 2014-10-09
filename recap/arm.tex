@@ -1,36 +1,56 @@
 \section{ARM Cortex}
-\subsection{Übersicht}
+\subsection{Overview}
 \begin{frame}
-    \frametitle{Frametitle}
-    \framesubtitle{Framesubtitle}
-    Content
+    \frametitle{ARM}
+    \framesubtitle{Overview}
+    ARM Cortex
     \begin{itemize}
-        \item List
-        \item with two items
+        \item \textbf{A}dvanced \textbf{R}ISC \textbf{M}achines
+        \item sell License
+        \item up to 64bit
     \end{itemize}
-\end{frame}
-
-\subsection{Familien}
-\begin{frame}
-    \frametitle{Another Frame}
-    \framesubtitle{Anotherframesubtitle}
-    \begin{block}{Blocktitle}
-        This is a regular Block
+    \begin{block}{ARM Today}
+		The Apple A8 is built up of a 64-Bit-ARM-CPU
     \end{block}
-    \begin{alertblock}{Blocktitle}
-        This is an alert Block
-    \end{alertblock}
-    \begin{exampleblock}{Blocktitle}
-        This is an example Block
-    \end{exampleblock}
 \end{frame}
 
-\subsection{Logo}
+\subsection{Families}
 \begin{frame}
-    \frametitle{Bild}
-    \framesubtitle{Untertitel}
+    \frametitle{ARM}
+    \framesubtitle{Families}
+   ARM Cortex Families:
+    \begin{itemize}
+        \item A: Application
+        \item R: Realtime
+        \item \textbf{M: Microcontroller}
+    \end{itemize}
+    \begin{block}{Instruction Set}
+        M0,\textbf{ M0+}, M1 <  M3 <  \textbf{M4} < M4 FPU
+    \end{block}
+\end{frame}
+
+\subsection{Instruction set}
+\begin{frame}
+    \frametitle{ARM}
+    \framesubtitle{Instruction set}
     \begin{figure}
-        \includegraphics[width=0.2\textwidth]{fig/1280px-ARM_Logo.png}
-        \caption{ARM Logo}
+        \includegraphics[width=0.8\textwidth]			{fig/instructionset.png}
+        \caption{Instruction set}
     \end{figure}
+\end{frame}
+
+\subsection{Interrupts}
+\begin{frame}
+    \frametitle{ARM}
+    \framesubtitle{Interrupts}
+    16 predefined Interrupts
+    Priorities
+        \begin{itemize}
+        \item 8bit Priority Register
+        \item FSL M0+: 2bits = 4 Priorities
+        \item FSL M4 : 4bits = 16 Prio
+    \end{itemize}
+    \begin{block}{Reihenfolge Priorities}
+        the lower the prio or subprio number - the higher prio!
+    \end{block}
 \end{frame}
