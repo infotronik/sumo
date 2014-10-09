@@ -3,6 +3,10 @@
 #if PL_HAS_LED
   #include "LED.h"
 #endif
+#if PL_HAS_TIMER
+  #include "Timer.h"
+#endif
+
 
 void PL_Init(void) {
 #if PL_HAS_LED

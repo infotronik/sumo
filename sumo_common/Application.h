@@ -8,8 +8,13 @@
 #ifndef APPLICATION_H_
 #define APPLICATION_H_
 
+#include "Event.h"
+
 
 void APP_Start(void);
+static void APP_EventHandler(EVNT_Handle event);
+static void APP_Loop(void);
+
 
 
 #endif /* APPLICATION_H_ */
