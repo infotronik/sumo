@@ -14,6 +14,7 @@
 
 void APP_Start(void) {
   PL_Init(); /* platform initialization */
+
   for(;;) {
     LED1_Neg();
     WAIT1_Waitms(300);
