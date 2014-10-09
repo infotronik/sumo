@@ -6,7 +6,7 @@
     ARM Cortex
     \begin{itemize}
         \item \textbf{A}dvanced \textbf{R}ISC \textbf{M}achines
-        \item sell License
+        \item licenses the configurable core
         \item up to 64bit
     \end{itemize}
     \begin{block}{ARM Today}
@@ -43,14 +43,15 @@
 \begin{frame}
     \frametitle{ARM}
     \framesubtitle{Interrupts}
-    16 predefined Interrupts
-    Priorities
         \begin{itemize}
+        \item 16 predefined Interrupts
         \item 8bit Priority Register
-        \item FSL M0+: 2bits = 4 Priorities
-        \item FSL M4 : 4bits = 16 Prio
-    \end{itemize}
-    \begin{block}{Reihenfolge Priorities}
-        the lower the prio or subprio number - the higher prio!
+      		  \begin{itemize}
+      		  \item FSL M0+: 2bits = 4 Priorities, no sub prio!
+       		 \item FSL M4 : 4bits = 16 Prio
+    		\end{itemize}
+        \end{itemize}
+    \begin{block}{Priority order}
+        The lower the number, the higher the priority
     \end{block}
 \end{frame}
