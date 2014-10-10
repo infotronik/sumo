@@ -31,6 +31,11 @@
 #include "Events.h"
 #include "Platform.h"
 
+#if PL_HAS_KBI
+	#include "Keys.h"
+#endif
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif 
@@ -74,6 +79,111 @@ void TI1_OnInterrupt(void)
 {
 #if PL_HAS_TIMER
 	TMR_OnInterrupt();
+#endif
+}
+
+/*
+** ===================================================================
+**     Event       :  SW_G_OnInterrupt (module Events)
+**
+**     Component   :  SW_G [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void SW_G_OnInterrupt(void)
+{
+#if PL_HAS_KBI
+	if(KEY7_Get()){
+		KEY_OnInterrupt(KEY_BTN7);
+	}
+#endif
+}
+
+/*
+** ===================================================================
+**     Event       :  SW_D_OnInterrupt (module Events)
+**
+**     Component   :  SW_D [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void SW_D_OnInterrupt(void)
+{
+#if PL_HAS_KBI
+	if(KEY4_Get()){
+		KEY_OnInterrupt(KEY_BTN4);
+	}
+#endif
+}
+
+/*
+** ===================================================================
+**     Event       :  SW_C_OnInterrupt (module Events)
+**
+**     Component   :  SW_C [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void SW_C_OnInterrupt(void)
+{
+#if PL_HAS_KBI
+	if(KEY3_Get()){
+		KEY_OnInterrupt(KEY_BTN3);
+	}
+#endif
+}
+
+/*
+** ===================================================================
+**     Event       :  SW_B_OnInterrupt (module Events)
+**
+**     Component   :  SW_B [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void SW_B_OnInterrupt(void)
+{
+#if PL_HAS_KBI
+	if(KEY2_Get()){
+		KEY_OnInterrupt(KEY_BTN2);
+	}
+#endif
+}
+
+/*
+** ===================================================================
+**     Event       :  SW_A_OnInterrupt (module Events)
+**
+**     Component   :  SW_A [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void SW_A_OnInterrupt(void)
+{
+#if PL_HAS_KBI
+	if(KEY1_Get()){
+		KEY_OnInterrupt(KEY_BTN1);
+	}
 #endif
 }
 

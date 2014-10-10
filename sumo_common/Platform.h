@@ -20,12 +20,33 @@
 #define PL_HAS_TIMER  (1)
   /*!< Set to 1 to enable TIMER support, 0 otherwise */
 
+#define PL_HAS_KEYS  (1)
+  /*!< Set to 1 to enable KEYS support, 0 otherwise */
+
+#define PL_HAS_KBI  (1)
+  /*!< Set to 1 to enable KBI support, 0 otherwise */
+
+#define PL_KEY_POLLED_KEY1  (0)
+#define PL_KEY_POLLED_KEY2  (0)
+#define PL_KEY_POLLED_KEY3  (0)
+#define PL_KEY_POLLED_KEY4  (0)
+#define PL_KEY_POLLED_KEY5  (1)
+#define PL_KEY_POLLED_KEY6  (1)
+#define PL_KEY_POLLED_KEY7  (0)
+
+#define PL_HAS_JOYSTICK  (0)
+  /*!< Set to 1 to enable JOYSTICK support, 0 otherwise */
+
 #if PL_IS_FRDM
+	#define PL_NOF_KEYS       (7)
+   /*!< FRDM board has up to 7 KEYs */
   #define PL_NOF_LEDS       (3)
      /*!< FRDM board has up to 3 LEDs (RGB) */
 #elif PL_IS_ROBO
   #define PL_NOF_LEDS       (2)
      /*!< We have up to 2 LED's on the robo board */
+	#define PL_NOF_KEYS       (2)
+   /*!< FRDM board has up to 2 KEYs */
 #else
   //#error "unknown configuration?"
 #endif
