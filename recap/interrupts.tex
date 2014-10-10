@@ -1,26 +1,28 @@
 \section{Interrupts}
-\subsection{Übersicht}
+\subsection*{What is an interrupt? }
 \begin{frame}
-    \frametitle{Frametitle}
-    \framesubtitle{Framesubtitle}
-    Content
-    \begin{itemize}
-        \item List
-        \item with two items
-    \end{itemize}
+    \frametitle{What is an Interrupt? }
+    \begin{figure}
+        \includegraphics[height=0.4\textheight]{fig/interrupt.pdf}
+        \caption{Interrupt}
+    \end{figure}
 \end{frame}
 
-\subsection{Funktionsweise}
+\subsection*{Nested interrupts}
 \begin{frame}
-    \frametitle{Another Frame}
-    \framesubtitle{Anotherframesubtitle}
-    \begin{block}{Blocktitle}
-        This is a regular Block
-    \end{block}
-    \begin{alertblock}{Blocktitle}
-        This is an alert Block
-    \end{alertblock}
-    \begin{exampleblock}{Blocktitle}
-        This is an example Block
-    \end{exampleblock}
+    \frametitle{Nested interrupts}
+    \begin{figure}
+        \includegraphics[height=0.4\textheight]{fig/interrupt_nested.pdf}
+        \caption{nested interrupt}
+    \end{figure}
 \end{frame}
+
+\subsection*{Reentrancy}
+\begin{frame}
+    \frametitle{Reentrancy}
+    \begin{figure}
+        \includegraphics[height=0.4\textheight]{fig/interrupt_reentrancy.pdf}
+        \caption{Non reentrant function f()}
+    \end{figure}
+\end{frame}
+
