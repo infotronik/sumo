@@ -12,13 +12,13 @@
   #include "LED.h"
 #endif
 #if PL_HAS_KEYS
-  #include "KEYS.h"
+  #include "Keys.h"
 #endif
 #if PL_HAS_KBI
-  #include "KEYS.h"
+  #include "Keys.h"
 #endif
 #if PL_HAS_JOYSTICK
-  #include "KEYS.h"
+  #include "Keys.h"
 #endif
 #if PL_HAS_EVENTS
   #include "Event.h"
