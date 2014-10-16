@@ -1,7 +1,7 @@
 /* ###################################################################
 **     Filename    : main.c
 **     Project     : sumo_robo
-**     Processor   : MKL25Z128VLK4
+**     Processor   : MK22FX512VLK12
 **     Version     : Driver 01.01
 **     Compiler    : GNU C Compiler
 **     Date/Time   : 2014-09-24, 16:09, # CodeGen: 0
@@ -30,6 +30,17 @@
 /* Including needed modules to compile this module/procedure */
 #include "Cpu.h"
 #include "Events.h"
+#include "LED1.h"
+#include "BitIoLdd1.h"
+#include "SW_A.h"
+#include "ExtIntLdd1.h"
+#include "LED2.h"
+#include "BitIoLdd3.h"
+#include "Buzzer.h"
+#include "BitIoLdd4.h"
+#include "WAIT1.h"
+#include "CS1.h"
+#include "HF1.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"

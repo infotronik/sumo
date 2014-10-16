@@ -26,7 +26,7 @@
 #define PL_HAS_KBI  (1)
   /*!< Set to 1 to enable KBI support, 0 otherwise */
 
-#define PL_HAS_CONSOLE  (1)
+#define PL_HAS_CONSOLE  (0)
   /*!< Set to 1 to enable Console support, 0 otherwise */
 
 #define PL_KEY_POLLED_KEY1  (0)
@@ -46,10 +46,12 @@
   #define PL_NOF_LEDS       (3)
      /*!< FRDM board has up to 3 LEDs (RGB) */
 #elif PL_IS_ROBO
-  #define PL_NOF_LEDS       (2)
+  #define PL_NOF_LEDS       (1)
      /*!< We have up to 2 LED's on the robo board */
-	#define PL_NOF_KEYS       (2)
+  #define PL_NOF_KEYS       (1)
    /*!< FRDM board has up to 2 KEYs */
+  #define PL_HAS_BUZZER  (1)
+  /*!< Set to 1 to enable Buzzer support, 0 otherwise */
 #else
   //#error "unknown configuration?"
 #endif

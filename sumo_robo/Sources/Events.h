@@ -1,7 +1,7 @@
 /* ###################################################################
 **     Filename    : Events.h
 **     Project     : sumo_robo
-**     Processor   : MKL25Z128VLK4
+**     Processor   : MK22FX512VLK12
 **     Component   : Events
 **     Version     : Driver 01.00
 **     Compiler    : GNU C Compiler
@@ -34,6 +34,17 @@
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
+#include "LED1.h"
+#include "BitIoLdd1.h"
+#include "SW_A.h"
+#include "ExtIntLdd1.h"
+#include "LED2.h"
+#include "BitIoLdd3.h"
+#include "Buzzer.h"
+#include "BitIoLdd4.h"
+#include "WAIT1.h"
+#include "CS1.h"
+#include "HF1.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -54,6 +65,20 @@ extern "C" {
 /* ===================================================================*/
 void Cpu_OnNMIINT(void);
 
+
+void SW_A_OnInterrupt(void);
+/*
+** ===================================================================
+**     Event       :  SW_A_OnInterrupt (module Events)
+**
+**     Component   :  SW_A [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
 
 /* END Events */
 
