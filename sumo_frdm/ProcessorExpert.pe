@@ -2,11 +2,11 @@
 <PEproject>
   <Header>
     <Name>sumo_frdm</Name>
-    <SavedBy>Mario</SavedBy>
-    <ModificationStamp>25</ModificationStamp>
+    <SavedBy>daniw</SavedBy>
+    <ModificationStamp>26</ModificationStamp>
     <Date>2014-10-16</Date>
     <IDE>Eclipse IDE</IDE>
-    <PEversion>1.10.0.RT6_b1428-0121</PEversion>
+    <PEversion>1.10.1.RT6_b1437-1025</PEversion>
   </Header>
   <Options>
     <ProjectMainModule>main</ProjectMainModule>
@@ -29,7 +29,7 @@
     <UseExistingModules>true</UseExistingModules>
     <RenamePeripheries>false</RenamePeripheries>
     <Autodependency>true</Autodependency>
-    <ProjectCompNumb>85</ProjectCompNumb>
+    <ProjectCompNumb>88</ProjectCompNumb>
     <DelUnusedPreviouslyGenFiles>true</DelUnusedPreviouslyGenFiles>
     <GeneratedCodeFrozen>false</GeneratedCodeFrozen>
     <AssignInitComponentNameToPrph>true</AssignInitComponentNameToPrph>
@@ -11632,7 +11632,7 @@
           <Name>ExtIntLdd3</Name>
           <CompNumb>69</CompNumb>
           <CompEnabled>true</CompEnabled>
-          <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
+          <GenCodeMode>DONT_WRITE</GenCodeMode>
           <IconName>ExtInt_LDD</IconName>
           <UserFolderName />
           <Comment lines_count="0" />
@@ -17817,7 +17817,7 @@
               <ItemSymbol>BdRate</ItemSymbol>
               <ReadOnly>false</ReadOnly>
               <UserReadOnly>false</UserReadOnly>
-              <Value>init:;prec:1.5%;RTS:none;clksrc_presc[SpeedMode0]Auto select;clksrc_presc[SpeedMode1]Auto select;clksrc_presc[SpeedMode2]Auto select;clksrc_presc[SpeedMode3]Auto select;clksrc_presc[SpeedMode4]Auto select;clksrc_presc[SpeedMode5]Auto select;clksrc_presc[SpeedMode6]Auto select;clksrc_presc[SpeedMode7]Auto select</Value>
+              <Value>init:38400 baud;prec:1.5%;RTS:none;clksrc_presc[SpeedMode0]Auto select;clksrc_presc[SpeedMode1]Auto select;clksrc_presc[SpeedMode2]Auto select;clksrc_presc[SpeedMode3]Auto select;clksrc_presc[SpeedMode4]Auto select;clksrc_presc[SpeedMode5]Auto select;clksrc_presc[SpeedMode6]Auto select;clksrc_presc[SpeedMode7]Auto select</Value>
               <RuntimeSetting>0</RuntimeSetting>
               <ReqDevPrescHigh>-1</ReqDevPrescHigh>
               <ReqDevPrescLow>-1</ReqDevPrescLow>
