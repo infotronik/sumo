@@ -6,6 +6,10 @@
 #if PL_HAS_TIMER
   #include "Timer.h"
 #endif
+#if PL_HAS_EVENTS
+  #include "Event.h"
+#endif
+
 
 
 void PL_Init(void) {

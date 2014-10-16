@@ -26,6 +26,9 @@
 #define PL_HAS_KBI  (1)
   /*!< Set to 1 to enable KBI support, 0 otherwise */
 
+#define PL_HAS_CONSOLE  (1)
+  /*!< Set to 1 to enable Console support, 0 otherwise */
+
 #define PL_KEY_POLLED_KEY1  (0)
 #define PL_KEY_POLLED_KEY2  (0)
 #define PL_KEY_POLLED_KEY3  (0)
