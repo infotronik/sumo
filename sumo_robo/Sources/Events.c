@@ -1,7 +1,7 @@
 /* ###################################################################
 **     Filename    : Events.c
 **     Project     : sumo_robo
-**     Processor   : MK22FX512VLK12
+**     Processor   : MK22FX512VLQ12
 **     Component   : Events
 **     Version     : Driver 01.00
 **     Compiler    : GNU C Compiler
@@ -29,6 +29,11 @@
 
 #include "Cpu.h"
 #include "Events.h"
+#include "Platform.h"
+
+#if PL_HAS_KBI
+	#include "Keys.h"
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -69,7 +74,32 @@ void Cpu_OnNMIINT(void)
 */
 void SW_A_OnInterrupt(void)
 {
-  /* Write your code here ... */
+#if PL_HAS_KBI
+	if(KEY1_Get()){
+		KEY_OnInterrupt(KEY_BTN1);
+	}
+#endif
+}
+
+/*
+** ===================================================================
+**     Event       :  TI1_OnInterrupt (module Events)
+**
+**     Component   :  TI1 [TimerInt]
+**     Description :
+**         When a timer interrupt occurs this event is called (only
+**         when the component is enabled - <Enable> and the events are
+**         enabled - <EnableEvent>). This event is enabled only if a
+**         <interrupt service/event> is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void TI1_OnInterrupt(void)
+{
+#if PL_HAS_TIMER
+  TMR_OnInterrupt();
+#endif
 }
 
 /* END Events */
