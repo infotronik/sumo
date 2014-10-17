@@ -29,6 +29,12 @@
 #define PL_HAS_CONSOLE  (0)
   /*!< Set to 1 to enable Console support, 0 otherwise */
 
+#define PL_HAS_TRIGGER  (1)
+  /*!< Set to 1 to enable Trigger support, 0 otherwise */
+
+#define PL_HAS_BUZZER  (1)
+  /*!< Set to 1 to enable Buzzer support, 0 otherwise */
+
 #define PL_KEY_POLLED_KEY1  (0)
 #define PL_KEY_POLLED_KEY2  (0)
 #define PL_KEY_POLLED_KEY3  (0)

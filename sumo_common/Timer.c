@@ -18,7 +18,7 @@ static int cnt = 0;
 
 void TMR_OnInterrupt(void) {
   cnt++;
-  if(cnt>100){
+  if(cnt>1000){
 	  cnt = 0;
   	  EVNT_SetEvent(EVNT_HEARTBEAT);
   }

@@ -26,6 +26,14 @@
 #if PL_HAS_CONSOLE
   #include "CLS1.h"
 #endif
+#if PL_HAS_BUZZER
+  #include "Buzzer.h"
+#endif
+#if PL_HAS_TRIGGER
+  #include "Trigger.h"
+#endif
+
+
 
 void APP_Start(void) {
   PL_Init(); /* platform initialization */
@@ -36,6 +44,7 @@ void APP_Start(void) {
 }
 
 static void APP_EventHandler(EVNT_Handle event) {
+	static uint16_t buzzer = 1000;
 	switch(event){
 	case EVNT_INIT:
 	    LED1_On();
@@ -50,6 +59,9 @@ static void APP_EventHandler(EVNT_Handle event) {
 		LED3_Neg();
 		#if PL_HAS_CONSOLE
 			CLS1_SendStr("SW A pressed\n",CLS1_GetStdio()->stdOut);
+		#endif
+		#if PL_HAS_BUZZER
+			BUZ_Beep(900,2000);
 		#endif
 		break;
 	case EVNT_SW_B_PRESSED:
@@ -94,7 +106,7 @@ static void APP_EventHandler(EVNT_Handle event) {
 		break;
 	default:
 		break;
-	  }
+	}
 }
 
 static void APP_Loop(){

@@ -40,7 +40,7 @@
 #include "ExtIntLdd1.h"
 #include "LED2.h"
 #include "BitIoLdd3.h"
-#include "Buzzer.h"
+#include "BUZ1.h"
 #include "BitIoLdd4.h"
 #include "WAIT1.h"
 #include "CS1.h"

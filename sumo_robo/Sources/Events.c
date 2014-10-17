@@ -35,6 +35,14 @@
 	#include "Keys.h"
 #endif
 
+#if PL_HAS_TIMER
+	#include "Timer.h"
+#endif
+
+#if PL_HAS_TRIGGER
+	#include "Trigger.h"
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif 
@@ -99,6 +107,9 @@ void TI1_OnInterrupt(void)
 {
 #if PL_HAS_TIMER
   TMR_OnInterrupt();
+	#if PL_HAS_TRIGGER
+  	  TRG_IncTick();
+	#endif
 #endif
 }
 
