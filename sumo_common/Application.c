@@ -47,38 +47,51 @@ static void APP_EventHandler(EVNT_Handle event) {
 		break;
 	case EVNT_SW_A_PRESSED:
 		LED1_Neg();
-//		LED3_Neg();
-//		CLS1_SendStr("SW A pressed\n",CLS1_GetStdio()->stdOut);
+		LED3_Neg();
+		#if PL_HAS_CONSOLE
+			CLS1_SendStr("SW A pressed\n",CLS1_GetStdio()->stdOut);
+		#endif
 		break;
-//	case EVNT_SW_B_PRESSED:
-//		LED2_Neg();
-//		LED3_Neg();
-//		CLS1_SendStr("SW B pressed\n",CLS1_GetStdio()->stdOut);
-//		break;
-//	case EVNT_SW_C_PRESSED:
-//		LED1_Neg();
-//		LED2_Neg();
-//		CLS1_SendStr("SW C pressed\n",CLS1_GetStdio()->stdOut);
-//		break;
-//	case EVNT_SW_D_PRESSED:
-//		LED1_Neg();
-//		CLS1_SendStr("SW D pressed\n",CLS1_GetStdio()->stdOut);
-//		break;
-//	case EVNT_SW_E_PRESSED:
-//		LED2_Neg();
-//
-//		CLS1_SendStr("SW E pressed\n",CLS1_GetStdio()->stdOut);
-//		break;
-//	case EVNT_SW_F_PRESSED:
-//		LED3_Neg();
-//		CLS1_SendStr("SW F pressed\n",CLS1_GetStdio()->stdOut);
-//		break;
-//	case EVNT_SW_G_PRESSED:
-//		LED1_Neg();
-//		LED2_Neg();
-//		LED3_Neg();
-//		CLS1_SendStr("SW G pressed\n",CLS1_GetStdio()->stdOut);
-//		break;
+	case EVNT_SW_B_PRESSED:
+		LED2_Neg();
+		LED3_Neg();
+		#if PL_HAS_CONSOLE
+			CLS1_SendStr("SW B pressed\n",CLS1_GetStdio()->stdOut);
+		#endif
+		break;
+	case EVNT_SW_C_PRESSED:
+		LED1_Neg();
+		LED2_Neg();
+		#if PL_HAS_CONSOLE
+			CLS1_SendStr("SW C pressed\n",CLS1_GetStdio()->stdOut);
+		#endif
+		break;
+	case EVNT_SW_D_PRESSED:
+		LED1_Neg();
+		#if PL_HAS_CONSOLE
+			CLS1_SendStr("SW D pressed\n",CLS1_GetStdio()->stdOut);
+		#endif
+		break;
+	case EVNT_SW_E_PRESSED:
+		LED2_Neg();
+		#if PL_HAS_CONSOLE
+				CLS1_SendStr("SW E pressed\n",CLS1_GetStdio()->stdOut);
+		#endif
+		break;
+	case EVNT_SW_F_PRESSED:
+		LED3_Neg();
+		#if PL_HAS_CONSOLE
+			CLS1_SendStr("SW F pressed\n",CLS1_GetStdio()->stdOut);
+		#endif
+		break;
+	case EVNT_SW_G_PRESSED:
+		LED1_Neg();
+		LED2_Neg();
+		LED3_Neg();
+		#if PL_HAS_CONSOLE
+			CLS1_SendStr("SW g pressed\n",CLS1_GetStdio()->stdOut);
+		#endif
+		break;
 	default:
 		break;
 	  }
