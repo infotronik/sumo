@@ -25,6 +25,20 @@ typedef enum EVNT_Handle {
   EVNT_SW_E_PRESSED,	/*!< Switch E Pressed Event */
   EVNT_SW_F_PRESSED,	/*!< Switch F Pressed Event */
   EVNT_SW_G_PRESSED,	/*!< Switch G Pressed Event */
+  EVNT_SW_A_LPRESSED,	/*!< Switch A Long Pressed Event */
+  EVNT_SW_B_LPRESSED,	/*!< Switch B Long Pressed Event */
+  EVNT_SW_C_LPRESSED,	/*!< Switch C Long Pressed Event */
+  EVNT_SW_D_LPRESSED,	/*!< Switch D Long Pressed Event */
+  EVNT_SW_E_LPRESSED,	/*!< Switch E Long Pressed Event */
+  EVNT_SW_F_LPRESSED,	/*!< Switch F Long Pressed Event */
+  EVNT_SW_G_LPRESSED,	/*!< Switch G Long Pressed Event */
+  EVNT_SW_A_RELEASED,	/*!< Switch A Released Event */
+  EVNT_SW_B_RELEASED,	/*!< Switch B Released Event */
+  EVNT_SW_C_RELEASED,	/*!< Switch C Released Event */
+  EVNT_SW_D_RELEASED,	/*!< Switch D Released Event */
+  EVNT_SW_E_RELEASED,	/*!< Switch E Released Event */
+  EVNT_SW_F_RELEASED,	/*!< Switch F Released Event */
+  EVNT_SW_G_RELEASED,	/*!< Switch G Released Event */
   EVNT_NOF_EVENTS       /*!< Must be last one! */
 } EVNT_Handle;
 

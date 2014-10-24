@@ -31,6 +31,10 @@
 #include "Events.h"
 #include "Platform.h"
 
+#if PL_HAS_TIMER
+  #include "Timer.h"
+#endif
+
 #if PL_HAS_KBI
 	#include "Keys.h"
 #endif

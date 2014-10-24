@@ -25,8 +25,10 @@
 **            Auto initialization                          : yes
 **          Threshold level                                : 0
 **     Contents    :
-**         Init   - LDD_TDeviceData* ExtIntLdd3_Init(LDD_TUserData *UserDataPtr);
-**         GetVal - bool ExtIntLdd3_GetVal(LDD_TDeviceData *DeviceDataPtr);
+**         Init    - LDD_TDeviceData* ExtIntLdd3_Init(LDD_TUserData *UserDataPtr);
+**         Enable  - void ExtIntLdd3_Enable(LDD_TDeviceData *DeviceDataPtr);
+**         Disable - void ExtIntLdd3_Disable(LDD_TDeviceData *DeviceDataPtr);
+**         GetVal  - bool ExtIntLdd3_GetVal(LDD_TDeviceData *DeviceDataPtr);
 **
 **     Copyright : 1997 - 2014 Freescale Semiconductor, Inc. 
 **     All Rights Reserved.
@@ -103,6 +105,8 @@ extern "C" {
 
 /* Methods configuration constants - generated for all enabled component's methods */
 #define ExtIntLdd3_Init_METHOD_ENABLED /*!< Init method of the component ExtIntLdd3 is enabled (generated) */
+#define ExtIntLdd3_Enable_METHOD_ENABLED /*!< Enable method of the component ExtIntLdd3 is enabled (generated) */
+#define ExtIntLdd3_Disable_METHOD_ENABLED /*!< Disable method of the component ExtIntLdd3 is enabled (generated) */
 #define ExtIntLdd3_GetVal_METHOD_ENABLED /*!< GetVal method of the component ExtIntLdd3 is enabled (generated) */
 
 /* Events configuration constants - generated for all enabled component's events */
@@ -132,6 +136,38 @@ extern "C" {
 */
 /* ===================================================================*/
 LDD_TDeviceData* ExtIntLdd3_Init(LDD_TUserData *UserDataPtr);
+
+/*
+** ===================================================================
+**     Method      :  ExtIntLdd3_Enable (component ExtInt_LDD)
+*/
+/*!
+**     @brief
+**         Enable the component - the external events are accepted.
+**         This method is available only if HW module allows
+**         enable/disable of the interrupt.
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by <Init> method.
+*/
+/* ===================================================================*/
+void ExtIntLdd3_Enable(LDD_TDeviceData *DeviceDataPtr);
+
+/*
+** ===================================================================
+**     Method      :  ExtIntLdd3_Disable (component ExtInt_LDD)
+*/
+/*!
+**     @brief
+**         Disable the component - the external events are not accepted.
+**         This method is available only if HW module allows
+**         enable/disable of the interrupt.
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by <Init> method.
+*/
+/* ===================================================================*/
+void ExtIntLdd3_Disable(LDD_TDeviceData *DeviceDataPtr);
 
 /*
 ** ===================================================================

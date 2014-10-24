@@ -154,6 +154,49 @@ LDD_TDeviceData* ExtIntLdd3_Init(LDD_TUserData *UserDataPtr)
 
 /*
 ** ===================================================================
+**     Method      :  ExtIntLdd3_Enable (component ExtInt_LDD)
+*/
+/*!
+**     @brief
+**         Enable the component - the external events are accepted.
+**         This method is available only if HW module allows
+**         enable/disable of the interrupt.
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by <Init> method.
+*/
+/* ===================================================================*/
+void ExtIntLdd3_Enable(LDD_TDeviceData *DeviceDataPtr)
+{
+  (void)DeviceDataPtr;                 /* Parameter is not used, suppress unused argument warning */
+  PORT_PDD_ClearPinInterruptFlag(PORTA_BASE_PTR, ExtIntLdd3_PIN_INDEX);
+  PORT_PDD_SetPinInterruptConfiguration(PORTA_BASE_PTR,
+    ExtIntLdd3_PIN_INDEX, PORT_PDD_INTERRUPT_ON_FALLING);
+}
+
+/*
+** ===================================================================
+**     Method      :  ExtIntLdd3_Disable (component ExtInt_LDD)
+*/
+/*!
+**     @brief
+**         Disable the component - the external events are not accepted.
+**         This method is available only if HW module allows
+**         enable/disable of the interrupt.
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by <Init> method.
+*/
+/* ===================================================================*/
+void ExtIntLdd3_Disable(LDD_TDeviceData *DeviceDataPtr)
+{
+  (void)DeviceDataPtr;                 /* Parameter is not used, suppress unused argument warning */
+  PORT_PDD_SetPinInterruptConfiguration(PORTA_BASE_PTR,
+    ExtIntLdd3_PIN_INDEX, PORT_PDD_INTERRUPT_DMA_DISABLED);
+}
+
+/*
+** ===================================================================
 **     Method      :  ExtIntLdd3_Interrupt (component ExtInt_LDD)
 **
 **     Description :

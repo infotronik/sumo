@@ -119,6 +119,12 @@ void KEY_Init(void);
 /*! \brief Key driver de-initialization */
 void KEY_Deinit(void);
 
+/*! \brief Key interrupts enable */
+void KEY_EnableInterrupts(void);
+
+/*! \brief Key interrupts disable */
+void KEY_DisableInterrupts(void);
+
 #endif /* PL_HAS_KEYS */
 
 #endif /* KEYS_H_ */

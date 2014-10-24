@@ -32,14 +32,17 @@
 #define PL_HAS_TRIGGER  (1)
   /*!< Set to 1 to enable Trigger support, 0 otherwise */
 
+#define PL_HAS_DEBOUNCE (1)
+  /*!< Set to 1 to enable Debounce support, 0 otherwise */
 
-#define PL_KEY_POLLED_KEY1  (0)
-#define PL_KEY_POLLED_KEY2  (0)
-#define PL_KEY_POLLED_KEY3  (0)
-#define PL_KEY_POLLED_KEY4  (0)
-#define PL_KEY_POLLED_KEY5  (1)
-#define PL_KEY_POLLED_KEY6  (1)
-#define PL_KEY_POLLED_KEY7  (0)
+
+#define PL_KEY_POLLED_KEY_A  (0)
+#define PL_KEY_POLLED_KEY_B  (0)
+#define PL_KEY_POLLED_KEY_C  (0)
+#define PL_KEY_POLLED_KEY_D  (0)
+#define PL_KEY_POLLED_KEY_E  (1)
+#define PL_KEY_POLLED_KEY_F  (1)
+#define PL_KEY_POLLED_KEY_G  (0)
 
 #define PL_HAS_JOYSTICK  (0)
   /*!< Set to 1 to enable JOYSTICK support, 0 otherwise */
