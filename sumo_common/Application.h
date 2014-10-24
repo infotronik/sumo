@@ -13,7 +13,11 @@
 
 void APP_Start(void);
 static void APP_EventHandler(EVNT_Handle event);
+#if PL_HAS_RTOS
+void TaskLoop(void *pvParameters);
+#else
 static void APP_Loop(void);
+#endif
 
 
 

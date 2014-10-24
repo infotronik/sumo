@@ -32,9 +32,11 @@
 #define PL_HAS_TRIGGER  (1)
   /*!< Set to 1 to enable Trigger support, 0 otherwise */
 
-#define PL_HAS_DEBOUNCE (1)
+#define PL_HAS_DEBOUNCE (0)
   /*!< Set to 1 to enable Debounce support, 0 otherwise */
 
+#define PL_HAS_RTOS (1)
+  /*!< Set to 1 to enable RTOS support, 0 otherwise */
 
 #define PL_KEY_POLLED_KEY_A  (0)
 #define PL_KEY_POLLED_KEY_B  (0)

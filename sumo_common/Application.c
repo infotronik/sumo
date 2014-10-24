@@ -32,14 +32,21 @@
 #if PL_HAS_TRIGGER
   #include "Trigger.h"
 #endif
-
+#if PL_HAS_RTOS
+    #include "RTOS.h"
+    #include "FRTOS1.h"
+#endif
 
 
 void APP_Start(void) {
   PL_Init(); /* platform initialization */
 
   EVNT_SetEvent(EVNT_INIT);
+#if PL_HAS_RTOS
+  RTOS_Run();
+#else
   APP_Loop();
+#endif
 
 }
 
@@ -109,6 +116,20 @@ static void APP_EventHandler(EVNT_Handle event) {
 	}
 }
 
+#if PL_HAS_RTOS
+void TaskLoop(void *pvParameters){
+	(void)pvParameters;
+	for(;;){
+		#if PL_HAS_KEYS
+			KEY_Scan();
+		#endif
+		#if PL_HAS_EVENTS
+		  EVNT_HandleEvent(APP_EventHandler);
+		#endif
+		  FRTOS1_vTaskDelay(50/portTICK_RATE_MS);
+	  }
+}
+#else
 static void APP_Loop(){
 	for(;;){
 		#if PL_HAS_KEYS
@@ -120,7 +141,7 @@ static void APP_Loop(){
 		  WAIT1_Waitms(50);
 	  }
 }
-
+#endif
 
 
 
