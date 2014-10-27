@@ -12,9 +12,9 @@
 #include "LED.h"
 
 static portTASK_FUNCTION(T1, pvParameters) {
-  for(;;) {
-    LED1_Neg();
-  }
+    for(;;) {
+        LED1_Neg();
+    }
 }
 
 void RTOS_Run(void) {
@@ -32,10 +32,10 @@ void RTOS_Run(void) {
 }
 
 void RTOS_Init(void) {
-  /*! \todo Add tasks here */
-  if (FRTOS1_xTaskCreate(T1, (signed portCHAR *)"T1", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
-    for(;;){} /* error */
-  }
+    /*! \todo Add tasks here */
+    if (FRTOS1_xTaskCreate(T1, (signed portCHAR *)"T1", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
+        for(;;){} /* error */
+    }
 }
 
 void RTOS_Deinit(void) {

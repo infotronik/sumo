@@ -11,102 +11,102 @@
 #include "Platform.h"
 
 #if PL_NOF_LEDS >= 1
-  #include "LED1.h"
-  #define LED1_On()     LED1_ClrVal()
-    /*!< Turn LED 1 on */
-  #define LED1_Off()    LED1_SetVal()
-    /*!< Turn LED 1 off */
-  #define LED1_Neg()    LED1_NegVal()
-    /*!< Toggle LED 1 */
-  #define LED1_Get()    LED1_GetVal()
-    /*!< Return TRUE if LED is on, FALSE otherwise */
-  #define LED1_Put(val) LED1_PutVal(val)
-    /*!< Turn LED on or off */
-  #define LED1_Init()   /* do nothing */
-    /*!< Initialize LED */
-  #define LED1_Deinit() /* do nothing */
-    /*!< De-Initialize LED */
+    #include "LED1.h"
+    #define LED1_On()     LED1_ClrVal()
+        /*!< Turn LED 1 on */
+    #define LED1_Off()    LED1_SetVal()
+        /*!< Turn LED 1 off */
+    #define LED1_Neg()    LED1_NegVal()
+        /*!< Toggle LED 1 */
+    #define LED1_Get()    LED1_GetVal()
+        /*!< Return TRUE if LED is on, FALSE otherwise */
+    #define LED1_Put(val) LED1_PutVal(val)
+        /*!< Turn LED on or off */
+    #define LED1_Init()   /* do nothing */
+        /*!< Initialize LED */
+    #define LED1_Deinit() /* do nothing */
+        /*!< De-Initialize LED */
 #else
     #define LED1_On()     /* do nothing */
-    /*!< Turn LED 1 on */
-  #define LED1_Off()    /* do nothing */
-    /*!< Turn LED 1 off */
-  #define LED1_Neg()    /* do nothing */
-    /*!< Toggle LED 1 */
-  #define LED1_Get()  0 /* do nothing */
-    /*!< Return TRUE if LED is on, FALSE otherwise */
-  #define LED1_Put(val) /* do nothing */
-    /*!< Turn LED 1 on or off */
-  #define LED1_Init()   /* do nothing */
-    /*!< Initialize LED 1 */
-  #define LED1_Deinit() /* do nothing */
-    /*!< De-Initialize LED 1 */
+        /*!< Turn LED 1 on */
+    #define LED1_Off()    /* do nothing */
+        /*!< Turn LED 1 off */
+    #define LED1_Neg()    /* do nothing */
+        /*!< Toggle LED 1 */
+    #define LED1_Get()  0 /* do nothing */
+        /*!< Return TRUE if LED is on, FALSE otherwise */
+    #define LED1_Put(val) /* do nothing */
+        /*!< Turn LED 1 on or off */
+    #define LED1_Init()   /* do nothing */
+        /*!< Initialize LED 1 */
+    #define LED1_Deinit() /* do nothing */
+        /*!< De-Initialize LED 1 */
 #endif
 
 #if PL_NOF_LEDS >= 2
-  #include "LED2.h"
-  #define LED2_On()     LED2_ClrVal()
-    /*!< Turn LED 1 on */
-  #define LED2_Off()    LED2_SetVal()
-    /*!< Turn LED 1 off */
-  #define LED2_Neg()    LED2_NegVal()
-    /*!< Toggle LED 1 */
-  #define LED2_Get()    LED2_GetVal()
-    /*!< Return TRUE if LED is on, FALSE otherwise */
-  #define LED2_Put(val) LED2_PutVal(val)
-    /*!< Turn LED on or off */
-  #define LED2_Init()   /* do nothing */
-    /*!< Initialize LED */
-  #define LED2_Deinit() /* do nothing */
-    /*!< De-Initialize LED */
+    #include "LED2.h"
+    #define LED2_On()     LED2_ClrVal()
+        /*!< Turn LED 1 on */
+    #define LED2_Off()    LED2_SetVal()
+        /*!< Turn LED 1 off */
+    #define LED2_Neg()    LED2_NegVal()
+        /*!< Toggle LED 1 */
+    #define LED2_Get()    LED2_GetVal()
+        /*!< Return TRUE if LED is on, FALSE otherwise */
+    #define LED2_Put(val) LED2_PutVal(val)
+        /*!< Turn LED on or off */
+    #define LED2_Init()   /* do nothing */
+        /*!< Initialize LED */
+    #define LED2_Deinit() /* do nothing */
+        /*!< De-Initialize LED */
 #else
     #define LED2_On()     /* do nothing */
-    /*!< Turn LED 2 on */
-  #define LED2_Off()    /* do nothing */
-    /*!< Turn LED 2 off */
-  #define LED2_Neg()    /* do nothing */
-    /*!< Toggle LED 2 */
-  #define LED2_Get()  0 /* do nothing */
-    /*!< Return TRUE if LED is on, FALSE otherwise */
-  #define LED2_Put(val) /* do nothing */
-    /*!< Turn LED 2 on or off */
-  #define LED2_Init()   /* do nothing */
-    /*!< Initialize LED 2 */
-  #define LED2_Deinit() /* do nothing */
-    /*!< De-Initialize LED 2 */
+        /*!< Turn LED 2 on */
+    #define LED2_Off()    /* do nothing */
+        /*!< Turn LED 2 off */
+    #define LED2_Neg()    /* do nothing */
+        /*!< Toggle LED 2 */
+    #define LED2_Get()  0 /* do nothing */
+        /*!< Return TRUE if LED is on, FALSE otherwise */
+    #define LED2_Put(val) /* do nothing */
+        /*!< Turn LED 2 on or off */
+    #define LED2_Init()   /* do nothing */
+        /*!< Initialize LED 2 */
+    #define LED2_Deinit() /* do nothing */
+        /*!< De-Initialize LED 2 */
 #endif
 
 #if PL_NOF_LEDS >= 3
-  #include "LED3.h"
-  #define LED3_On()     LED3_ClrVal()
-    /*!< Turn LED 1 on */
-  #define LED3_Off()    LED3_SetVal()
-    /*!< Turn LED 1 off */
-  #define LED3_Neg()    LED3_NegVal()
-    /*!< Toggle LED 1 */
-  #define LED3_Get()    LED3_GetVal()
-    /*!< Return TRUE if LED is on, FALSE otherwise */
-  #define LED3_Put(val) LED3_PutVal(val)
-    /*!< Turn LED on or off */
-  #define LED3_Init()   /* do nothing */
-    /*!< Initialize LED */
-  #define LED3_Deinit() /* do nothing */
-    /*!< De-Initialize LED */
+    #include "LED3.h"
+    #define LED3_On()     LED3_ClrVal()
+        /*!< Turn LED 1 on */
+    #define LED3_Off()    LED3_SetVal()
+        /*!< Turn LED 1 off */
+    #define LED3_Neg()    LED3_NegVal()
+        /*!< Toggle LED 1 */
+    #define LED3_Get()    LED3_GetVal()
+        /*!< Return TRUE if LED is on, FALSE otherwise */
+    #define LED3_Put(val) LED3_PutVal(val)
+        /*!< Turn LED on or off */
+    #define LED3_Init()   /* do nothing */
+        /*!< Initialize LED */
+    #define LED3_Deinit() /* do nothing */
+        /*!< De-Initialize LED */
 #else
-   #define LED3_On()     /* do nothing */
-    /*!< Turn LED 3 on */
-  #define LED3_Off()    /* do nothing */
-    /*!< Turn LED 3 off */
-  #define LED3_Neg()    /* do nothing */
-    /*!< Toggle LED 3 */
-  #define LED3_Get()  0 /* do nothing */
-    /*!< Return TRUE if LED is on, FALSE otherwise */
-  #define LED3_Put(val) /* do nothing */
-    /*!< Turn LED 3 on or off */
-  #define LED3_Init()   /* do nothing */
-    /*!< Initialize LED 3 */
-  #define LED3_Deinit() /* do nothing */
-    /*!< De-Initialize LED 3 */
+    #define LED3_On()     /* do nothing */
+        /*!< Turn LED 3 on */
+    #define LED3_Off()    /* do nothing */
+        /*!< Turn LED 3 off */
+    #define LED3_Neg()    /* do nothing */
+        /*!< Toggle LED 3 */
+    #define LED3_Get()  0 /* do nothing */
+        /*!< Return TRUE if LED is on, FALSE otherwise */
+    #define LED3_Put(val) /* do nothing */
+        /*!< Turn LED 3 on or off */
+    #define LED3_Init()   /* do nothing */
+        /*!< Initialize LED 3 */
+    #define LED3_Deinit() /* do nothing */
+        /*!< De-Initialize LED 3 */
 #endif
 
 /*!
@@ -129,8 +129,5 @@ void LED_Init(void);
  * \brief LED Driver De-Initialization.
  */
 void LED_Deinit(void);
-
-
-
 
 #endif /* LED_H_ */

@@ -9,35 +9,35 @@
 #include "LED.h"
 
 void LED_Deinit(void) {
-  /* all LED's off by default */
-  #if PL_NOF_LEDS>=1
-  LED1_Off();
-  #endif
-  #if PL_NOF_LEDS>=2
-  LED2_Off();
-  #endif
-  #if PL_NOF_LEDS>=3
-  LED3_Off();
-  #endif
-  LED1_Deinit();
-  LED2_Deinit();
-  LED3_Deinit();
+    /* all LED's off by default */
+    #if PL_NOF_LEDS>=1
+        LED1_Off();
+    #endif
+    #if PL_NOF_LEDS>=2
+        LED2_Off();
+    #endif
+    #if PL_NOF_LEDS>=3
+        LED3_Off();
+    #endif
+        LED1_Deinit();
+        LED2_Deinit();
+        LED3_Deinit();
 }
 
 void LED_Init(void) {
-  LED1_Init();
-  LED2_Init();
-  LED3_Init();
-  /* all LED's off by default */
-  #if PL_NOF_LEDS>=1
-  LED1_Off();
-  #endif
-  #if PL_NOF_LEDS>=2
-  LED2_Off();
-  #endif
-  #if PL_NOF_LEDS>=3
-  LED3_Off();
-  #endif
+    LED1_Init();
+    LED2_Init();
+    LED3_Init();
+    /* all LED's off by default */
+    #if PL_NOF_LEDS>=1
+        LED1_Off();
+    #endif
+    #if PL_NOF_LEDS>=2
+        LED2_Off();
+    #endif
+    #if PL_NOF_LEDS>=3
+        LED3_Off();
+    #endif
 }
 
 /*!
@@ -50,32 +50,32 @@ void LED_Init(void) {
  * If the test fails, the program will hanging in an endless loop
  */
 void LED_Test(void) {
-  bool isOn = TRUE;
+    bool isOn = TRUE;
 
-  LED1_On();
-  LED2_On();
-  LED3_On();
+    LED1_On();
+    LED2_On();
+    LED3_On();
 
-  LED1_Off();
-  LED2_Off();
-  LED3_Off();
+    LED1_Off();
+    LED2_Off();
+    LED3_Off();
 
-  LED1_Neg();
-  LED2_Neg();
-  LED3_Neg();
+    LED1_Neg();
+    LED2_Neg();
+    LED3_Neg();
 
-  LED1_On();
-  if (!LED1_Get()) {
-    for(;;){} /*! \todo Need a dedicated error routine? */
-  }
-  LED1_Off();
-  if (LED1_Get()) {
-    for(;;){}; /* error */
-  }
-  LED1_Put(isOn);
-  if (!LED1_Get()) {
-    for(;;){}; /* error */
-  }
+    LED1_On();
+    if (!LED1_Get()) {
+        for(;;){} /*! \todo Need a dedicated error routine? */
+    }
+    LED1_Off();
+    if (LED1_Get()) {
+        for(;;){}; /* error */
+    }
+    LED1_Put(isOn);
+    if (!LED1_Get()) {
+        for(;;){}; /* error */
+    }
 }
 
 

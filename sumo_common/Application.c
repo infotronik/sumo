@@ -9,28 +9,28 @@
 #include "Application.h"
 #include "WAIT1.h"
 #if PL_HAS_LED
-  #include "LED.h"
+    #include "LED.h"
 #endif
 #if PL_HAS_KEYS
-  #include "Keys.h"
+    #include "Keys.h"
 #endif
 #if PL_HAS_KBI
-  #include "Keys.h"
+    #include "Keys.h"
 #endif
 #if PL_HAS_JOYSTICK
-  #include "Keys.h"
+    #include "Keys.h"
 #endif
 #if PL_HAS_EVENTS
-  #include "Event.h"
+    #include "Event.h"
 #endif
 #if PL_HAS_CONSOLE
-  #include "CLS1.h"
+    #include "CLS1.h"
 #endif
 #if PL_HAS_BUZZER
-  #include "Buzzer.h"
+    #include "Buzzer.h"
 #endif
 #if PL_HAS_TRIGGER
-  #include "Trigger.h"
+    #include "Trigger.h"
 #endif
 #if PL_HAS_RTOS
     #include "RTOS.h"
@@ -39,13 +39,13 @@
 
 
 void APP_Start(void) {
-  PL_Init(); /* platform initialization */
+    PL_Init(); /* platform initialization */
 
-  EVNT_SetEvent(EVNT_INIT);
+    EVNT_SetEvent(EVNT_INIT);
 #if PL_HAS_RTOS
-  RTOS_Run();
+    RTOS_Run();
 #else
-  APP_Loop();
+    APP_Loop();
 #endif
 
 }
