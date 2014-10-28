@@ -32,15 +32,15 @@
 #include "Platform.h"
 
 #if PL_HAS_KBI
-	#include "Keys.h"
+    #include "Keys.h"
 #endif
 
 #if PL_HAS_TIMER
-	#include "Timer.h"
+    #include "Timer.h"
 #endif
 
 #if PL_HAS_TRIGGER
-	#include "Trigger.h"
+    #include "Trigger.h"
 #endif
 
 #ifdef __cplusplus
@@ -65,7 +65,7 @@ extern "C" {
 /* ===================================================================*/
 void Cpu_OnNMIINT(void)
 {
-  /* Write your code here ... */
+    /* Write your code here ... */
 }
 
 /*
@@ -82,11 +82,11 @@ void Cpu_OnNMIINT(void)
 */
 void SW_A_OnInterrupt(void)
 {
-#if PL_HAS_KBI
-	if(KEY1_Get()){
-		KEY_OnInterrupt(KEY_BTN1);
-	}
-#endif
+    #if PL_HAS_KBI
+        if(KEY1_Get()){
+            KEY_OnInterrupt(KEY_BTN1);
+        }
+    #endif
 }
 
 /*
@@ -106,10 +106,10 @@ void SW_A_OnInterrupt(void)
 void TI1_OnInterrupt(void)
 {
 #if PL_HAS_TIMER
-  TMR_OnInterrupt();
-	#if PL_HAS_TRIGGER
-  	  TRG_IncTick();
-	#endif
+    TMR_OnInterrupt();
+    #if PL_HAS_TRIGGER
+        TRG_IncTick();
+    #endif
 #endif
 }
 

@@ -32,7 +32,7 @@
 #include "Platform.h"
 
 #if PL_HAS_TIMER
-  #include "Timer.h"
+    #include "Timer.h"
 #endif
 
 #if PL_HAS_KBI
@@ -62,7 +62,7 @@ extern "C" {
 /* ===================================================================*/
 void Cpu_OnNMIINT(void)
 {
-  /* Write your code here ... */
+    /* Write your code here ... */
 }
 
 /*
@@ -81,9 +81,9 @@ void Cpu_OnNMIINT(void)
 */
 void TI1_OnInterrupt(void)
 {
-#if PL_HAS_TIMER
-	TMR_OnInterrupt();
-#endif
+    #if PL_HAS_TIMER
+        TMR_OnInterrupt();
+    #endif
 }
 
 /*
@@ -100,11 +100,11 @@ void TI1_OnInterrupt(void)
 */
 void SW_G_OnInterrupt(void)
 {
-#if PL_HAS_KBI
-	if(KEY7_Get()){
-		KEY_OnInterrupt(KEY_BTN7);
-	}
-#endif
+    #if PL_HAS_KBI
+        if(KEY7_Get()){
+            KEY_OnInterrupt(KEY_BTN7);
+        }
+    #endif
 }
 
 /*
@@ -121,11 +121,11 @@ void SW_G_OnInterrupt(void)
 */
 void SW_D_OnInterrupt(void)
 {
-#if PL_HAS_KBI
-	if(KEY4_Get()){
-		KEY_OnInterrupt(KEY_BTN4);
-	}
-#endif
+    #if PL_HAS_KBI
+        if(KEY4_Get()){
+            KEY_OnInterrupt(KEY_BTN4);
+        }
+    #endif
 }
 
 /*
@@ -142,11 +142,11 @@ void SW_D_OnInterrupt(void)
 */
 void SW_C_OnInterrupt(void)
 {
-#if PL_HAS_KBI
-	if(KEY3_Get()){
-		KEY_OnInterrupt(KEY_BTN3);
-	}
-#endif
+    #if PL_HAS_KBI
+        if(KEY3_Get()){
+            KEY_OnInterrupt(KEY_BTN3);
+        }
+    #endif
 }
 
 /*
@@ -163,11 +163,11 @@ void SW_C_OnInterrupt(void)
 */
 void SW_B_OnInterrupt(void)
 {
-#if PL_HAS_KBI
-	if(KEY2_Get()){
-		KEY_OnInterrupt(KEY_BTN2);
-	}
-#endif
+    #if PL_HAS_KBI
+        if(KEY2_Get()){
+            KEY_OnInterrupt(KEY_BTN2);
+        }
+    #endif
 }
 
 /*
@@ -184,11 +184,11 @@ void SW_B_OnInterrupt(void)
 */
 void SW_A_OnInterrupt(void)
 {
-#if PL_HAS_KBI
-	if(KEY1_Get()){
-		KEY_OnInterrupt(KEY_BTN1);
-	}
-#endif
+    #if PL_HAS_KBI
+        if(KEY1_Get()){
+            KEY_OnInterrupt(KEY_BTN1);
+        }
+    #endif
 }
 
 /*
@@ -208,15 +208,15 @@ void SW_A_OnInterrupt(void)
 */
 void FRTOS1_vApplicationStackOverflowHook(xTaskHandle pxTask, char *pcTaskName)
 {
-  /* This will get called if a stack overflow is detected during the context
-     switch.  Set configCHECK_FOR_STACK_OVERFLOWS to 2 to also check for stack
-     problems within nested interrupts, but only do this for debug purposes as
-     it will increase the context switch time. */
-  (void)pxTask;
-  (void)pcTaskName;
-  taskDISABLE_INTERRUPTS();
-  /* Write your code here ... */
-  for(;;) {}
+    /* This will get called if a stack overflow is detected during the context
+       switch.  Set configCHECK_FOR_STACK_OVERFLOWS to 2 to also check for stack
+       problems within nested interrupts, but only do this for debug purposes as
+       it will increase the context switch time. */
+    (void)pxTask;
+    (void)pcTaskName;
+    taskDISABLE_INTERRUPTS();
+    /* Write your code here ... */
+    for(;;) {}
 }
 
 /*
@@ -233,8 +233,8 @@ void FRTOS1_vApplicationStackOverflowHook(xTaskHandle pxTask, char *pcTaskName)
 */
 void FRTOS1_vApplicationTickHook(void)
 {
-  /* Called for every RTOS tick. */
-  /* Write your code here ... */
+    /* Called for every RTOS tick. */
+    /* Write your code here ... */
 }
 
 /*
@@ -251,9 +251,9 @@ void FRTOS1_vApplicationTickHook(void)
 */
 void FRTOS1_vApplicationIdleHook(void)
 {
-  /* Called whenever the RTOS is idle (from the IDLE task).
-     Here would be a good place to put the CPU into low power mode. */
-  /* Write your code here ... */
+    /* Called whenever the RTOS is idle (from the IDLE task).
+       Here would be a good place to put the CPU into low power mode. */
+    /* Write your code here ... */
 }
 
 /*
@@ -270,14 +270,14 @@ void FRTOS1_vApplicationIdleHook(void)
 */
 void FRTOS1_vApplicationMallocFailedHook(void)
 {
-  /* Called if a call to pvPortMalloc() fails because there is insufficient
-     free memory available in the FreeRTOS heap.  pvPortMalloc() is called
-     internally by FreeRTOS API functions that create tasks, queues, software
-     timers, and semaphores.  The size of the FreeRTOS heap is set by the
-     configTOTAL_HEAP_SIZE configuration constant in FreeRTOSConfig.h. */
-  taskDISABLE_INTERRUPTS();
-  /* Write your code here ... */
-  for(;;) {}
+    /* Called if a call to pvPortMalloc() fails because there is insufficient
+       free memory available in the FreeRTOS heap.  pvPortMalloc() is called
+       internally by FreeRTOS API functions that create tasks, queues, software
+       timers, and semaphores.  The size of the FreeRTOS heap is set by the
+       configTOTAL_HEAP_SIZE configuration constant in FreeRTOSConfig.h. */
+    taskDISABLE_INTERRUPTS();
+    /* Write your code here ... */
+    for(;;) {}
 }
 
 /*
@@ -294,7 +294,7 @@ void FRTOS1_vApplicationMallocFailedHook(void)
 */
 void RTOSTRC1_OnTraceWrap(void)
 {
-  /* Write your code here ... */
+    /* Write your code here ... */
 }
 
 /* END Events */
