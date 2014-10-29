@@ -44,6 +44,10 @@
 #include "TI1.h"
 #include "TimerIntLdd1.h"
 #include "TU1.h"
+#include "FRTOS1.h"
+#include "RTOSTRC1.h"
+#include "RTOSCNTRLDD1.h"
+#include "UTIL1.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
@@ -65,14 +69,14 @@ int main(void)
     /* For example: for(;;) { } */
     APP_Start();
     /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
-    /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/
-    #ifdef PEX_RTOS_START
-        PEX_RTOS_START();                  /* Startup of the selected RTOS. Macro is defined by the RTOS component. */
-    #endif
-    /*** End of RTOS startup code.  ***/
-    /*** Processor Expert end of main routine. DON'T MODIFY THIS CODE!!! ***/
-    for(;;){}
-    /*** Processor Expert end of main routine. DON'T WRITE CODE BELOW!!! ***/
+  /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/
+  #ifdef PEX_RTOS_START
+    PEX_RTOS_START();                  /* Startup of the selected RTOS. Macro is defined by the RTOS component. */
+  #endif
+  /*** End of RTOS startup code.  ***/
+  /*** Processor Expert end of main routine. DON'T MODIFY THIS CODE!!! ***/
+  for(;;){}
+  /*** Processor Expert end of main routine. DON'T WRITE CODE BELOW!!! ***/
 } /*** End of main routine. DO NOT MODIFY THIS TEXT!!! ***/
 
 /* END main */
