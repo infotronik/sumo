@@ -23,7 +23,7 @@
 #if PL_HAS_EVENTS
     #include "Event.h"
 #endif
-#if PL_HAS_CONSOLE
+#if PL_HAS_SHELL
     #include "CLS1.h"
 #endif
 #if PL_HAS_BUZZER
@@ -64,7 +64,7 @@ static void APP_EventHandler(EVNT_Handle event) {
 	case EVNT_SW_A_PRESSED:
 		LED1_Neg();
 		LED3_Neg();
-		#if PL_HAS_CONSOLE
+		#if PL_HAS_SHELL
 			CLS1_SendStr("SW A pressed\n",CLS1_GetStdio()->stdOut);
 		#endif
 		#if PL_HAS_BUZZER
@@ -74,32 +74,32 @@ static void APP_EventHandler(EVNT_Handle event) {
 	case EVNT_SW_B_PRESSED:
 		LED2_Neg();
 		LED3_Neg();
-		#if PL_HAS_CONSOLE
+		#if PL_HAS_SHELL
 			CLS1_SendStr("SW B pressed\n",CLS1_GetStdio()->stdOut);
 		#endif
 		break;
 	case EVNT_SW_C_PRESSED:
 		LED1_Neg();
 		LED2_Neg();
-		#if PL_HAS_CONSOLE
+		#if PL_HAS_SHELL
 			CLS1_SendStr("SW C pressed\n",CLS1_GetStdio()->stdOut);
 		#endif
 		break;
 	case EVNT_SW_D_PRESSED:
 		LED1_Neg();
-		#if PL_HAS_CONSOLE
+		#if PL_HAS_SHELL
 			CLS1_SendStr("SW D pressed\n",CLS1_GetStdio()->stdOut);
 		#endif
 		break;
 	case EVNT_SW_E_PRESSED:
 		LED2_Neg();
-		#if PL_HAS_CONSOLE
+		#if PL_HAS_SHELL
 				CLS1_SendStr("SW E pressed\n",CLS1_GetStdio()->stdOut);
 		#endif
 		break;
 	case EVNT_SW_F_PRESSED:
 		LED3_Neg();
-		#if PL_HAS_CONSOLE
+		#if PL_HAS_SHELL
 			CLS1_SendStr("SW F pressed\n",CLS1_GetStdio()->stdOut);
 		#endif
 		break;
@@ -107,7 +107,7 @@ static void APP_EventHandler(EVNT_Handle event) {
 		LED1_Neg();
 		LED2_Neg();
 		LED3_Neg();
-		#if PL_HAS_CONSOLE
+		#if PL_HAS_SHELL
 			CLS1_SendStr("SW g pressed\n",CLS1_GetStdio()->stdOut);
 		#endif
 		break;

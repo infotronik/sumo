@@ -26,9 +26,6 @@
 #define PL_HAS_KBI  (1)
     /*!< Set to 1 to enable KBI support, 0 otherwise */
 
-#define PL_HAS_CONSOLE  (0)
-    /*!< Set to 1 to enable Console support, 0 otherwise */
-
 #define PL_HAS_TRIGGER  (1)
     /*!< Set to 1 to enable Trigger support, 0 otherwise */
 
@@ -37,6 +34,16 @@
 
 #define PL_HAS_RTOS (1)
     /*!< Set to 1 to enable RTOS support, 0 otherwise */
+
+#define PL_HAS_SHELL  (1)
+    /*!< Set to 1 to enable Shell support, 0 otherwise */
+
+#define PL_HAS_BLUETOOTH (0)
+    /*!< Set to 1 to enable Bluetooth support, 0 otherwise */
+
+#define PL_HAS_USB_CDC (0)
+/*!< Set to 1 to enable USB CDC support, 0 otherwise */
+
 
 #define PL_KEY_POLLED_KEY_A  (0)
 #define PL_KEY_POLLED_KEY_B  (0)
