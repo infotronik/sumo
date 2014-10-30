@@ -37,7 +37,7 @@ __stack_size = 0x0400;                 /* required amount of stack */
 
 MEMORY {
   m_interrupts (RX) : ORIGIN = 0x1FFF8000, LENGTH = 0x00000188
-  m_text      (RX) : ORIGIN = 0x20000000, LENGTH = 0x00008000
+  m_text      (RX) : ORIGIN = 0x20000000, LENGTH = 0x0000d000
   m_data      (RW) : ORIGIN = 0x1FFF8188, LENGTH = 0x00007E78
   m_cfmprotrom  (RX) : ORIGIN = 0x00000400, LENGTH = 0x00000010
 }
