@@ -41,7 +41,7 @@
 #define PL_HAS_BLUETOOTH (0)
     /*!< Set to 1 to enable Bluetooth support, 0 otherwise */
 
-#define PL_HAS_USB_CDC (0)
+#define PL_HAS_USB_CDC (1)
 /*!< Set to 1 to enable USB CDC support, 0 otherwise */
 
 

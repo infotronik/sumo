@@ -35,6 +35,7 @@
 							<option id="ilg.gnuarmeclipse.managedbuild.cross.option.command.size.1616770124" name="Size command" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.command.size" value="size" valueType="string"/>
 							<option id="ilg.gnuarmeclipse.managedbuild.cross.option.command.make.27473923" name="Build command" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.command.make" value="make" valueType="string"/>
 							<option id="ilg.gnuarmeclipse.managedbuild.cross.option.command.rm.322612228" name="Remove command" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.command.rm" value="rm" valueType="string"/>
+							<option id="ilg.gnuarmeclipse.managedbuild.cross.option.addtools.printsize.1707917457" name="Print size" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.addtools.printsize" value="true" valueType="boolean"/>
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="ilg.gnuarmeclipse.managedbuild.cross.targetPlatform.810681075" isAbstract="false" osList="all" superClass="ilg.gnuarmeclipse.managedbuild.cross.targetPlatform"/>
 							<builder buildPath="${workspace_loc:/sumo_frdm}/Debug" id="ilg.gnuarmeclipse.managedbuild.cross.builder.1717181422" keepEnvironmentInBuildfile="false" name="Gnu Make Builder" superClass="ilg.gnuarmeclipse.managedbuild.cross.builder"/>
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.1799539491" name="Cross ARM GNU Assembler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler">
@@ -86,6 +87,8 @@
 							</tool>
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.printsize.930453203" name="Cross ARM GNU Print Size" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.printsize">
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.printsize.format.454532793" name="Size format" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.printsize.format"/>
+								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.printsize.totals.1266790339" name="Show totals" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.printsize.totals" value="false" valueType="boolean"/>
+								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.printsize.other.1649020961" name="Other flags" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.printsize.other" value="Generated_Code/AS1.o Generated_Code/SW_G.o Generated_Code/ASerialLdd1.o Generated_Code/tasks.o Generated_Code/BitIoLdd1.o Generated_Code/TI1.o Generated_Code/BitIoLdd2.o Generated_Code/TimerIntLdd1.o Generated_Code/BitIoLdd3.o Generated_Code/timers.o Generated_Code/BitIoLdd8.o Generated_Code/trcBase.o Generated_Code/BitIoLdd9.o Generated_Code/trcHardwarePort.o Generated_Code/CDC1.o Generated_Code/trcKernel.o Generated_Code/CLS1.o Generated_Code/trcKernelPort.o Generated_Code/Cpu.o Generated_Code/trcUser.o Generated_Code/croutine.o Generated_Code/TU1.o Generated_Code/CS1.o Generated_Code/Tx1.o Generated_Code/event_groups.o Generated_Code/USB0.o Generated_Code/ExtIntLdd1.o Generated_Code/USB1.o Generated_Code/ExtIntLdd2.o Generated_Code/usb_cdc.o Generated_Code/ExtIntLdd3.o Generated_Code/usb_cdc_pstn.o Generated_Code/ExtIntLdd4.o Generated_Code/usb_class.o Generated_Code/ExtIntLdd5.o Generated_Code/usb_dci_kinetis.o Generated_Code/FRTOS1.o Generated_Code/usb_descriptor.o Generated_Code/heap_1.o Generated_Code/usb_driver.o Generated_Code/heap_2.o Generated_Code/usb_framework.o Generated_Code/heap_3.o Generated_Code/UTIL1.o Generated_Code/heap_4.o Generated_Code/Vectors.o Generated_Code/HF1.o Generated_Code/WAIT1.o Generated_Code/LED1.o Generated_Code/wdt_kinetis.o Generated_Code/LED2.o Sources/Events.o Generated_Code/LED3.o Sources/main.o Generated_Code/list.o sumo_common/Application.o Generated_Code/PE_LDD.o sumo_common/Buzzer.o Generated_Code/port.o sumo_common/Debounce.o Generated_Code/queue.o sumo_common/Event.o Generated_Code/RTOSCNTRLDD1.o sumo_common/KeyDebounce.o Generated_Code/RTOSTRC1.o sumo_common/Keys.o Generated_Code/Rx1.o sumo_common/LED.o Generated_Code/SW_A.o sumo_common/Platform.o Generated_Code/SW_B.o sumo_common/RTOS.o Generated_Code/SW_C.o sumo_common/Shell.o Generated_Code/SW_D.o sumo_common/Timer.o Generated_Code/SW_E.o sumo_common/Trigger.o Generated_Code/SW_F.o" valueType="string"/>
 							</tool>
 						</toolChain>
 					</folderInfo>
@@ -222,5 +225,12 @@
 		</scannerConfigBuildInfo>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.pathentry"/>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/sumo_frdm"/>
+		</configuration>
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/sumo_frdm"/>
+		</configuration>
+	</storageModule>
 </cproject>

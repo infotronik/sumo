@@ -3,8 +3,8 @@
   <Header>
     <Name>sumo_frdm</Name>
     <SavedBy>daniw</SavedBy>
-    <ModificationStamp>40</ModificationStamp>
-    <Date>2014-10-30</Date>
+    <ModificationStamp>44</ModificationStamp>
+    <Date>2014-10-31</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.10.1.RT6_b1437-1025</PEversion>
   </Header>
@@ -29,7 +29,7 @@
     <UseExistingModules>true</UseExistingModules>
     <RenamePeripheries>false</RenamePeripheries>
     <Autodependency>true</Autodependency>
-    <ProjectCompNumb>117</ProjectCompNumb>
+    <ProjectCompNumb>120</ProjectCompNumb>
     <DelUnusedPreviouslyGenFiles>true</DelUnusedPreviouslyGenFiles>
     <GeneratedCodeFrozen>false</GeneratedCodeFrozen>
     <AssignInitComponentNameToPrph>true</AssignInitComponentNameToPrph>
@@ -19894,7 +19894,7 @@
               <ReadOnly>false</ReadOnly>
               <UserReadOnly>false</UserReadOnly>
               <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Value>1200</Value>
+              <Value>100</Value>
               <Base>DEC</Base>
             </ItemState>
             <ItemState>
@@ -19902,7 +19902,7 @@
               <ReadOnly>false</ReadOnly>
               <UserReadOnly>false</UserReadOnly>
               <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Value>400</Value>
+              <Value>50</Value>
               <Base>DEC</Base>
             </ItemState>
             <ItemState>
@@ -21744,7 +21744,7 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Value>8192</Value>
+        <Value>4096</Value>
         <Base>DEC</Base>
       </ItemState>
       <ItemState>
