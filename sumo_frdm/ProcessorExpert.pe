@@ -2,11 +2,11 @@
 <PEproject>
   <Header>
     <Name>sumo_frdm</Name>
-    <SavedBy>Mario</SavedBy>
-    <ModificationStamp>39</ModificationStamp>
+    <SavedBy>daniw</SavedBy>
+    <ModificationStamp>40</ModificationStamp>
     <Date>2014-10-30</Date>
     <IDE>Eclipse IDE</IDE>
-    <PEversion>1.10.0.RT6_b1428-0121</PEversion>
+    <PEversion>1.10.1.RT6_b1437-1025</PEversion>
   </Header>
   <Options>
     <ProjectMainModule>main</ProjectMainModule>
@@ -24056,7 +24056,7 @@
               <ReadOnly>false</ReadOnly>
               <UserReadOnly>false</UserReadOnly>
               <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Value />
+              <Value>default</Value>
             </ItemState>
             <ItemState>
               <ItemSymbol>InterruptVector_OTG_ID_CHGPriorityFeatureGroup</ItemSymbol>
