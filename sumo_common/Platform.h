@@ -38,7 +38,7 @@
 #define PL_HAS_SHELL  (1)
     /*!< Set to 1 to enable Shell support, 0 otherwise */
 
-#define PL_HAS_BLUETOOTH (0)
+#define PL_HAS_BLUETOOTH (1)
     /*!< Set to 1 to enable Bluetooth support, 0 otherwise */
 
 #define PL_HAS_USB_CDC (1)

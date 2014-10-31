@@ -28,6 +28,9 @@ void PL_Init(void) {
 #if PL_HAS_TIMER
     TMR_Init();
 #endif
+#if PL_HAS_RTOS
+    RTOS_Init();
+#endif
 #if PL_HAS_SHELL
     SHELL_Init();
 #endif
@@ -45,6 +48,9 @@ void PL_Deinit(void) {
 #endif
 #if PL_HAS_TIMER
     TMR_Deinit();
+#endif
+#if PL_HAS_RTOS
+    RTOS_Deinit();
 #endif
 #if PL_HAS_SHELL
     SHELL_Deinit();

@@ -2,11 +2,11 @@
 <PEproject>
   <Header>
     <Name>sumo_frdm</Name>
-    <SavedBy>daniw</SavedBy>
-    <ModificationStamp>44</ModificationStamp>
+    <SavedBy>Mario</SavedBy>
+    <ModificationStamp>45</ModificationStamp>
     <Date>2014-10-31</Date>
     <IDE>Eclipse IDE</IDE>
-    <PEversion>1.10.1.RT6_b1437-1025</PEversion>
+    <PEversion>1.10.0.RT6_b1428-0121</PEversion>
   </Header>
   <Options>
     <ProjectMainModule>main</ProjectMainModule>

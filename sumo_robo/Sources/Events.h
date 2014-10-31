@@ -58,6 +58,9 @@
 #include "CDC1.h"
 #include "Tx1.h"
 #include "Rx1.h"
+#include "BT1.h"
+#include "Serial1.h"
+#include "ASerialLdd1.h"
 
 #ifdef __cplusplus
 extern "C" {
