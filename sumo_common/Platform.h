@@ -47,6 +47,8 @@
 #define PL_HAS_USB_CDC (0)
 /*!< Set to 1 to enable USB CDC support, 0 otherwise */
 
+#define PL_HAS_SEMAPHORE (1)
+/*!< Set to 1 to enable Semaphore support, 0 otherwise */
 
 #define PL_KEY_POLLED_KEY_A  (0)
 #define PL_KEY_POLLED_KEY_B  (0)
