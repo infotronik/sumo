@@ -15,16 +15,43 @@
   #include "RTOSTRC1.h"
 #endif
 
+#define USE_SEMAPHORES 1
+
+#if USE_SEMAPHORES
 static portTASK_FUNCTION(vSlaveTask, pvParameters) {
+  xSemaphoreHandle sem;
+
+  sem = (xSemaphoreHandle)pvParameters;
   for(;;) {
-    /*! \todo implement functionality */
+    if (sem != NULL) {
+      if (FRTOS1_xSemaphoreTake(sem, portMAX_DELAY)==pdTRUE) {
+        LED1_Neg();
+      }
+    }
   }
 }
 
 static portTASK_FUNCTION(vMasterTask, pvParameters) {
+  xSemaphoreHandle sem = NULL;
+
   (void)pvParameters; /* parameter not used */
+  FRTOS1_vSemaphoreCreateBinary(sem);
+  if (sem==NULL) { /* semaphore creation failed */
+    for(;;){} /* error */
+  }
+  FRTOS1_vQueueAddToRegistry(sem, "Sem");
+#if PL_HAS_RTOS_TRACE
+  RTOSTRC1_vTraceSetQueueName(sem, "IPC_Sem");
+#endif
+  /* create slave task */
+  if (FRTOS1_xTaskCreate(vSlaveTask, "Slave", configMINIMAL_STACK_SIZE, sem, tskIDLE_PRIORITY+1, NULL) != pdPASS) {
+    for(;;){} /* error */
+  }
   for(;;) {
-    /*! \todo implement functionality */
+    if (sem != NULL) { /* valid semaphore? */
+      (void)xSemaphoreGive(sem); /* give control to other task */
+      FRTOS1_vTaskDelay(1000/portTICK_RATE_MS);
+    }
   }
 }
 #endif /* USE_SEMAPHORES */
@@ -35,11 +62,10 @@ void SEM_Deinit(void) {
 
 /*! \brief Initializes module */
 void SEM_Init(void) {
+#if USE_SEMAPHORES
   if (FRTOS1_xTaskCreate(vMasterTask, "Master", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, NULL) != pdPASS) {
     for(;;){} /* error */
   }
-  if (FRTOS1_xTaskCreate(vSlaveTask, "Slave", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, NULL) != pdPASS) {
-    for(;;){} /* error */
-  }
-
+#endif
 }
+#endif /* PL_HAS_SEMAPHORE */
