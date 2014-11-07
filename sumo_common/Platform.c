@@ -23,6 +23,9 @@
 #if PL_HAS_SEMAPHORE
 	#include "Sem.h"
 #endif
+#if PL_HAS_LINE_SENSOR
+	#include "Reflectance.h"
+#endif
 
 void PL_Init(void) {
 #if PL_HAS_LED
@@ -48,6 +51,9 @@ void PL_Init(void) {
 #endif
 #if PL_HAS_SEMAPHORE
 	SEM_Init();
+#endif
+#if PL_HAS_LINE_SENSOR
+	REF_Init();
 #endif
 }
 
@@ -75,5 +81,8 @@ void PL_Deinit(void) {
 #endif
 #if PL_HAS_SEMAPHORE
 	SEM_Deinit();
+#endif
+#if PL_HAS_LINE_SENSOR
+	REF_Deinit();
 #endif
 }

@@ -38,16 +38,16 @@
 #define PL_HAS_SHELL  (1)
     /*!< Set to 1 to enable Shell support, 0 otherwise */
 
-#define PL_HAS_SHELL_QUEUE (1)
+#define PL_HAS_SHELL_QUEUE (0)
 /*!< Set to 1 to enable Shell-Queue support, 0 otherwise */
 
 #define PL_HAS_BLUETOOTH (0)
     /*!< Set to 1 to enable Bluetooth support, 0 otherwise */
 
-#define PL_HAS_USB_CDC (0)
+#define PL_HAS_USB_CDC (1)
 /*!< Set to 1 to enable USB CDC support, 0 otherwise */
 
-#define PL_HAS_SEMAPHORE (1)
+#define PL_HAS_SEMAPHORE (0)
 /*!< Set to 1 to enable Semaphore support, 0 otherwise */
 
 #define PL_KEY_POLLED_KEY_A  (0)
@@ -73,6 +73,8 @@
         /*!< FRDM board has up to 2 KEYs */
     #define PL_HAS_BUZZER  (1)
         /*!< Set to 1 to enable Buzzer support, 0 otherwise */
+	#define PL_HAS_LINE_SENSOR  (1)
+        /*!< Set to 1 to enable Line Sensor support, 0 otherwise */
 #else
     //#error "unknown configuration?"
 #endif

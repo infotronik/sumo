@@ -36,6 +36,9 @@
     #include "RTOS.h"
     #include "FRTOS1.h"
 #endif
+#if PL_HAS_SHELL_QUEUE
+    #include "ShellQueue.h"
+#endif
 
 
 void APP_Start(void) {
@@ -64,11 +67,18 @@ static void APP_EventHandler(EVNT_Handle event) {
 	case EVNT_SW_A_PRESSED:
 		LED1_Neg();
 		LED3_Neg();
-		#if PL_HAS_SHELL
-			CLS1_SendStr("SW A pressed\n",CLS1_GetStdio()->stdOut);
-		#endif
+//		#if PL_HAS_SHELL
+//			#if PL_HAS_SHELL_QUEUE
+//				SQUEUE_SendString("SW A pressed\n");
+//			#else
+//				CLS1_SendStr("SW A pressed\n",CLS1_GetStdio()->stdOut);
+//			#endif
+//		#endif
 		#if PL_HAS_BUZZER
-			BUZ_Beep(900,2000);
+			BUZ_Beep(3000,500);
+		#endif
+		#if PL_HAS_LINE_SENSOR
+			EVNT_SetEvent(EVNT_REF_START_STOP_CALIBRATION);
 		#endif
 		break;
 	case EVNT_SW_B_PRESSED:
@@ -110,6 +120,9 @@ static void APP_EventHandler(EVNT_Handle event) {
 		#if PL_HAS_SHELL
 			CLS1_SendStr("SW g pressed\n",CLS1_GetStdio()->stdOut);
 		#endif
+		break;
+	case EVNT_REF_START_STOP_CALIBRATION:
+
 		break;
 	default:
 		break;
