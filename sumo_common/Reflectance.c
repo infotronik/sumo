@@ -23,9 +23,7 @@
 #include "Application.h"
 #include "Event.h"
 #include "Shell.h"
-#if PL_HAS_BUZZER
-	#include "Buzzer.h"
-#endif
+
 
 #define REF_NOF_SENSORS 6 /* number of sensors */
 #define TIMEOUT 45000
@@ -274,7 +272,7 @@ static void REF_StateMachine(void) {
 
   switch (refState) {
     case REF_STATE_INIT:
-//      SHELL_SendString((unsigned char*)"INFO: No calibration data present.\r\n");
+      SHELL_SendString((unsigned char*)"INFO: No calibration data present.\r\n");
       refState = REF_STATE_NOT_CALIBRATED;
       break;
       
@@ -289,7 +287,7 @@ static void REF_StateMachine(void) {
       break;
     
     case REF_STATE_START_CALIBRATION:
-      //SHELL_SendString((unsigned char*)"start calibration...\r\n");
+      SHELL_SendString((unsigned char*)"start calibration...\r\n");
       for(i=0;i<REF_NOF_SENSORS;i++) {
         SensorCalibMinMax.minVal[i] = MAX_SENSOR_VALUE;
         SensorCalibMinMax.maxVal[i] = 0;
@@ -303,13 +301,13 @@ static void REF_StateMachine(void) {
       REF_CalibrateMinMax(SensorCalibMinMax.minVal, SensorCalibMinMax.maxVal, SensorRaw);
       if (EVNT_EventIsSet(EVNT_REF_START_STOP_CALIBRATION)) {
         EVNT_ClearEvent(EVNT_REF_START_STOP_CALIBRATION);
-        //BUZ_Beep(700,800);
+
         refState = REF_STATE_STOP_CALIBRATION;
       }
       break;
     
     case REF_STATE_STOP_CALIBRATION:
-      //SHELL_SendString((unsigned char*)"...stopping calibration.\r\n");
+      SHELL_SendString((unsigned char*)"...stopping calibration.\r\n");
 
       refState = REF_STATE_READY;
       break;
@@ -318,7 +316,6 @@ static void REF_StateMachine(void) {
       REF_Measure();
       if (EVNT_EventIsSet(EVNT_REF_START_STOP_CALIBRATION)) {
         EVNT_ClearEvent(EVNT_REF_START_STOP_CALIBRATION);
-        //BUZ_Beep(3000,800);
         refState = REF_STATE_START_CALIBRATION;
       }
       break;

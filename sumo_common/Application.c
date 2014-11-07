@@ -62,10 +62,13 @@ static void APP_EventHandler(EVNT_Handle event) {
 	    LED1_Off();
 	    break;
 	case EVNT_HEARTBEAT:
-		LED1_Neg();
+		//LED1_Off();
+		break;
+	case EVNT_SW_A_RELEASED:
+		//BUZ_Beep(2000,2000);
 		break;
 	case EVNT_SW_A_PRESSED:
-		LED1_Neg();
+		//LED1_Neg();
 		LED3_Neg();
 //		#if PL_HAS_SHELL
 //			#if PL_HAS_SHELL_QUEUE
@@ -75,9 +78,12 @@ static void APP_EventHandler(EVNT_Handle event) {
 //			#endif
 //		#endif
 		#if PL_HAS_BUZZER
-			BUZ_Beep(3000,500);
+			BUZ_Beep(1000,1000);
 		#endif
+		break;
+	case EVNT_SW_A_LPRESSED:
 		#if PL_HAS_LINE_SENSOR
+			LED1_Neg();
 			EVNT_SetEvent(EVNT_REF_START_STOP_CALIBRATION);
 		#endif
 		break;
