@@ -41,7 +41,7 @@
 #define PL_HAS_SHELL_QUEUE (0)
 /*!< Set to 1 to enable Shell-Queue support, 0 otherwise */
 
-#define PL_HAS_BLUETOOTH (0)
+#define PL_HAS_BLUETOOTH (1)
     /*!< Set to 1 to enable Bluetooth support, 0 otherwise */
 
 #define PL_HAS_USB_CDC (1)
@@ -74,6 +74,8 @@
     #define PL_HAS_BUZZER  (1)
         /*!< Set to 1 to enable Buzzer support, 0 otherwise */
 	#define PL_HAS_LINE_SENSOR  (1)
+        /*!< Set to 1 to enable Line Sensor support, 0 otherwise */
+	#define PL_HAS_MOTOR  (1)
         /*!< Set to 1 to enable Line Sensor support, 0 otherwise */
 #else
     //#error "unknown configuration?"

@@ -157,6 +157,13 @@ void FRTOS1_vApplicationTickHook(void)
 {
   /* Called for every RTOS tick. */
   /* Write your code here ... */
+#if PL_HAS_TIMER
+    TMR_OnInterrupt();
+    #if PL_HAS_TRIGGER
+        TRG_IncTick();
+    #endif
+#endif
+
 }
 
 /*
