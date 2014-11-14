@@ -11,7 +11,7 @@
 #define PL_IS_ROBO  (defined(PL_BOARD_IS_ROBO))
     /*!< Macro is defined through compiler option for the Robot board */
 
-
+#define PL_IS_INTRO_ZUMO_K22_V2 (1)
 
 
 #if PL_IS_FRDM
@@ -112,6 +112,11 @@
 
     #define PL_HAS_SEMAPHORE (0)
     /*!< Set to 1 to enable Semaphore support, 0 otherwise */
+
+    #define PL_HAS_QUAD_CALIBRATION (1)
+    /*!< Set to 1 to enable QUAD_CALIBRATION support, 0 otherwise */
+    #define PL_HAS_MPC4728 (1)
+    /*!< Set to 1 to enable MPC4728 support, 0 otherwise */
 #else
     //#error "unknown configuration?"
 #endif
