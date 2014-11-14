@@ -2,11 +2,11 @@
 <PEproject>
   <Header>
     <Name>sumo_frdm</Name>
-    <SavedBy>Mario</SavedBy>
-    <ModificationStamp>52</ModificationStamp>
-    <Date>2014-11-07</Date>
+    <SavedBy>daniw</SavedBy>
+    <ModificationStamp>53</ModificationStamp>
+    <Date>2014-11-14</Date>
     <IDE>Eclipse IDE</IDE>
-    <PEversion>1.10.0.RT6_b1428-0121</PEversion>
+    <PEversion>1.10.1.RT6_b1437-1025</PEversion>
   </Header>
   <Options>
     <ProjectMainModule>main</ProjectMainModule>
@@ -15673,13 +15673,13 @@
         <ItemSymbol>Prompt</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>"CMD&gt; "</Value>
+        <Value>"frdm$ "</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>ProjectNameStr</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>My Project Name</Value>
+        <Value>(*void) -&gt; frdm</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>SilentModePrefixChar</ItemSymbol>
