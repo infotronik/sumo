@@ -2,11 +2,11 @@
 <PEproject>
   <Header>
     <Name>sumo_robo</Name>
-    <SavedBy>marc</SavedBy>
-    <ModificationStamp>54</ModificationStamp>
-    <Date>2014-11-14</Date>
+    <SavedBy>daniw</SavedBy>
+    <ModificationStamp>55</ModificationStamp>
+    <Date>2014-11-18</Date>
     <IDE>Eclipse IDE</IDE>
-    <PEversion>1.10.0.RT6_b1428-0121</PEversion>
+    <PEversion>1.10.1.RT6_b1437-1025</PEversion>
   </Header>
   <Options>
     <ProjectMainModule>main</ProjectMainModule>
@@ -20992,7 +20992,7 @@
             </ItemState>
             <ItemState>
               <ItemSymbol>DividerInputFreq</ItemSymbol>
-              <Value>120 MHz</Value>
+              <Value>unknown</Value>
             </ItemState>
             <ItemState>
               <ItemSymbol>DividerClockFraction</ItemSymbol>
@@ -21022,7 +21022,7 @@
             </ItemState>
             <ItemState>
               <ItemSymbol>ModuleClockFreq</ItemSymbol>
-              <Value>48 MHz</Value>
+              <Value>unknown</Value>
             </ItemState>
             <ItemState>
               <ItemSymbol>PullUpDownGrp</ItemSymbol>
@@ -37531,7 +37531,7 @@
   </Bean>
   <Bean>
     <BeanType>TimerUnit_LDD</BeanType>
-    <Name>TU_MPC4728</Name>
+    <Name>TU_MCP4728</Name>
     <CompNumb>142</CompNumb>
     <CompEnabled>true</CompEnabled>
     <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
@@ -37546,7 +37546,7 @@
         <ItemSymbol>DeviceName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>TU_MPC4728</Value>
+        <Value>TU_MCP4728</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>MainModule</ItemSymbol>
@@ -38323,7 +38323,7 @@
         <ItemSymbol>OnCounterRestartName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>TU_MPC4728_OnCounterRestart</Value>
+        <Value>TU_MCP4728_OnCounterRestart</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnChannel0</ItemSymbol>
@@ -38339,7 +38339,7 @@
         <ItemSymbol>OnChannel0Name</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>TU_MPC4728_OnChannel0</Value>
+        <Value>TU_MCP4728_OnChannel0</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnChannel1</ItemSymbol>
@@ -38355,7 +38355,7 @@
         <ItemSymbol>OnChannel1Name</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>TU_MPC4728_OnChannel1</Value>
+        <Value>TU_MCP4728_OnChannel1</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnChannel2</ItemSymbol>
@@ -38371,7 +38371,7 @@
         <ItemSymbol>OnChannel2Name</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>TU_MPC4728_OnChannel2</Value>
+        <Value>TU_MCP4728_OnChannel2</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnChannel3</ItemSymbol>
@@ -38387,7 +38387,7 @@
         <ItemSymbol>OnChannel3Name</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>TU_MPC4728_OnChannel3</Value>
+        <Value>TU_MCP4728_OnChannel3</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnChannel4</ItemSymbol>
@@ -38403,7 +38403,7 @@
         <ItemSymbol>OnChannel4Name</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>TU_MPC4728_OnChannel4</Value>
+        <Value>TU_MCP4728_OnChannel4</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnChannel5</ItemSymbol>
@@ -38419,7 +38419,7 @@
         <ItemSymbol>OnChannel5Name</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>TU_MPC4728_OnChannel5</Value>
+        <Value>TU_MCP4728_OnChannel5</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnChannel6</ItemSymbol>
@@ -38435,7 +38435,7 @@
         <ItemSymbol>OnChannel6Name</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>TU_MPC4728_OnChannel6</Value>
+        <Value>TU_MCP4728_OnChannel6</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnChannel7</ItemSymbol>
@@ -38451,13 +38451,13 @@
         <ItemSymbol>OnChannel7Name</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>TU_MPC4728_OnChannel7</Value>
+        <Value>TU_MCP4728_OnChannel7</Value>
       </ItemState>
     </Events>
   </Bean>
   <Bean>
     <BeanType>BitIO</BeanType>
-    <Name>MPC4728_LDAC</Name>
+    <Name>MCP4728_LDAC</Name>
     <CompNumb>143</CompNumb>
     <CompEnabled>true</CompEnabled>
     <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
@@ -38472,7 +38472,7 @@
         <ItemSymbol>DeviceName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>MPC4728_LDAC</Value>
+        <Value>MCP4728_LDAC</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>_Pin</ItemSymbol>
@@ -39044,7 +39044,7 @@
   </Bean>
   <Bean>
     <BeanType>BitIO</BeanType>
-    <Name>MPC4728_RDY</Name>
+    <Name>MCP4728_RDY</Name>
     <CompNumb>145</CompNumb>
     <CompEnabled>true</CompEnabled>
     <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
@@ -39059,7 +39059,7 @@
         <ItemSymbol>DeviceName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>MPC4728_RDY</Value>
+        <Value>MCP4728_RDY</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>_Pin</ItemSymbol>
@@ -39072,7 +39072,7 @@
         <ItemSymbol>PinSignal</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>MPC4728_RDY</Value>
+        <Value>MCP4728_RDY</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>FeatureCondGrpLDD</ItemSymbol>

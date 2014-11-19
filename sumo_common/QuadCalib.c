@@ -10,8 +10,8 @@
 #include "Shell.h"
 #include "FRTOS1.h"
 #include "WAIT1.h"
-#include "MPC4728.h"
-#include "TU_MPC4728.h"
+#include "MCP4728.h"
+#include "TU_MCP4728.h"
 #include "Q4CLeft.h"
 #include "Q4CRight.h"
 #include "Motor.h"
@@ -82,7 +82,7 @@ static uint8_t Measure(uint8_t channel, QuadTime_t *timing) {
     }
   }
   /* here signal is on the raising edge */
-  TU_MPC4728_ResetCounter(TU_MPC4728_DeviceData);
+  TU_MCP4728_ResetCounter(TU_MCP4728_DeviceData);
   timeout = 0;
   while(ChannelFct[channel]()) { /* while signal is high... */
     /* wait until signal goes down */
@@ -93,9 +93,9 @@ static uint8_t Measure(uint8_t channel, QuadTime_t *timing) {
     }
   }
   /* signal is 0 now */
-  timing->highTicks = TU_MPC4728_GetCounterValue(TU_MPC4728_DeviceData);
+  timing->highTicks = TU_MCP4728_GetCounterValue(TU_MCP4728_DeviceData);
   timeout = 0;
-  TU_MPC4728_ResetCounter(TU_MPC4728_DeviceData);
+  TU_MCP4728_ResetCounter(TU_MCP4728_DeviceData);
   while(!ChannelFct[channel]()) { /* while signal is low... */
     /* wait until signal goes up */
     timeout++;
@@ -104,7 +104,7 @@ static uint8_t Measure(uint8_t channel, QuadTime_t *timing) {
       return ERR_FAILED;
     }
   }
-  timing->lowTicks = TU_MPC4728_GetCounterValue(TU_MPC4728_DeviceData);
+  timing->lowTicks = TU_MCP4728_GetCounterValue(TU_MCP4728_DeviceData);
   taskEXIT_CRITICAL();
   timing->lowPercent  = (timing->lowTicks*100UL)/((uint32_t)timing->highTicks+(uint32_t)timing->lowTicks);
   timing->highPercent = (timing->highTicks*100UL)/((uint32_t)timing->highTicks+(uint32_t)timing->lowTicks);
@@ -125,14 +125,14 @@ static uint8_t Tune(const CLS1_StdIOType *io, uint8_t channel, MOT_MotorDevice *
   MOT_SetSpeedPercent(motorHandle, TUNE_MOTOR_PERCENT);
   CLS1_SendStr((uint8_t*)"Tuning channel...\r\n", io->stdOut);
   res = ERR_FAILED;
-  for(i=0,dac=0;dac<=MPC4728_MAX_DAC_VAL;i++) {
+  for(i=0,dac=0;dac<=MCP4728_MAX_DAC_VAL;i++) {
     UTIL1_strcpy(buf, sizeof(buf), (uint8_t*)"Channel: ");
     UTIL1_chcat(buf, sizeof(buf), (uint8_t)('A'+channel)); /* 0:A, 1:B, 2:C, 3:D */
     UTIL1_strcat(buf, sizeof(buf), (uint8_t*)" DAC: 0x");
     UTIL1_strcatNum16Hex(buf, sizeof(buf), dac);
     UTIL1_chcat(buf, sizeof(buf), ' ');
     CLS1_SendStr(buf, io->stdOut);
-    if (MPC4728_FastWriteDAC(channel, dac)!=ERR_OK) { /* writes single channel DAC value, not updating EEPROM */
+    if (MCP4728_FastWriteDAC(channel, dac)!=ERR_OK) { /* writes single channel DAC value, not updating EEPROM */
       CLS1_SendStr((uint8_t*)"ERROR writing DAC channel!\r\n", io->stdErr);
       res = ERR_FAILED;
       break;
@@ -148,7 +148,7 @@ static uint8_t Tune(const CLS1_StdIOType *io, uint8_t channel, MOT_MotorDevice *
       if (timing.highPercent==50 || timing.lowPercent==50) {
         CLS1_SendStr((uint8_t*)"Set!\r\n", io->stdErr);
         CLS1_SendStr((uint8_t*)"Writing to EEPROM...\r\n", io->stdOut);
-        if (MPC4728_WriteDACandEE(channel, dac)!=ERR_OK) {
+        if (MCP4728_WriteDACandEE(channel, dac)!=ERR_OK) {
           CLS1_SendStr((uint8_t*)"ERROR writing DAC/EEPROM\r\n", io->stdErr);
           res = ERR_FAILED;
           break;

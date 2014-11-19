@@ -30,8 +30,8 @@
 #if PL_HAS_QUAD_CALIBRATION
   #include "QuadCalib.h"
 #endif
-#if PL_HAS_MPC4728
-  #include "MPC4728.h"
+#if PL_HAS_MCP4728
+  #include "MCP4728.h"
 #endif
 
 static uint32_t SHELL_val; /* used as demo value for shell */
@@ -106,8 +106,8 @@ static const CLS1_ParseCommandCallback CmdParserTable[] =
 #if PL_HAS_QUAD_CALIBRATION
   QUADCALIB_ParseCommand,
 #endif
-#if PL_HAS_MPC4728
-  MPC4728_ParseCommand,
+#if PL_HAS_MCP4728
+  MCP4728_ParseCommand,
 #endif
 #if FRTOS1_PARSE_COMMAND_ENABLED
   FRTOS1_ParseCommand, /* FreeRTOS shell parser */
