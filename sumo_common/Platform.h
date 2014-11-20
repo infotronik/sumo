@@ -117,6 +117,10 @@
     /*!< Set to 1 to enable QUAD_CALIBRATION support, 0 otherwise */
     #define PL_HAS_MCP4728 (1)
     /*!< Set to 1 to enable MCP4728 support, 0 otherwise */
+
+    #define PL_HAS_MOTOR_TACHO (1)
+        /*!< Set to 1 to enable Motor Tacho support, 0 otherwise */
+
 #else
     //#error "unknown configuration?"
 #endif

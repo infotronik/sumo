@@ -28,10 +28,15 @@
   #include "Motor.h"
 #endif
 #if PL_HAS_QUAD_CALIBRATION
+  #include "Q4CLeft.h"
+  #include "Q4CRight.h"
   #include "QuadCalib.h"
 #endif
 #if PL_HAS_MCP4728
   #include "MCP4728.h"
+#endif
+#if PL_HAS_MOTOR_TACHO
+  #include "Tacho.h"
 #endif
 
 static uint32_t SHELL_val; /* used as demo value for shell */
@@ -104,6 +109,8 @@ static const CLS1_ParseCommandCallback CmdParserTable[] =
   MOT_ParseCommand,
 #endif
 #if PL_HAS_QUAD_CALIBRATION
+  Q4CLeft_ParseCommand,
+  Q4CRight_ParseCommand,
   QUADCALIB_ParseCommand,
 #endif
 #if PL_HAS_MCP4728
@@ -115,6 +122,9 @@ static const CLS1_ParseCommandCallback CmdParserTable[] =
 #if PL_HAS_BLUETOOTH
 #if BT1_PARSE_COMMAND_ENABLED
   BT1_ParseCommand,
+#endif
+#if PL_HAS_MOTOR_TACHO
+  TACHO_ParseCommand,
 #endif
 #endif
   NULL /* Sentinel */

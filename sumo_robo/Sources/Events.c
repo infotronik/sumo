@@ -43,6 +43,10 @@
     #include "Trigger.h"
 #endif
 
+#if PL_HAS_MOTOR_TACHO
+	#include "Tacho.h"
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif 
@@ -164,6 +168,10 @@ void FRTOS1_vApplicationTickHook(void)
     #endif
     TMOUT1_AddTick();
 #endif
+#if PL_HAS_MOTOR_TACHO
+    TACHO_Sample();
+    TACHO_CalcSpeed();
+#endif
 
 }
 
@@ -278,6 +286,8 @@ void GI2C1_OnReleaseBus(void)
 void QuadInt_OnInterrupt(void)
 {
   /* Write your code here ... */
+  Q4CLeft_Sample();
+  Q4CRight_Sample();
 }
 
 /* END Events */
