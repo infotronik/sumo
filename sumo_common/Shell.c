@@ -44,6 +44,9 @@
 #if PL_HAS_PID
   #include "Pid.h"
 #endif
+#if PL_HAS_ULTRASONIC
+    #include "Ultrasonic.h"
+#endif
 
 static uint32_t SHELL_val; /* used as demo value for shell */
 
@@ -138,6 +141,9 @@ static const CLS1_ParseCommandCallback CmdParserTable[] =
 #endif
 #if PL_HAS_PID
   PID_ParseCommand,
+#endif
+#if PL_HAS_ULTRASONIC
+  US_ParseCommand,
 #endif
   NULL /* Sentinel */
 };

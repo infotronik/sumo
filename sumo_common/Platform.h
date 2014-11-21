@@ -127,6 +127,9 @@
     #define PL_HAS_PID (1)
         /*!< Set to 1 to enable PID support, 0 otherwise */
 
+    #define PL_HAS_ULTRASONIC (1)
+        /*!< Set to 1 to enable Ultrasonic support, 0 otherwise */
+
 #else
     //#error "unknown configuration?"
 #endif

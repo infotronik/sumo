@@ -38,6 +38,9 @@
 #if PL_HAS_PID
   #include "Pid.h"
 #endif
+#if PL_HAS_ULTRASONIC
+  #include "Ultrasonic.h"
+#endif
 
 void PL_Init(void) {
 #if PL_HAS_LED
@@ -79,6 +82,9 @@ void PL_Init(void) {
 #if PL_HAS_PID
     PID_Init();
 #endif
+#if PL_HAS_ULTRASONIC
+    US_Init();
+#endif
 }
 
 void PL_Deinit(void) {
@@ -116,9 +122,12 @@ void PL_Deinit(void) {
 	TACHO_Deinit();
 #endif
 #if PL_HAS_DRIVE
-    DRV_Init();
+    DRV_Deinit();
 #endif
 #if PL_HAS_PID
-    PID_Init();
+    PID_Deinit();
+#endif
+#if PL_HAS_ULTRASONIC
+    US_Deinit();
 #endif
 }

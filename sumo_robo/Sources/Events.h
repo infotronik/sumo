@@ -104,6 +104,8 @@
 #include "I2C1.h"
 #include "GI2C1.h"
 #include "TMOUT1.h"
+#include "TU_US.h"
+#include "TRIG.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -271,6 +273,48 @@ void GI2C1_OnReleaseBus(void);
 ** ===================================================================
 */
 void QuadInt_OnInterrupt(void);
+
+/*
+** ===================================================================
+**     Event       :  TU_US_OnCounterRestart (module Events)
+**
+**     Component   :  TU_US [TimerUnit_LDD]
+*/
+/*!
+**     @brief
+**         Called if counter overflow/underflow or counter is
+**         reinitialized by modulo or compare register matching.
+**         OnCounterRestart event and Timer unit must be enabled. See
+**         [SetEventMask] and [GetEventMask] methods. This event is
+**         available only if a [Interrupt] is enabled.
+**     @param
+**         UserDataPtr     - Pointer to the user or
+**                           RTOS specific data. The pointer passed as
+**                           the parameter of Init method.
+*/
+/* ===================================================================*/
+void TU_US_OnCounterRestart(LDD_TUserData *UserDataPtr);
+
+/*
+** ===================================================================
+**     Event       :  TU_US_OnChannel0 (module Events)
+**
+**     Component   :  TU_US [TimerUnit_LDD]
+*/
+/*!
+**     @brief
+**         Called if compare register match the counter registers or
+**         capture register has a new content. OnChannel0 event and
+**         Timer unit must be enabled. See [SetEventMask] and
+**         [GetEventMask] methods. This event is available only if a
+**         [Interrupt] is enabled.
+**     @param
+**         UserDataPtr     - Pointer to the user or
+**                           RTOS specific data. The pointer passed as
+**                           the parameter of Init method.
+*/
+/* ===================================================================*/
+void TU_US_OnChannel0(LDD_TUserData *UserDataPtr);
 
 /* END Events */
 

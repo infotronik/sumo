@@ -100,6 +100,8 @@
 #include "I2C1.h"
 #include "GI2C1.h"
 #include "TMOUT1.h"
+#include "TU_US.h"
+#include "TRIG.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
