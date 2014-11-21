@@ -15,6 +15,7 @@
 #endif
 
 static int cnt = 0;
+static int cnt_pid = 0;
 
 void TMR_OnInterrupt(void) {
     cnt++;

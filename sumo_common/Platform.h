@@ -121,6 +121,12 @@
     #define PL_HAS_MOTOR_TACHO (1)
         /*!< Set to 1 to enable Motor Tacho support, 0 otherwise */
 
+    #define PL_HAS_DRIVE (1)
+        /*!< Set to 1 to enable Drive support, 0 otherwise */
+
+    #define PL_HAS_PID (1)
+        /*!< Set to 1 to enable PID support, 0 otherwise */
+
 #else
     //#error "unknown configuration?"
 #endif
