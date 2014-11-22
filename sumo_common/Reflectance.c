@@ -27,7 +27,7 @@
 
 #define REF_NOF_SENSORS 6 /* number of sensors */
 #define TIMEOUT 50000
-#define THRESHOLD 70
+#define THRESHOLD 500 //70
 
 
 typedef enum {
