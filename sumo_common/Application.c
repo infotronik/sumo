@@ -39,6 +39,9 @@
 #if PL_HAS_SHELL_QUEUE
     #include "ShellQueue.h"
 #endif
+#if PL_HAS_LINE_SENSOR
+    #include "Reflectance.h"
+#endif
 
 
 void APP_Start(void) {
@@ -54,6 +57,9 @@ void APP_Start(void) {
 }
 
 static void APP_EventHandler(EVNT_Handle event) {
+	#if PL_HAS_LINE_SENSOR
+		LineStateType typ;
+	#endif
 	static uint16_t buzzer = 1000;
 	switch(event){
 	case EVNT_INIT:
@@ -77,6 +83,30 @@ static void APP_EventHandler(EVNT_Handle event) {
 //				CLS1_SendStr("SW A pressed\n",CLS1_GetStdio()->stdOut);
 //			#endif
 //		#endif
+		#if PL_HAS_LINE_SENSOR
+			typ = Line_Detection();
+			if(typ == LINE_STATE_AHEAD){
+				CLS1_SendStr("Line Ahead\n",CLS1_GetStdio()->stdOut);
+			}
+			if(typ == LINE_STATE_RIGHT){
+				CLS1_SendStr("Line Right\n",CLS1_GetStdio()->stdOut);
+			}
+			if(typ == LINE_STATE_LEFT){
+				CLS1_SendStr("Line Left\n",CLS1_GetStdio()->stdOut);
+			}
+			if(typ == LINE_STATE_MIDDLE){
+				CLS1_SendStr("Line middle\n",CLS1_GetStdio()->stdOut);
+			}
+			if(typ == LINE_STATE_NO_LINE){
+				CLS1_SendStr("no Line\n",CLS1_GetStdio()->stdOut);
+			}
+			if(typ == LINE_STATE_ERR){
+				CLS1_SendStr("Line Error\n",CLS1_GetStdio()->stdOut);
+			}
+			if(typ == LINE_STATE_LINE){
+				CLS1_SendStr("Line !!!\n",CLS1_GetStdio()->stdOut);
+			}
+		#endif
 		#if PL_HAS_BUZZER
 			BUZ_Beep(1000,1000);
 		#endif

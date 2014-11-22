@@ -12,6 +12,18 @@
 #include "Platform.h"
 #if PL_HAS_LINE_SENSOR
 
+typedef enum {
+  LINE_STATE_LEFT,
+  LINE_STATE_RIGHT,
+  LINE_STATE_AHEAD,
+  LINE_STATE_MIDDLE,
+  LINE_STATE_NO_LINE,
+  LINE_STATE_LINE,
+  LINE_STATE_ERR
+} LineStateType;
+
+LineStateType Line_Detection(void);
+
 #if PL_HAS_SHELL
   #include "CLS1.h"
   

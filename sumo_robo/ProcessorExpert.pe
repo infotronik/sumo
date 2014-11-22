@@ -2,11 +2,11 @@
 <PEproject>
   <Header>
     <Name>sumo_robo</Name>
-    <SavedBy>daniw</SavedBy>
-    <ModificationStamp>62</ModificationStamp>
-    <Date>2014-11-21</Date>
+    <SavedBy>Mario</SavedBy>
+    <ModificationStamp>70</ModificationStamp>
+    <Date>2014-11-22</Date>
     <IDE>Eclipse IDE</IDE>
-    <PEversion>1.10.1.RT6_b1437-1025</PEversion>
+    <PEversion>1.10.0.RT6_b1428-0121</PEversion>
   </Header>
   <Options>
     <ProjectMainModule>main</ProjectMainModule>
@@ -29,7 +29,7 @@
     <UseExistingModules>true</UseExistingModules>
     <RenamePeripheries>false</RenamePeripheries>
     <Autodependency>true</Autodependency>
-    <ProjectCompNumb>200</ProjectCompNumb>
+    <ProjectCompNumb>212</ProjectCompNumb>
     <DelUnusedPreviouslyGenFiles>true</DelUnusedPreviouslyGenFiles>
     <GeneratedCodeFrozen>false</GeneratedCodeFrozen>
     <AssignInitComponentNameToPrph>true</AssignInitComponentNameToPrph>
@@ -16551,7 +16551,7 @@
     <UserFolderName />
     <Comment lines_count="0" />
     <Template />
-    <BeanVersion>01.371</BeanVersion>
+    <BeanVersion>01.370</BeanVersion>
     <LightErrorsIgnored>false</LightErrorsIgnored>
     <Properties>
       <ItemState>
@@ -16697,7 +16697,7 @@
           <UserFolderName />
           <Comment lines_count="0" />
           <Template />
-          <BeanVersion>01.022</BeanVersion>
+          <BeanVersion>01.021</BeanVersion>
           <LightErrorsIgnored>false</LightErrorsIgnored>
           <Properties>
             <ItemState>
@@ -20456,7 +20456,7 @@
     <UserFolderName />
     <Comment lines_count="0" />
     <Template />
-    <BeanVersion>01.050</BeanVersion>
+    <BeanVersion>01.048</BeanVersion>
     <LightErrorsIgnored>false</LightErrorsIgnored>
     <Properties>
       <ItemState>
@@ -22450,7 +22450,7 @@
           <UserFolderName />
           <Comment lines_count="0" />
           <Template />
-          <BeanVersion>01.034</BeanVersion>
+          <BeanVersion>01.033</BeanVersion>
           <LightErrorsIgnored>false</LightErrorsIgnored>
           <Properties>
             <ItemState>
@@ -22464,7 +22464,7 @@
               <ReadOnly>false</ReadOnly>
               <UserReadOnly>false</UserReadOnly>
               <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <EnumSymbVal>Kinetis K21F120</EnumSymbVal>
+              <EnumSymbVal>Kinetis K22F120</EnumSymbVal>
               <Index>15</Index>
             </ItemState>
             <ItemState>

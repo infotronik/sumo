@@ -26,7 +26,9 @@
 
 
 #define REF_NOF_SENSORS 6 /* number of sensors */
-#define TIMEOUT 45000
+#define TIMEOUT 50000
+#define THRESHOLD 70
+
 
 typedef enum {
   REF_STATE_INIT,
@@ -99,6 +101,50 @@ static const SensorFctType SensorFctArray[REF_NOF_SENSORS] = {
   {S5_SetOutput, S5_SetInput, S5_SetVal, S5_GetVal},
   {S6_SetOutput, S6_SetInput, S6_SetVal, S6_GetVal},
 };
+
+LineStateType Line_Detection(void){
+	LineStateType type;
+	int i; int s = 0;
+
+	for(i=0;i<REF_NOF_SENSORS;i++){
+		if(SensorCalibrated[i] > THRESHOLD){
+			s |= (1<<i);
+		}
+	}
+	switch(s)
+	{
+	case 0b000000:
+		type = LINE_STATE_ERR;
+		break;
+	case 0b000011:
+	case 0b000111:
+	case 0b001111:
+	case 0b011111:
+		type = LINE_STATE_RIGHT;
+		break;
+	case 0b110000:
+	case 0b111000:
+	case 0b111100:
+	case 0b111110:
+		type = LINE_STATE_LEFT;
+		break;
+	case 0b110011:
+	case 0b100111:
+	case 0b111001:
+	case 0b100011:
+	case 0b110001:
+		type = LINE_STATE_MIDDLE;
+		break;
+	case 0b111111:
+		type = LINE_STATE_NO_LINE;
+		break;
+	default:
+		type = LINE_STATE_LINE;
+		break;
+	}
+	return type;
+
+}
 
 static void REF_MeasureRaw(SensorTimeType raw[REF_NOF_SENSORS]) {
   uint8_t cnt; /* number of sensor */
