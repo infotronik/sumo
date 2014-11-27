@@ -42,6 +42,9 @@
 #if PL_HAS_LINE_SENSOR
     #include "Reflectance.h"
 #endif
+#if PL_HAS_ACCEL
+    #include "Accel.h"
+#endif
 
 
 void APP_Start(void) {
