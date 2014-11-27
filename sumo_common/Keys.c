@@ -105,7 +105,7 @@ void KEY_EnableInterrupts(void) {
         SW_B_Enable();
     #endif
     #if PL_NOF_KEYS >= 3 && !PL_KEY_POLLED_KEY_C
-        SW_C_Enable();
+        //SW_C_Enable();
     #endif
     #if PL_NOF_KEYS >= 4 && !PL_KEY_POLLED_KEY_D
         SW_D_Enable();
@@ -130,7 +130,7 @@ void KEY_DisableInterrupts(void) {
         SW_B_Disable();
     #endif
     #if PL_NOF_KEYS >= 3 && !PL_KEY_POLLED_KEY_C
-        SW_C_Disable();
+        //SW_C_Disable();
     #endif
     #if PL_NOF_KEYS >= 4 && !PL_KEY_POLLED_KEY_D
         SW_D_Disable();

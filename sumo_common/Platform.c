@@ -41,6 +41,9 @@
 #if PL_HAS_ULTRASONIC
   #include "Ultrasonic.h"
 #endif
+#if PL_HAS_ACCEL
+	#include "Accel.h"
+#endif
 
 void PL_Init(void) {
 #if PL_HAS_LED
@@ -84,6 +87,9 @@ void PL_Init(void) {
 #endif
 #if PL_HAS_ULTRASONIC
     US_Init();
+#endif
+#if PL_HAS_ACCEL
+    ACCEL_Init();
 #endif
 }
 
@@ -129,5 +135,8 @@ void PL_Deinit(void) {
 #endif
 #if PL_HAS_ULTRASONIC
     US_Deinit();
+#endif
+#if PL_HAS_ACCEL
+    ACCEL_Deinit();
 #endif
 }

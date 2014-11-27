@@ -167,6 +167,7 @@ static void APP_EventHandler(EVNT_Handle event) {
 
 #if PL_HAS_RTOS
 void TaskLoop(void *pvParameters){
+	ACCEL_LowLevelInit();
 	(void)pvParameters;
 	for(;;){
 		#if PL_HAS_KEYS

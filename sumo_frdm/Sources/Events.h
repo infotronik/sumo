@@ -68,6 +68,9 @@
 #include "CDC1.h"
 #include "Tx1.h"
 #include "Rx1.h"
+#include "MMA1.h"
+#include "I2C1.h"
+#include "GI2C1.h"
 #include "SW_C.h"
 #include "SW_D.h"
 #include "SW_E.h"
@@ -250,6 +253,19 @@ void RTOSTRC1_OnTraceWrap(void);
 **     Description :
 **         Called for trace ring buffer wrap around. This gives the
 **         application a chance to dump the trace buffer.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void GI2C1_OnError(void);
+/*
+** ===================================================================
+**     Event       :  GI2C1_OnError (module Events)
+**
+**     Component   :  GI2C1 [GenericI2C]
+**     Description :
+**         Event called in case of error condition
 **     Parameters  : None
 **     Returns     : Nothing
 ** ===================================================================

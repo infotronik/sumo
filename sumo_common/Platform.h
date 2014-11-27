@@ -65,6 +65,10 @@
     #define PL_HAS_SEMAPHORE (0)
         /*!< Set to 1 to enable Semaphore support, 0 otherwise */
 
+    #define PL_HAS_ACCEL (1)
+        /*!< Set to 1 to enable Acceleration support, 0 otherwise */
+
+
 #elif PL_IS_ROBO
     #define PL_HAS_KEYS  (1)
         /*!< Set to 1 to enable KEYS support, 0 otherwise */
@@ -129,6 +133,9 @@
 
     #define PL_HAS_ULTRASONIC (1)
         /*!< Set to 1 to enable Ultrasonic support, 0 otherwise */
+
+    #define PL_HAS_ACCEL (1)
+        /*!< Set to 1 to enable Acceleration support, 0 otherwise */
 
 #else
     //#error "unknown configuration?"
