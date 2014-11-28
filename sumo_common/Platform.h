@@ -105,7 +105,7 @@
     #define PL_HAS_SHELL  (1)
         /*!< Set to 1 to enable Shell support, 0 otherwise */
 
-    #define PL_HAS_SHELL_QUEUE (0)
+    #define PL_HAS_SHELL_QUEUE (1)
     /*!< Set to 1 to enable Shell-Queue support, 0 otherwise */
 
     #define PL_HAS_BLUETOOTH (1)

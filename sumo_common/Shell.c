@@ -21,46 +21,128 @@
 #if PL_HAS_SHELL_QUEUE
   #include "ShellQueue.h"
 #endif
-#if PL_HAS_LINE_SENSOR
+#if PL_HAS_REFLECTANCE
   #include "Reflectance.h"
 #endif
 #if PL_HAS_MOTOR
   #include "Motor.h"
 #endif
-#if PL_HAS_QUAD_CALIBRATION
-  #include "Q4CLeft.h"
-  #include "Q4CRight.h"
-  #include "QuadCalib.h"
-#endif
 #if PL_HAS_MCP4728
   #include "MCP4728.h"
+#endif
+#if PL_HAS_QUAD_CALIBRATION
+  #include "QuadCalib.h"
+#endif
+#if PL_HAS_QUADRATURE
+  #include "Q4CLeft.h"
+  #include "Q4CRight.h"
+#endif
+#if PL_HAS_BUZZER
+  #include "Buzzer.h"
 #endif
 #if PL_HAS_MOTOR_TACHO
   #include "Tacho.h"
 #endif
+#if PL_HAS_PID
+  #include "PID.h"
+#endif
 #if PL_HAS_DRIVE
   #include "Drive.h"
 #endif
-#if PL_HAS_PID
-  #include "Pid.h"
+#if PL_HAS_ACCEL
+  #include "MMA1.h"
 #endif
 #if PL_HAS_ULTRASONIC
-    #include "Ultrasonic.h"
+  #include "Ultrasonic.h"
+#endif
+#if PL_HAS_RADIO
+  #include "RNET1.h"
+  #include "RNet_App.h"
+  #include "RNetConf.h"
+#endif
+#if RNET_CONFIG_REMOTE_STDIO
+  #include "RStdIO.h"
+#endif
+#if PL_HAS_REMOTE
+  #include "Remote.h"
+#endif
+
+/* forward declaration */
+static uint8_t SHELL_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io);
+
+static const CLS1_ParseCommandCallback CmdParserTable[] =
+{
+  CLS1_ParseCommand, /* Processor Expert Shell component, is first in list */
+  SHELL_ParseCommand, /* our own module parser */
+#if FRTOS1_PARSE_COMMAND_ENABLED
+  FRTOS1_ParseCommand, /* FreeRTOS shell parser */
+#endif
+#if PL_HAS_BLUETOOTH
+#if BT1_PARSE_COMMAND_ENABLED
+  BT1_ParseCommand,
+#endif
+#endif
+#if PL_HAS_REFLECTANCE
+  #if REF_PARSE_COMMAND_ENABLED
+  REF_ParseCommand,
+  #endif
+#endif
+#if PL_HAS_MOTOR
+  MOT_ParseCommand,
+#endif
+#if PL_HAS_MCP4728
+  MCP4728_ParseCommand,
+#endif
+#if PL_HAS_QUAD_CALIBRATION
+  QUADCALIB_ParseCommand,
+#endif
+#if PL_HAS_QUADRATURE
+#if Q4CLeft_PARSE_COMMAND_ENABLED
+  Q4CLeft_ParseCommand,
+#endif
+#if Q4CRight_PARSE_COMMAND_ENABLED
+  Q4CRight_ParseCommand,
+#endif
+#endif
+#if PL_HAS_BUZZER
+  //BUZ_ParseCommand,
+#endif
+#if PL_HAS_MOTOR_TACHO
+  TACHO_ParseCommand,
+#endif
+#if PL_HAS_PID
+  PID_ParseCommand,
+#endif
+#if PL_HAS_DRIVE
+  DRV_ParseCommand,
 #endif
 #if PL_HAS_ACCEL
-    #include "MMA1.h"
+#if MMA1_PARSE_COMMAND_ENABLED
+  MMA1_ParseCommand,
 #endif
+#endif
+#if PL_HAS_ULTRASONIC
+  US_ParseCommand,
+#endif
+#if PL_HAS_RADIO
+  RNET1_ParseCommand,
+  RNETA_ParseCommand,
+#endif
+#if PL_HAS_REMOTE
+  REMOTE_ParseCommand,
+#endif
+  NULL /* Sentinel */
+};
 
 static uint32_t SHELL_val; /* used as demo value for shell */
 
 void SHELL_SendString(unsigned char *msg) {
-  /*! \todo Replace this with message queues */
-
-  #if PL_HAS_SHELL_QUEUE
-	SQUEUE_SendString(msg);
-  #else
-	CLS1_SendStr(msg, CLS1_GetStdio()->stdOut);
-  #endif
+#if PL_HAS_SHELL_QUEUE
+  /*! \todo Implement function using queues */
+  SQUEUE_SendString(msg);
+#else
+  CLS1_SendStr(msg, CLS1_GetStdio()->stdOut);
+#endif
 }
 
 /*!
@@ -105,54 +187,12 @@ static uint8_t SHELL_ParseCommand(const unsigned char *cmd, bool *handled, const
     if (UTIL1_xatoi(&p, &val)==ERR_OK) {
       SHELL_val = val;
       *handled = TRUE;
+    } else {
+      return ERR_FAILED; /* wrong format of command? */
     }
   }
   return ERR_OK;
 }
-
-static const CLS1_ParseCommandCallback CmdParserTable[] =
-{
-  CLS1_ParseCommand, /* Processor Expert Shell component, is first in list */
-  SHELL_ParseCommand, /* our own module parser */
-#if PL_HAS_LINE_SENSOR
-  REF_ParseCommand,
-#endif
-#if PL_HAS_MOTOR
-  MOT_ParseCommand,
-#endif
-#if PL_HAS_QUAD_CALIBRATION
-  Q4CLeft_ParseCommand,
-  Q4CRight_ParseCommand,
-  QUADCALIB_ParseCommand,
-#endif
-#if PL_HAS_MCP4728
-  MCP4728_ParseCommand,
-#endif
-#if FRTOS1_PARSE_COMMAND_ENABLED
-  FRTOS1_ParseCommand, /* FreeRTOS shell parser */
-#endif
-#if PL_HAS_BLUETOOTH
-#if BT1_PARSE_COMMAND_ENABLED
-  BT1_ParseCommand,
-#endif
-#endif
-#if PL_HAS_MOTOR_TACHO
-  TACHO_ParseCommand,
-#endif
-#if PL_HAS_DRIVE
-  DRV_ParseCommand,
-#endif
-#if PL_HAS_PID
-  PID_ParseCommand,
-#endif
-#if PL_HAS_ULTRASONIC
-  US_ParseCommand,
-#endif
-#if PL_HAS_ACCEL
-  MMA1_ParseCommand,
-#endif
-  NULL /* Sentinel */
-};
 
 #if PL_HAS_BLUETOOTH
 /* Bluetooth stdio */
@@ -199,6 +239,10 @@ static portTASK_FUNCTION(ShellTask, pvParameters) {
 #if CLS1_DEFAULT_SERIAL
   CLS1_ConstStdIOTypePtr ioLocal = CLS1_GetStdio();  
 #endif
+#if RNET_CONFIG_REMOTE_STDIO
+  static unsigned char radio_cmd_buf[48];
+  CLS1_ConstStdIOType *ioRemote = RSTDIO_GetStdioRx();
+#endif
   
   (void)pvParameters; /* not used */
 #if PL_HAS_USB_CDC
@@ -206,6 +250,9 @@ static portTASK_FUNCTION(ShellTask, pvParameters) {
 #endif
 #if PL_HAS_BLUETOOTH
   bluetooth_buf[0] = '\0';
+#endif
+#if RNET_CONFIG_REMOTE_STDIO
+  radio_cmd_buf[0] = '\0';
 #endif
   localConsole_buf[0] = '\0';
 #if CLS1_DEFAULT_SERIAL
@@ -221,17 +268,33 @@ static portTASK_FUNCTION(ShellTask, pvParameters) {
 #if PL_HAS_BLUETOOTH
     (void)CLS1_ReadAndParseWithCommandTable(bluetooth_buf, sizeof(bluetooth_buf), &BT_stdio, CmdParserTable);
 #endif
-    FRTOS1_vTaskDelay(50/portTICK_RATE_MS);
+#if RNET_CONFIG_REMOTE_STDIO
+    RSTDIO_Print(ioLocal); /* dispatch incoming messages */
+    (void)CLS1_ReadAndParseWithCommandTable(radio_cmd_buf, sizeof(radio_cmd_buf), ioRemote, CmdParserTable);
+#endif
+#if PL_HAS_SHELL_QUEUE
+    {
+      /*! \todo Handle shell queue */
+      unsigned char ch;
+
+      while((ch=SQUEUE_ReceiveChar()) && ch!='\0') {
+        ioLocal->stdOut(ch);
+#if PL_HAS_BLUETOOTH
+        BT_stdio.stdOut(ch); /* copy on Bluetooth */
+#endif
+      }
+    }
+#endif
+    FRTOS1_vTaskDelay(10/portTICK_RATE_MS);
   } /* for */
 }
 
 void SHELL_Init(void) {
-  CLS1_Init();
 #if !CLS1_DEFAULT_SERIAL && PL_HAS_BLUETOOTH
   (void)CLS1_SetStdio(&BT_stdio); /* use the Bluetooth stdio as default */
 #endif
 #if PL_HAS_RTOS
-  if (FRTOS1_xTaskCreate(ShellTask, "Shell", configMINIMAL_STACK_SIZE+150, NULL, tskIDLE_PRIORITY+1, NULL) != pdPASS) {
+  if (FRTOS1_xTaskCreate(ShellTask, "Shell", configMINIMAL_STACK_SIZE+100, NULL, tskIDLE_PRIORITY+1, NULL) != pdPASS) {
     for(;;){} /* error */
   }
 #endif

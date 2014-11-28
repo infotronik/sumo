@@ -89,25 +89,25 @@ static void APP_EventHandler(EVNT_Handle event) {
 		#if PL_HAS_LINE_SENSOR
 			typ = Line_Detection();
 			if(typ == LINE_STATE_AHEAD){
-				CLS1_SendStr("Line Ahead\n",CLS1_GetStdio()->stdOut);
+				SHELL_SendString("Line Ahead\n",CLS1_GetStdio()->stdOut);
 			}
 			if(typ == LINE_STATE_RIGHT){
-				CLS1_SendStr("Line Right\n",CLS1_GetStdio()->stdOut);
+				SHELL_SendString("Line Right\n",CLS1_GetStdio()->stdOut);
 			}
 			if(typ == LINE_STATE_LEFT){
-				CLS1_SendStr("Line Left\n",CLS1_GetStdio()->stdOut);
+				SHELL_SendString("Line Left\n",CLS1_GetStdio()->stdOut);
 			}
 			if(typ == LINE_STATE_MIDDLE){
-				CLS1_SendStr("Line middle\n",CLS1_GetStdio()->stdOut);
+				SHELL_SendString("Line middle\n",CLS1_GetStdio()->stdOut);
 			}
 			if(typ == LINE_STATE_NO_LINE){
-				CLS1_SendStr("no Line\n",CLS1_GetStdio()->stdOut);
+				SHELL_SendString("no Line\n",CLS1_GetStdio()->stdOut);
 			}
 			if(typ == LINE_STATE_ERR){
-				CLS1_SendStr("Line Error\n",CLS1_GetStdio()->stdOut);
+				SHELL_SendString("Line Error\n",CLS1_GetStdio()->stdOut);
 			}
 			if(typ == LINE_STATE_LINE){
-				CLS1_SendStr("Line !!!\n",CLS1_GetStdio()->stdOut);
+				SHELL_SendString("Line !!!\n",CLS1_GetStdio()->stdOut);
 			}
 		#endif
 		#if PL_HAS_BUZZER
