@@ -25,6 +25,7 @@
 #endif
 #if PL_HAS_SHELL
     #include "CLS1.h"
+	#include "Shell.h"
 #endif
 #if PL_HAS_BUZZER
     #include "Buzzer.h"
@@ -46,6 +47,13 @@
     #include "Accel.h"
 #endif
 
+static LineStateType typ;
+
+void APP_DebugPrint(unsigned char *str) {
+#if PL_HAS_SHELL
+  CLS1_SendStr(str, CLS1_GetStdio()->stdOut);
+#endif
+}
 
 void APP_Start(void) {
     PL_Init(); /* platform initialization */
@@ -61,7 +69,7 @@ void APP_Start(void) {
 
 static void APP_EventHandler(EVNT_Handle event) {
 	#if PL_HAS_LINE_SENSOR
-		LineStateType typ;
+
 	#endif
 	static uint16_t buzzer = 1000;
 	switch(event){
@@ -89,25 +97,25 @@ static void APP_EventHandler(EVNT_Handle event) {
 		#if PL_HAS_LINE_SENSOR
 			typ = Line_Detection();
 			if(typ == LINE_STATE_AHEAD){
-				SHELL_SendString("Line Ahead\n",CLS1_GetStdio()->stdOut);
+				SHELL_SendString("Line Ahead\n");
 			}
 			if(typ == LINE_STATE_RIGHT){
-				SHELL_SendString("Line Right\n",CLS1_GetStdio()->stdOut);
+				SHELL_SendString("Line Right\n");
 			}
 			if(typ == LINE_STATE_LEFT){
-				SHELL_SendString("Line Left\n",CLS1_GetStdio()->stdOut);
+				SHELL_SendString("Line Left\n");
 			}
 			if(typ == LINE_STATE_MIDDLE){
-				SHELL_SendString("Line middle\n",CLS1_GetStdio()->stdOut);
+				SHELL_SendString("Line middle\n");
 			}
 			if(typ == LINE_STATE_NO_LINE){
-				SHELL_SendString("no Line\n",CLS1_GetStdio()->stdOut);
+				SHELL_SendString("no Line\n");
 			}
 			if(typ == LINE_STATE_ERR){
-				SHELL_SendString("Line Error\n",CLS1_GetStdio()->stdOut);
+				SHELL_SendString("Line Error\n");
 			}
 			if(typ == LINE_STATE_LINE){
-				SHELL_SendString("Line !!!\n",CLS1_GetStdio()->stdOut);
+				SHELL_SendString("Line !!!\n");
 			}
 		#endif
 		#if PL_HAS_BUZZER
@@ -177,6 +185,12 @@ void TaskLoop(void *pvParameters){
 	for(;;){
 		#if PL_HAS_KEYS
 			KEY_Scan();
+		#endif
+		#if PL_HAS_LINE_SENSOR
+			typ = Line_Detection();
+			if(typ!=LINE_STATE_NO_LINE){
+				EVNT_SetEvent(EVNT_LINE);
+			}
 		#endif
 		#if PL_HAS_EVENTS
 		  EVNT_HandleEvent(APP_EventHandler);

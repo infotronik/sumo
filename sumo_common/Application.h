@@ -18,5 +18,5 @@ static void APP_EventHandler(EVNT_Handle event);
 #else
     static void APP_Loop(void);
 #endif
-
+void APP_DebugPrint(unsigned char *str);
 #endif /* APPLICATION_H_ */

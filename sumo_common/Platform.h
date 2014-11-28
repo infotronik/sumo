@@ -33,7 +33,7 @@
 
     #define PL_HAS_LED  (1)
         /*!< Set to 1 to enable LED support, 0 otherwise */
-    #define PL_NOF_LEDS       (3)
+    #define PL_NOF_LEDS       (2)
         /*!< FRDM board has up to 3 LEDs (RGB) */
 
     #define PL_HAS_JOYSTICK  (0)
@@ -67,6 +67,9 @@
 
     #define PL_HAS_ACCEL (1)
         /*!< Set to 1 to enable Acceleration support, 0 otherwise */
+
+	#define PL_HAS_RADIO (1)
+        /*!< Set to 1 to enable Radio support, 0 otherwise */
 
 
 #elif PL_IS_ROBO
@@ -136,6 +139,9 @@
 
     #define PL_HAS_ACCEL (1)
         /*!< Set to 1 to enable Acceleration support, 0 otherwise */
+
+	#define PL_HAS_RADIO (1)
+        /*!< Set to 1 to enable Radio support, 0 otherwise */
 
 #else
     //#error "unknown configuration?"

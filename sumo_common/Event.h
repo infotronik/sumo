@@ -40,6 +40,7 @@
         EVNT_SW_F_RELEASED,	/*!< Switch F Released Event */
         EVNT_SW_G_RELEASED,	/*!< Switch G Released Event */
         EVNT_REF_START_STOP_CALIBRATION, /*!< Start Stopp Calibration Event */
+        EVNT_LINE,/*!< Line Detected Event */
         EVNT_NOF_EVENTS       /*!< Must be last one! */
     } EVNT_Handle;
     
