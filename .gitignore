@@ -10,3 +10,5 @@ kds_workspace
 **/Debug
 **/doxy
 **/language.settings.xml
+
+*.swp
