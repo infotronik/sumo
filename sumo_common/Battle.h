@@ -12,27 +12,18 @@
 
 #if PL_HAS_BATTLE
 
-enum State_{
-	NONE,
-	WAIT,
-	REMOTE,
-	FIND,
-	PUSH,
-	LINE
-}State;
-
-
 #if PL_HAS_SHELL
 /*!
  * \brief Prints the system low power status
  * \param io I/O channel to use for printing status
  */
+void BATTLE_StateMachine(void);
 static void BATTLE_PrintStatus(const CLS1_StdIOType *io);
 static void BATTLE_PrintHelp(const CLS1_StdIOType *io);
 uint8_t BATTLE_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io);
 #endif /* PL_HAS_SHELL */
 
-void BATTLE_Deinit(void):
+void BATTLE_Deinit(void);
 void BATTLE_Init(void);
 #endif /* PL_HAS_BATTLE */
 
