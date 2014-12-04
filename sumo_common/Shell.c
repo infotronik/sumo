@@ -66,6 +66,9 @@
 #if PL_HAS_REMOTE
   #include "Remote.h"
 #endif
+#if PL_HAS_BATTLE
+  #include "Battle.h"
+#endif
 
 /* forward declaration */
 static uint8_t SHELL_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io);
@@ -128,6 +131,9 @@ static const CLS1_ParseCommandCallback CmdParserTable[] =
 #endif
 #if PL_HAS_REMOTE
   REMOTE_ParseCommand,
+#endif
+#if PL_HAS_BATTLE
+  BATTLE_ParseCommand
 #endif
   NULL /* Sentinel */
 };

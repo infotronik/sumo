@@ -2,9 +2,9 @@
 <PEproject>
   <Header>
     <Name>sumo_frdm</Name>
-    <SavedBy>Mario</SavedBy>
-    <ModificationStamp>62</ModificationStamp>
-    <Date>2014-11-28</Date>
+    <SavedBy>marc</SavedBy>
+    <ModificationStamp>63</ModificationStamp>
+    <Date>2014-12-04</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.10.0.RT6_b1428-0121</PEversion>
   </Header>
@@ -15671,7 +15671,7 @@
     <UserFolderName />
     <Comment lines_count="0" />
     <Template />
-    <BeanVersion>01.048</BeanVersion>
+    <BeanVersion>01.050</BeanVersion>
     <LightErrorsIgnored>false</LightErrorsIgnored>
     <Properties>
       <ItemState>
@@ -19623,7 +19623,7 @@
     <UserFolderName />
     <Comment lines_count="0" />
     <Template />
-    <BeanVersion>01.370</BeanVersion>
+    <BeanVersion>01.371</BeanVersion>
     <LightErrorsIgnored>false</LightErrorsIgnored>
     <Properties>
       <ItemState>
@@ -19769,7 +19769,7 @@
           <UserFolderName />
           <Comment lines_count="0" />
           <Template />
-          <BeanVersion>01.021</BeanVersion>
+          <BeanVersion>01.022</BeanVersion>
           <LightErrorsIgnored>false</LightErrorsIgnored>
           <Properties>
             <ItemState>
@@ -24424,7 +24424,7 @@
           <UserFolderName />
           <Comment lines_count="0" />
           <Template />
-          <BeanVersion>01.033</BeanVersion>
+          <BeanVersion>01.034</BeanVersion>
           <LightErrorsIgnored>false</LightErrorsIgnored>
           <Properties>
             <ItemState>
@@ -24438,7 +24438,7 @@
               <ReadOnly>false</ReadOnly>
               <UserReadOnly>false</UserReadOnly>
               <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>8</Index>
+              <Index>9</Index>
               <EnumSymbVal>Kinetis L2K</EnumSymbVal>
             </ItemState>
             <ItemState>

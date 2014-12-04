@@ -143,6 +143,9 @@
 	#define PL_HAS_RADIO (1)
         /*!< Set to 1 to enable Radio support, 0 otherwise */
 
+	#define PL_HAS_BATTLE (1)
+        /*!< Set to 1 to enable Battle support, 0 otherwise */
+
 #else
     //#error "unknown configuration?"
 #endif
