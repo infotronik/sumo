@@ -39,24 +39,27 @@ static void BATTLE_PrintStatus(const CLS1_StdIOType *io) {
     //TACHO_CalcSpeed(); /* only temporary until this is done periodically */
     CLS1_SendStatusStr((unsigned char*)"battle", (unsigned char*)"\r\n", io->stdOut);
     CLS1_SendStatusStr((unsigned char*)"  state", (unsigned char*)"", io->stdOut);
-    switch(State) {
-        case NONE:
-            CLS1_SendStr((unsigned char*)"  NONE\r\n", io->stdOut);
+    switch(battleState) {
+        case BATTLE_STATE_INIT:
+            CLS1_SendStr((unsigned char*)"  BATTLE_STATE_INIT\r\n", io->stdOut);
             break;
-        case WAIT:
-            CLS1_SendStr((unsigned char*)"  WAIT\r\n", io->stdOut);
+        case BATTLE_STATE_NONE:
+            CLS1_SendStr((unsigned char*)"  BATTLE_STATE_NONE\r\n", io->stdOut);
             break;
-        case REMOTE:
-            CLS1_SendStr((unsigned char*)"  REMOTE\r\n", io->stdOut);
+        case BATTLE_STATE_REMOTE:
+            CLS1_SendStr((unsigned char*)"  BATTLE_STATE_REMOTE\r\n", io->stdOut);
             break;
-        case FIND:
-            CLS1_SendStr((unsigned char*)"  FIND\r\n", io->stdOut);
+        case BATTLE_STATE_WAIT:
+            CLS1_SendStr((unsigned char*)"  BATTLE_STATE_WAIT\r\n", io->stdOut);
             break;
-        case PUSH:
-            CLS1_SendStr((unsigned char*)"  PUSH\r\n", io->stdOut);
+        case BATTLE_STATE_FIND:
+            CLS1_SendStr((unsigned char*)"  BATTLE_STATE_FIND\r\n", io->stdOut);
             break;
-        case LINE:
-            CLS1_SendStr((unsigned char*)"  LINE\r\n", io->stdOut);
+        case BATTLE_STATE_PUSH:
+            CLS1_SendStr((unsigned char*)"  BATTLE_STATE_PUSH\r\n", io->stdOut);
+            break;
+        case BATTLE_STATE_LINE:
+            CLS1_SendStr((unsigned char*)"  BATTLE_STATE_LINE\r\n", io->stdOut);
             break;
         default:
             CLS1_SendStr((unsigned char*)"  Invalid State\r\n", io->stdOut);
@@ -85,13 +88,13 @@ uint8_t BATTLE_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_
         BATTLE_PrintStatus(io);
         *handled = TRUE;
     } else if (UTIL1_strcmp((char*)cmd, (char*)CLS1_CMD_STATUS)==0 || UTIL1_strcmp((char*)cmd, (char*)"battle on")==0) {
-        State = FIND;
+        battleState = BATTLE_STATE_FIND;
     } else if (UTIL1_strcmp((char*)cmd, (char*)CLS1_CMD_STATUS)==0 || UTIL1_strcmp((char*)cmd, (char*)"battle start")==0) {
-        State = WAIT;
+        battleState = BATTLE_STATE_WAIT;
     } else if (UTIL1_strcmp((char*)cmd, (char*)CLS1_CMD_STATUS)==0 || UTIL1_strcmp((char*)cmd, (char*)"battle off")==0) {
-        State = NONE;
+        battleState = BATTLE_STATE_NONE;
     } else if (UTIL1_strcmp((char*)cmd, (char*)CLS1_CMD_STATUS)==0 || UTIL1_strcmp((char*)cmd, (char*)"battle remote")==0) {
-        State = REMOTE;
+        battleState = BATTLE_STATE_REMOTE;
     }
     return ERR_OK;
 }
