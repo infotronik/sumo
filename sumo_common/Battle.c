@@ -9,8 +9,11 @@
 #include "Application.h"
 #include "Trigger.h"
 #include "Drive.h"
+#include "Ultrasonic.h"
 
 #if PL_HAS_BATTLE
+
+#define MAX_US_RANGE_CM 100
 
 typedef enum {
 	BATTLE_STATE_INIT,
@@ -32,6 +35,12 @@ static void changeState(void *state) {
 	battleState = *((BattleStateType *) state);
 }
 
+bool BATTLE_EnemyInRange(){
+	  uint16_t cm;
+	  cm = US_usToCentimeters(US_Measure_us(), 22);
+	  return(cm <= MAX_US_RANGE_CM);
+}
+
 void BATTLE_StateMachine(void) {
 	switch (battleState) {
 	case BATTLE_STATE_INIT:
@@ -50,10 +59,20 @@ void BATTLE_StateMachine(void) {
 		TRG_SetTrigger(TRG_WAIT, 5000 / TRG_TICKS_MS, changeState, &batstate);
 		break;
 	case BATTLE_STATE_FIND:
-
+		if(BATTLE_EnemyInRange()){
+			battleState = BATTLE_STATE_PUSH;
+		}
+		else{
+			DRV_DriveDistance(100,-100);
+		}
 		break;
 	case BATTLE_STATE_PUSH:
-
+		if(BATTLE_EnemyInRange()){
+			DRV_DriveDistance(1000,1000);
+		}
+		else{
+			battleState = BATTLE_STATE_FIND;
+		}
 		break;
 	case BATTLE_STATE_LINE:
 		DRV_DriveDistance(-BACKWARDDISTANCE, -BACKWARDDISTANCE);

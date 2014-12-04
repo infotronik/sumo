@@ -8,6 +8,7 @@
 #if PL_HAS_PID
 #include "Pid.h"
 #include "Motor.h"
+#include "Drive.h"
 #include "UTIL1.h"
 #if PL_HAS_SHELL
   #include "CLS1.h"

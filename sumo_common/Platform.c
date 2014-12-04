@@ -47,6 +47,9 @@
 #if PL_HAS_RADIO
   #include "RNet_App.h"
 #endif
+#if PL_HAS_BATTLE
+  #include "Battle.h"
+#endif
 
 void PL_Init(void) {
 #if PL_HAS_LED

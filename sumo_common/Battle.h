@@ -18,6 +18,7 @@
  * \param io I/O channel to use for printing status
  */
 void BATTLE_StateMachine(void);
+bool BATTLE_EnemyInRange(void);
 static void BATTLE_PrintStatus(const CLS1_StdIOType *io);
 static void BATTLE_PrintHelp(const CLS1_StdIOType *io);
 uint8_t BATTLE_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io);
