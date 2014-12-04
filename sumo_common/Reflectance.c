@@ -26,7 +26,7 @@
 
 
 #define REF_NOF_SENSORS 6 /* number of sensors */
-#define TIMEOUT 50000
+#define TIMEOUT 1500//50000
 #define THRESHOLD 500 //70
 
 

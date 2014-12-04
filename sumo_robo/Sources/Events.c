@@ -175,7 +175,7 @@ void FRTOS1_vApplicationTickHook(void)
 #endif
 #if PL_HAS_MOTOR_TACHO
     TACHO_Sample();
-    TACHO_CalcSpeed();
+    //TACHO_CalcSpeed();
 #endif
 
 }

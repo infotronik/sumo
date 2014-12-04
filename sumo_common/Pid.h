@@ -35,10 +35,12 @@ void PID_Speed(int32_t currSpeed, int32_t setSpeed, bool isLeft);
  * \param setPos Desired wheel position
  * \param isLeft TRUE if is for the left wheel, otherwise for the right wheel
  */
-void PID_Pos(int32_t currPos, int32_t setPos, bool isLeft);
+void PID_Pos(int32_t currPos, int32_t setPos, int32_t speedleft, int32_t speedright, bool isLeft);
 
 /*! \brief Driver initialization */
 void PID_Start(void);
+
+void PID_Pos_Start(void);
 
 /*! \brief Driver initialization */
 void PID_Init(void);
