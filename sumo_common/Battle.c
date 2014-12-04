@@ -17,14 +17,32 @@
  * \param io I/O channel to use for printing status
  */
 static void BATTLE_PrintStatus(const CLS1_StdIOType *io) {
-  //TACHO_CalcSpeed(); /* only temporary until this is done periodically */
-  CLS1_SendStatusStr((unsigned char*)"Tache", (unsigned char*)"\r\n", io->stdOut);
-  CLS1_SendStatusStr((unsigned char*)"  L speed", (unsigned char*)"", io->stdOut);
-  CLS1_SendNum32s(TACHO_GetSpeed(TRUE), io->stdOut);
-  CLS1_SendStr((unsigned char*)" steps/sec\r\n", io->stdOut);
-  CLS1_SendStatusStr((unsigned char*)"  R speed", (unsigned char*)"", io->stdOut);
-  CLS1_SendNum32s(TACHO_GetSpeed(FALSE), io->stdOut);
-  CLS1_SendStr((unsigned char*)" steps/sec\r\n", io->stdOut);
+    //TACHO_CalcSpeed(); /* only temporary until this is done periodically */
+    CLS1_SendStatusStr((unsigned char*)"battle", (unsigned char*)"\r\n", io->stdOut);
+    CLS1_SendStatusStr((unsigned char*)"  state", (unsigned char*)"", io->stdOut);
+    switch(State) {
+        case NONE:
+            CLS1_SendStr((unsigned char*)"  NONE\r\n", io->stdOut);
+            break;
+        case WAIT:
+            CLS1_SendStr((unsigned char*)"  WAIT\r\n", io->stdOut);
+            break;
+        case REMOTE:
+            CLS1_SendStr((unsigned char*)"  REMOTE\r\n", io->stdOut);
+            break;
+        case FIND:
+            CLS1_SendStr((unsigned char*)"  FIND\r\n", io->stdOut);
+            break;
+        case PUSH:
+            CLS1_SendStr((unsigned char*)"  PUSH\r\n", io->stdOut);
+            break;
+        case LINE:
+            CLS1_SendStr((unsigned char*)"  LINE\r\n", io->stdOut);
+            break;
+        default:
+            CLS1_SendStr((unsigned char*)"  Invalid State\r\n", io->stdOut);
+            break;
+    }
 }
 
 /*!
@@ -32,19 +50,31 @@ static void BATTLE_PrintStatus(const CLS1_StdIOType *io) {
  * \param io I/O channel to be used
  */
 static void BATTLE_PrintHelp(const CLS1_StdIOType *io) {
-  CLS1_SendHelpStr((unsigned char*)"tacho", (unsigned char*)"Group of tacho commands\r\n", io->stdOut);
-  CLS1_SendHelpStr((unsigned char*)"  help|status", (unsigned char*)"Shows tacho help or status\r\n", io->stdOut);
+    CLS1_SendHelpStr((unsigned char*)"battle", (unsigned char*)"Group of battle commands\r\n", io->stdOut);
+    CLS1_SendHelpStr((unsigned char*)"  help|status", (unsigned char*)"Shows battle help or status\r\n", io->stdOut);
+    CLS1_SendHelpStr((unsigned char*)"  on", (unsigned char*)"Starts battle\r\n", io->stdOut);
+    CLS1_SendHelpStr((unsigned char*)"  start", (unsigned char*)"Starts battle after waiting period\r\n", io->stdOut);
+    CLS1_SendHelpStr((unsigned char*)"  off", (unsigned char*)"Stops battle\r\n", io->stdOut);
+    CLS1_SendHelpStr((unsigned char*)"  remote", (unsigned char*)"Starts battle with remote control\r\n", io->stdOut);
 }
 
 uint8_t BATTLE_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io) {
-  if (UTIL1_strcmp((char*)cmd, (char*)CLS1_CMD_HELP)==0 || UTIL1_strcmp((char*)cmd, (char*)"tacho help")==0) {
-    TACHO_PrintHelp(io);
-    *handled = TRUE;
-  } else if (UTIL1_strcmp((char*)cmd, (char*)CLS1_CMD_STATUS)==0 || UTIL1_strcmp((char*)cmd, (char*)"tacho status")==0) {
-    TACHO_PrintStatus(io);
-    *handled = TRUE;
-  }
-  return ERR_OK;
+    if (UTIL1_strcmp((char*)cmd, (char*)CLS1_CMD_HELP)==0 || UTIL1_strcmp((char*)cmd, (char*)"battle help")==0) {
+        BATTLE_PrintHelp(io);
+        *handled = TRUE;
+    } else if (UTIL1_strcmp((char*)cmd, (char*)CLS1_CMD_STATUS)==0 || UTIL1_strcmp((char*)cmd, (char*)"battle status")==0) {
+        BATTLE_PrintStatus(io);
+        *handled = TRUE;
+    } else if (UTIL1_strcmp((char*)cmd, (char*)CLS1_CMD_STATUS)==0 || UTIL1_strcmp((char*)cmd, (char*)"battle on")==0) {
+        State = FIND;
+    } else if (UTIL1_strcmp((char*)cmd, (char*)CLS1_CMD_STATUS)==0 || UTIL1_strcmp((char*)cmd, (char*)"battle start")==0) {
+        State = WAIT;
+    } else if (UTIL1_strcmp((char*)cmd, (char*)CLS1_CMD_STATUS)==0 || UTIL1_strcmp((char*)cmd, (char*)"battle off")==0) {
+        State = NONE;
+    } else if (UTIL1_strcmp((char*)cmd, (char*)CLS1_CMD_STATUS)==0 || UTIL1_strcmp((char*)cmd, (char*)"battle remote")==0) {
+        State = REMOTE;
+    }
+    return ERR_OK;
 }
 #endif /* PL_HAS_SHELL */
 
