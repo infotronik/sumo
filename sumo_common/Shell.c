@@ -133,7 +133,7 @@ static const CLS1_ParseCommandCallback CmdParserTable[] =
   REMOTE_ParseCommand,
 #endif
 #if PL_HAS_BATTLE
-  BATTLE_ParseCommand
+  BATTLE_ParseCommand,
 #endif
   NULL /* Sentinel */
 };

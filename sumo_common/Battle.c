@@ -8,10 +8,29 @@
 #include "Platform.h"
 #include "Application.h"
 
+#if PL_HAS_BATTLE
 
+typedef enum {
+  BATTLE_STATE_INIT,
+  BATTLE_STATE_NONE,
+  BATTLE_STATE_REMOTE,
+  BATTLE_STATE_WAIT,
+  BATTLE_STATE_FIND,
+  BATTLE_STATE_PUSH,
+  BATTLE_STATE_LINE
+} BattleStateType;
 
+static volatile BattleStateType battleState = BATTLE_STATE_INIT; /* state machine state */
+
+void BATTLE_StateMachine(){
+
+}
 
 #if PL_HAS_SHELL
+
+#include "CLS1.h"
+#include "UTIL1.h"
+#include "FRTOS1.h"
 /*!
  * \brief Prints the system low power status
  * \param io I/O channel to use for printing status
@@ -78,11 +97,22 @@ uint8_t BATTLE_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_
 }
 #endif /* PL_HAS_SHELL */
 
-void TACHO_Deinit(void) {
+static portTASK_FUNCTION(BattleTask, pvParameters) {
+  (void)pvParameters; /* not used */
+  for(;;) {
+    BATTLE_StateMachine();
+    FRTOS1_vTaskDelay(10/portTICK_RATE_MS);
+  }
+}
+
+void BATTLE_Deinit(void) {
 }
 
 void BATTLE_Init(void) {
-
+	  battleState = BATTLE_STATE_INIT;
+	  if (FRTOS1_xTaskCreate(BattleTask, "Battle", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
+	    for(;;){} /* error */
+	  }
 }
 
-#endif /* PL_HAS_MOTOR_TACHO */
+#endif /* PL_HAS_BATTLE */
