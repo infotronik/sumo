@@ -40,6 +40,14 @@ void DRV_SetPos(int32_t left, int32_t right) {
 	DRV_PosRight = right;
 }
 
+void DRV_DriveDistance(int32_t distanceLeft, int32_t distanceRight){
+
+	int32_t left = TACHO_GetPos(TRUE);
+	int32_t right = TACHO_GetPos(FALSE);
+	DRV_SetPos(left+distanceLeft, right+distanceRight);
+	DRV_Pos_EnableDisable(TRUE);
+}
+
 static portTASK_FUNCTION(DriveTask, pvParameters) {
 	(void) pvParameters; /* parameter not used */
 	bool prevOn;

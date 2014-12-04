@@ -36,6 +36,8 @@ void DRV_EnableDisable(bool enable);
  */
 void DRV_SetSpeed(int32_t left, int32_t right);
 
+void DRV_DriveDistance(int32_t distanceLeft, int32_t distanceRight);
+
 /*! \brief Driver initialization */
 void DRV_Init(void);
 
