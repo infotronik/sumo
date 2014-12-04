@@ -26,7 +26,7 @@
 
 
 #define REF_NOF_SENSORS 6 /* number of sensors */
-#define TIMEOUT 1500//50000
+#define TIMEOUT 0xFFFF/4//50000
 #define THRESHOLD 500 //70
 
 
@@ -149,7 +149,6 @@ LineStateType Line_Detection(void){
 static void REF_MeasureRaw(SensorTimeType raw[REF_NOF_SENSORS]) {
   uint8_t cnt; /* number of sensor */
   uint8_t i;
-  uint8_t timerVal;
 
   LED_IR_On(); /* IR LED's on */
   WAIT1_Waitus(200); /*! \todo adjust time as needed */
@@ -168,13 +167,9 @@ static void REF_MeasureRaw(SensorTimeType raw[REF_NOF_SENSORS]) {
     /*! \todo Be aware that this might block for a long time, if discharging takes long. Consider using a timeout. */
     FRTOS1_taskENTER_CRITICAL();
 	cnt = 0;
-	timerVal = RefCnt_GetCounterValue(timerHandle);
-	if(timerVal>TIMEOUT){
-		break;
-	}
     for(i=0;i<REF_NOF_SENSORS;i++) {
       if (raw[i]==MAX_SENSOR_VALUE) { /* not measured yet? */
-        if (SensorFctArray[i].GetVal()==0) {
+        if (SensorFctArray[i].GetVal()==0 || TIMEOUT <= RefCnt_GetCounterValue(timerHandle)) {
           raw[i] = RefCnt_GetCounterValue(timerHandle);
         }
       } else { /* have value */
