@@ -7,6 +7,7 @@
 
 #include "Platform.h"
 #include "Application.h"
+#include "Trigger.h"
 
 #if PL_HAS_BATTLE
 
@@ -20,10 +21,45 @@ typedef enum {
   BATTLE_STATE_LINE
 } BattleStateType;
 
+
+static BattleStateType batstate = BATTLE_STATE_FIND;
+
 static volatile BattleStateType battleState = BATTLE_STATE_INIT; /* state machine state */
 
-void BATTLE_StateMachine(){
+static void changeState(void *state){
+	battleState = *((BattleStateType *) state);
+}
 
+void BATTLE_StateMachine(void){
+	switch(battleState){
+	case BATTLE_STATE_INIT:
+		battleState = BATTLE_STATE_NONE;
+		break;
+	case BATTLE_STATE_NONE:
+		if (EVNT_EventIsSet(EVNT_SW_A_PRESSED)) {
+		   EVNT_ClearEvent(EVNT_SW_A_PRESSED);
+		   battleState = BATTLE_STATE_WAIT;
+		}
+		break;
+	case BATTLE_STATE_REMOTE:
+
+		break;
+	case BATTLE_STATE_WAIT:
+		TRG_SetTrigger(TRG_WAIT,5000/TRG_TICKS_MS,changeState,&batstate);
+		break;
+	case BATTLE_STATE_FIND:
+
+		break;
+	case BATTLE_STATE_PUSH:
+
+		break;
+	case BATTLE_STATE_LINE:
+
+		break;
+	default:
+
+		break;
+	}
 }
 
 #if PL_HAS_SHELL
@@ -104,7 +140,7 @@ static portTASK_FUNCTION(BattleTask, pvParameters) {
   (void)pvParameters; /* not used */
   for(;;) {
     BATTLE_StateMachine();
-    FRTOS1_vTaskDelay(10/portTICK_RATE_MS);
+    //FRTOS1_vTaskDelay(10/portTICK_RATE_MS);
   }
 }
 

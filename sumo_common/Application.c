@@ -85,41 +85,8 @@ static void APP_EventHandler(EVNT_Handle event) {
 		//BUZ_Beep(2000,2000);
 		break;
 	case EVNT_SW_A_PRESSED:
-		//LED1_Neg();
-		LED3_Neg();
-//		#if PL_HAS_SHELL
-//			#if PL_HAS_SHELL_QUEUE
-//				SQUEUE_SendString("SW A pressed\n");
-//			#else
-//				CLS1_SendStr("SW A pressed\n",CLS1_GetStdio()->stdOut);
-//			#endif
-//		#endif
-		#if PL_HAS_LINE_SENSOR
-			typ = Line_Detection();
-			if(typ == LINE_STATE_AHEAD){
-				SHELL_SendString("Line Ahead\n");
-			}
-			if(typ == LINE_STATE_RIGHT){
-				SHELL_SendString("Line Right\n");
-			}
-			if(typ == LINE_STATE_LEFT){
-				SHELL_SendString("Line Left\n");
-			}
-			if(typ == LINE_STATE_MIDDLE){
-				SHELL_SendString("Line middle\n");
-			}
-			if(typ == LINE_STATE_NO_LINE){
-				SHELL_SendString("no Line\n");
-			}
-			if(typ == LINE_STATE_ERR){
-				SHELL_SendString("Line Error\n");
-			}
-			if(typ == LINE_STATE_LINE){
-				SHELL_SendString("Line !!!\n");
-			}
-		#endif
 		#if PL_HAS_BUZZER
-			BUZ_Beep(1000,1000);
+			BUZ_Beep(1000,10);
 		#endif
 		break;
 	case EVNT_SW_A_LPRESSED:

@@ -23,6 +23,7 @@ typedef enum {
     TRG_BTNLED_OFF,  /*!< Turn LED off */
     TRG_BTNSND_OFF,  /*!< Switch sounder off  */
     TRG_KEYPRESS,    /*!< Trigger for debouncing */
+    TRG_WAIT,
 #if PL_HAS_BUZZER
     TRG_BUZ_BEEP,    /*!< Trigger for buzzer */
 #endif
