@@ -10,6 +10,7 @@
 #include "Trigger.h"
 #include "Drive.h"
 #include "Ultrasonic.h"
+#include "FRTOS1.h"
 
 #if PL_HAS_BATTLE
 
@@ -73,14 +74,18 @@ void BATTLE_StateMachine(void) {
             EVNT_ClearEvent(EVNT_SW_A_PRESSED);
             BATTLE_changeState(BATTLE_STATE_WAIT);
         }
+        else {
+            BATTLE_changeState(BATTLE_STATE_WAIT);
+        }
         break;
     case BATTLE_STATE_REMOTE:
-
+        BATTLE_changeState(BATTLE_STATE_REMOTE);
         break;
     case BATTLE_STATE_WAIT:
         if (battleStatePrev != BATTLE_STATE_WAIT) {
             TRG_SetTrigger(TRG_WAIT, 5000 / TRG_TICKS_MS, changeState, &batstate);
         }
+        BATTLE_changeState(BATTLE_STATE_WAIT);
         break;
     case BATTLE_STATE_FIND:
     	BATTLE_Prove();
@@ -89,23 +94,30 @@ void BATTLE_StateMachine(void) {
         }
         else{
             DRV_DriveDistance(100,-100);
+            BATTLE_changeState(BATTLE_STATE_FIND);
         }
         break;
     case BATTLE_STATE_PUSH:
     	BATTLE_Prove();
         if(BATTLE_EnemyInRange()){
             DRV_DriveDistance(1000,1000);
+            BATTLE_changeState(BATTLE_STATE_PUSH);
         }
         else{
             BATTLE_changeState(BATTLE_STATE_FIND);
         }
         break;
     case BATTLE_STATE_LINE:
-        DRV_DriveDistance(-BACKWARDDISTANCE, -BACKWARDDISTANCE);
+        if (battleStatePrev != BATTLE_STATE_LINE) {
+            DRV_DriveDistance(-BACKWARDDISTANCE, -BACKWARDDISTANCE);
+        }
+        FRTOS1_vTaskDelay(100/portTICK_RATE_MS);
+        BATTLE_changeState(BATTLE_STATE_WAIT);
         break;
     case BATTLE_STATE_FALLDOWN:
         DRV_EnableDisable(FALSE);
         DRV_Pos_EnableDisable(FALSE);
+        BATTLE_changeState(BATTLE_STATE_FALLDOWN);
         break;
     default:
 
