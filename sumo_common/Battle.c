@@ -22,7 +22,8 @@ typedef enum {
     BATTLE_STATE_WAIT,
     BATTLE_STATE_FIND,
     BATTLE_STATE_PUSH,
-    BATTLE_STATE_LINE
+    BATTLE_STATE_LINE,
+    BATTLE_STATE_FALLDOWN
 } BattleStateType;
 
 #define BACKWARDDISTANCE 500
@@ -39,6 +40,19 @@ bool BATTLE_EnemyInRange(){
       uint16_t cm;
       cm = US_usToCentimeters(US_Measure_us(), 22);
       return(cm <= MAX_US_RANGE_CM);
+}
+
+void BATTLE_Prove(void){
+	if (EVNT_EventIsSet(EVNT_LINE)) {
+            EVNT_ClearEvent(EVNT_LINE);
+            battleState = BATTLE_STATE_LINE;
+	}
+	if (EVNT_EventIsSet(EVNT_ACCEL)) {
+            EVNT_ClearEvent(EVNT_ACCEL);
+            battleState = BATTLE_STATE_FALLDOWN;
+	}
+
+
 }
 
 void BATTLE_StateMachine(void) {
@@ -59,6 +73,7 @@ void BATTLE_StateMachine(void) {
         TRG_SetTrigger(TRG_WAIT, 5000 / TRG_TICKS_MS, changeState, &batstate);
         break;
     case BATTLE_STATE_FIND:
+    	BATTLE_Prove();
         if(BATTLE_EnemyInRange()){
             battleState = BATTLE_STATE_PUSH;
         }
@@ -67,6 +82,7 @@ void BATTLE_StateMachine(void) {
         }
         break;
     case BATTLE_STATE_PUSH:
+    	BATTLE_Prove();
         if(BATTLE_EnemyInRange()){
             DRV_DriveDistance(1000,1000);
         }
@@ -76,6 +92,10 @@ void BATTLE_StateMachine(void) {
         break;
     case BATTLE_STATE_LINE:
         DRV_DriveDistance(-BACKWARDDISTANCE, -BACKWARDDISTANCE);
+        break;
+    case BATTLE_STATE_FALLDOWN:
+        DRV_EnableDisable(FALSE);
+        DRV_Pos_EnableDisable(FALSE);
         break;
     default:
 
@@ -220,10 +240,6 @@ uint8_t BATTLE_ParseCommand(const unsigned char *cmd, bool *handled,
 static portTASK_FUNCTION(BattleTask, pvParameters) {
     (void) pvParameters; /* not used */
     for (;;) {
-        if (EVNT_EventIsSet(EVNT_LINE)) {
-            EVNT_ClearEvent(EVNT_LINE);
-            battleState = BATTLE_STATE_LINE;
-        }
         BATTLE_StateMachine();
         FRTOS1_vTaskDelay(2/portTICK_RATE_MS);
     }

@@ -45,6 +45,7 @@
 #endif
 #if PL_HAS_ACCEL
     #include "Accel.h"
+	#define Z_ACCEL_THRESHOLD 900
 #endif
 
 static LineStateType typ;
@@ -145,6 +146,7 @@ static void APP_EventHandler(EVNT_Handle event) {
 
 #if PL_HAS_RTOS
 void TaskLoop(void *pvParameters){
+	int16_t x,y,z;
 	#if PL_HAS_ACCEL
 	ACCEL_LowLevelInit();
 	#endif
@@ -157,6 +159,12 @@ void TaskLoop(void *pvParameters){
 			typ = Line_Detection();
 			if(typ!=LINE_STATE_NO_LINE){
 				EVNT_SetEvent(EVNT_LINE);
+			}
+		#endif
+		#if PL_HAS_ACCEL
+			ACCEL_GetValues(&x,&y,&z);
+			if(z < Z_ACCEL_THRESHOLD){
+				EVNT_SetEvent(EVNT_ACCEL);
 			}
 		#endif
 		#if PL_HAS_EVENTS
