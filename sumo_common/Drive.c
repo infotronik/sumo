@@ -229,7 +229,7 @@ void DRV_Init(void) {
 	DRV_EnableDisable(TRUE);
 	DRV_SpeedLeft = 0;
 	DRV_SpeedRight = 0;
-	DRV_Pos_EnableDisable(TRUE);
+	DRV_Pos_EnableDisable(FALSE);
 	DRV_PosLeft = 0;
 	DRV_PosRight = 0;
 	if (FRTOS1_xTaskCreate(

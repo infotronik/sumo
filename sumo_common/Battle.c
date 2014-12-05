@@ -14,7 +14,7 @@
 
 #if PL_HAS_BATTLE
 
-#define MAX_US_RANGE_CM 100
+#define MAX_US_RANGE_CM 60
 
 typedef enum {
     BATTLE_STATE_INIT,
@@ -52,19 +52,23 @@ bool BATTLE_EnemyInRange(){
 }
 
 void BATTLE_Prove(void){
-	if (EVNT_EventIsSet(EVNT_LINE)) {
-            EVNT_ClearEvent(EVNT_LINE);
-            BATTLE_changeState(BATTLE_STATE_LINE);
-	}
-	if (EVNT_EventIsSet(EVNT_ACCEL)) {
-            EVNT_ClearEvent(EVNT_ACCEL);
-            BATTLE_changeState(BATTLE_STATE_FALLDOWN);
-	}
-
+	if (battleState != BATTLE_STATE_NONE
+	 && battleState != BATTLE_STATE_WAIT
+	 && battleState != BATTLE_STATE_INIT){
+	    if (EVNT_EventIsSet(EVNT_LINE)) {
+                EVNT_ClearEvent(EVNT_LINE);
+                BATTLE_changeState(BATTLE_STATE_LINE);
+	    }
+	    if (EVNT_EventIsSet(EVNT_ACCEL)) {
+                EVNT_ClearEvent(EVNT_ACCEL);
+                //BATTLE_changeState(BATTLE_STATE_FALLDOWN);
+	    }
+    }
 
 }
 
 void BATTLE_StateMachine(void) {
+    BATTLE_Prove();
     switch (battleState) {
     case BATTLE_STATE_INIT:
         BATTLE_changeState(BATTLE_STATE_NONE);
@@ -88,19 +92,19 @@ void BATTLE_StateMachine(void) {
         BATTLE_changeState(BATTLE_STATE_WAIT);
         break;
     case BATTLE_STATE_FIND:
-    	BATTLE_Prove();
         if(BATTLE_EnemyInRange()){
             BATTLE_changeState(BATTLE_STATE_PUSH);
         }
         else{
-            DRV_DriveDistance(100,-100);
+            DRV_EnableDisable(TRUE);
+            DRV_SetSpeed(2000,-2000);
             BATTLE_changeState(BATTLE_STATE_FIND);
         }
         break;
     case BATTLE_STATE_PUSH:
-    	BATTLE_Prove();
         if(BATTLE_EnemyInRange()){
-            DRV_DriveDistance(1000,1000);
+            DRV_EnableDisable(TRUE);
+            DRV_SetSpeed(5000, 5000);
             BATTLE_changeState(BATTLE_STATE_PUSH);
         }
         else{
@@ -109,10 +113,12 @@ void BATTLE_StateMachine(void) {
         break;
     case BATTLE_STATE_LINE:
         if (battleStatePrev != BATTLE_STATE_LINE) {
-            DRV_DriveDistance(-BACKWARDDISTANCE, -BACKWARDDISTANCE);
+            DRV_EnableDisable(TRUE);
+            DRV_SetSpeed(-3000, -3000);
+            // DRV_DriveDistance(-BACKWARDDISTANCE, -BACKWARDDISTANCE);
         }
-        FRTOS1_vTaskDelay(100/portTICK_RATE_MS);
-        BATTLE_changeState(BATTLE_STATE_WAIT);
+        FRTOS1_vTaskDelay(500/portTICK_RATE_MS);
+        BATTLE_changeState(BATTLE_STATE_FIND);
         break;
     case BATTLE_STATE_FALLDOWN:
         DRV_EnableDisable(FALSE);
@@ -129,7 +135,6 @@ void BATTLE_StateMachine(void) {
 
 #include "CLS1.h"
 #include "UTIL1.h"
-#include "FRTOS1.h"
 /*!
  * \brief Prints the system low power status
  * \param io I/O channel to use for printing status
@@ -272,7 +277,7 @@ static portTASK_FUNCTION(BattleTask, pvParameters) {
     (void) pvParameters; /* not used */
     for (;;) {
         BATTLE_StateMachine();
-        FRTOS1_vTaskDelay(2/portTICK_RATE_MS);
+        FRTOS1_vTaskDelay(5/portTICK_RATE_MS);
     }
 }
 

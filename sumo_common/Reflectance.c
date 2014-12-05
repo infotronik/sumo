@@ -28,7 +28,7 @@
 
 #define REF_NOF_SENSORS 6 /* number of sensors */
 #define TIMEOUT 0xFFFF/4 /*Timeout Value*/
-#define THRESHOLD 500 /* Threshold for white/ black */
+#define THRESHOLD 200 /* Threshold for white/ black */
 #define REF_CALIBRATE_FLASH    1 /* calibration values in FLASH */
 
 

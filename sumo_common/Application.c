@@ -172,7 +172,7 @@ void TaskLoop(void *pvParameters){
 		#if PL_HAS_EVENTS
 		  EVNT_HandleEvent(APP_EventHandler);
 		#endif
-		  FRTOS1_vTaskDelay(50/portTICK_RATE_MS);
+		  FRTOS1_vTaskDelay(5/portTICK_RATE_MS);
 	  }
 }
 #else
