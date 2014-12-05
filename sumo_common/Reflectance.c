@@ -23,11 +23,13 @@
 #include "Application.h"
 #include "Event.h"
 #include "Shell.h"
+#include "NVM_Config.h"
 
 
 #define REF_NOF_SENSORS 6 /* number of sensors */
-#define TIMEOUT 0xFFFF/4//50000
-#define THRESHOLD 500 //70
+#define TIMEOUT 0xFFFF/4 /*Timeout Value*/
+#define THRESHOLD 500 /* Threshold for white/ black */
+#define REF_CALIBRATE_FLASH    1 /* calibration values in FLASH */
 
 
 typedef enum {
@@ -313,8 +315,24 @@ static void REF_StateMachine(void) {
 
   switch (refState) {
     case REF_STATE_INIT:
+#if PL_HAS_CONFIG_NVM
+      {
+        SensorCalibT *SensorCalibMinMaxPtr;
+
+        SensorCalibMinMaxPtr = (SensorCalibT*)NVMC_GetReflectanceData();
+        if (SensorCalibMinMaxPtr!=NULL) { /* use calibration data from FLASH */
+          SensorCalibMinMax = *SensorCalibMinMaxPtr; /* struct copy */
+          refState = REF_STATE_READY;
+        } else {
+          SHELL_SendString((unsigned char*)"INFO: No calibration data present.\r\n");
+          refState = REF_STATE_NOT_CALIBRATED;
+        }
+      }
+
+#else
       SHELL_SendString((unsigned char*)"INFO: No calibration data present.\r\n");
       refState = REF_STATE_NOT_CALIBRATED;
+#endif
       break;
       
     case REF_STATE_NOT_CALIBRATED:
@@ -349,7 +367,11 @@ static void REF_StateMachine(void) {
     
     case REF_STATE_STOP_CALIBRATION:
       SHELL_SendString((unsigned char*)"...stopping calibration.\r\n");
-
+	#if PL_HAS_CONFIG_NVM
+      if (NVMC_SaveReflectanceData((void*)&SensorCalibMinMax, sizeof(SensorCalibMinMax))!=ERR_OK) {
+        SHELL_SendString((unsigned char*)"FAILED saving calibration.\r\n");
+      }
+	#endif
       refState = REF_STATE_READY;
       break;
         
