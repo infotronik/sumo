@@ -23,7 +23,8 @@ typedef enum {
     BATTLE_STATE_FIND,
     BATTLE_STATE_PUSH,
     BATTLE_STATE_LINE,
-    BATTLE_STATE_FALLDOWN
+    BATTLE_STATE_FALLDOWN,
+    BATTLE_STATE_END /* not used state to mark end of states list */
 } BattleStateType;
 
 #define BACKWARDDISTANCE 500
@@ -149,6 +150,9 @@ static void BATTLE_PrintStatus(const CLS1_StdIOType *io) {
     case BATTLE_STATE_LINE:
         CLS1_SendStr((unsigned char*) "  BATTLE_STATE_LINE\r\n", io->stdOut);
         break;
+    case BATTLE_STATE_FALLDOWN:
+        CLS1_SendStr((unsigned char*) "  BATTLE_STATE_FALLDOWN\r\n", io->stdOut);
+        break;
     default:
         CLS1_SendStr((unsigned char*) "  Invalid State\r\n", io->stdOut);
         break;
@@ -189,6 +193,8 @@ static void BATTLE_PrintHelp(const CLS1_StdIOType *io) {
             (unsigned char*) "BATTLE_STATE_PUSH\r\n", io->stdOut);
     CLS1_SendHelpStr((unsigned char*) "    line",
             (unsigned char*) "BATTLE_STATE_LINE\r\n", io->stdOut);
+    CLS1_SendHelpStr((unsigned char*) "    falldown",
+            (unsigned char*) "BATTLE_STATE_FALLDOWN\r\n", io->stdOut);
 }
 
 uint8_t BATTLE_ParseCommand(const unsigned char *cmd, bool *handled,
@@ -240,6 +246,10 @@ uint8_t BATTLE_ParseCommand(const unsigned char *cmd, bool *handled,
     } else if (UTIL1_strcmp((char*)cmd, (char*)"battle state LINE") == 0
             || UTIL1_strcmp((char*)cmd, (char*)"battle state line") == 0) {
         BATTLE_changeState(BATTLE_STATE_LINE);
+        *handled = TRUE;
+    } else if (UTIL1_strcmp((char*)cmd, (char*)"battle state FALLDOWN") == 0
+            || UTIL1_strcmp((char*)cmd, (char*)"battle state falldown") == 0) {
+        BATTLE_changeState(BATTLE_STATE_FALLDOWN);
         *handled = TRUE;
     }
     return ERR_OK;
