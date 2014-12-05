@@ -117,6 +117,8 @@
 #include "ExtIntLdd2.h"
 #include "SM2_nRF.h"
 #include "SMasterLdd1.h"
+#include "IFsh1.h"
+#include "IntFlashLdd1.h"
 
 #ifdef __cplusplus
 extern "C" {
