@@ -31,8 +31,15 @@ typedef enum {
 static BattleStateType batstate = BATTLE_STATE_FIND;
 
 static volatile BattleStateType battleState = BATTLE_STATE_INIT; /* state machine state */
+static volatile BattleStateType battleStatePrev = BATTLE_STATE_INIT; /* previous state machine state */
+
+static void BATTLE_changeState(BattleStateType state) {
+    battleStatePrev = battleState;
+    battleState = state;
+}
 
 static void changeState(void *state) {
+    battleStatePrev = battleState;
     battleState = *((BattleStateType *) state);
 }
 
@@ -45,11 +52,11 @@ bool BATTLE_EnemyInRange(){
 void BATTLE_Prove(void){
 	if (EVNT_EventIsSet(EVNT_LINE)) {
             EVNT_ClearEvent(EVNT_LINE);
-            battleState = BATTLE_STATE_LINE;
+            BATTLE_changeState(BATTLE_STATE_LINE);
 	}
 	if (EVNT_EventIsSet(EVNT_ACCEL)) {
             EVNT_ClearEvent(EVNT_ACCEL);
-            battleState = BATTLE_STATE_FALLDOWN;
+            BATTLE_changeState(BATTLE_STATE_FALLDOWN);
 	}
 
 
@@ -58,24 +65,26 @@ void BATTLE_Prove(void){
 void BATTLE_StateMachine(void) {
     switch (battleState) {
     case BATTLE_STATE_INIT:
-        battleState = BATTLE_STATE_NONE;
+        BATTLE_changeState(BATTLE_STATE_NONE);
         break;
     case BATTLE_STATE_NONE:
         if (EVNT_EventIsSet(EVNT_SW_A_PRESSED)) {
             EVNT_ClearEvent(EVNT_SW_A_PRESSED);
-            battleState = BATTLE_STATE_WAIT;
+            BATTLE_changeState(BATTLE_STATE_WAIT);
         }
         break;
     case BATTLE_STATE_REMOTE:
 
         break;
     case BATTLE_STATE_WAIT:
-        TRG_SetTrigger(TRG_WAIT, 5000 / TRG_TICKS_MS, changeState, &batstate);
+        if (battleStatePrev != BATTLE_STATE_WAIT) {
+            TRG_SetTrigger(TRG_WAIT, 5000 / TRG_TICKS_MS, changeState, &batstate);
+        }
         break;
     case BATTLE_STATE_FIND:
     	BATTLE_Prove();
         if(BATTLE_EnemyInRange()){
-            battleState = BATTLE_STATE_PUSH;
+            BATTLE_changeState(BATTLE_STATE_PUSH);
         }
         else{
             DRV_DriveDistance(100,-100);
@@ -87,7 +96,7 @@ void BATTLE_StateMachine(void) {
             DRV_DriveDistance(1000,1000);
         }
         else{
-            battleState = BATTLE_STATE_FIND;
+            BATTLE_changeState(BATTLE_STATE_FIND);
         }
         break;
     case BATTLE_STATE_LINE:
@@ -192,45 +201,45 @@ uint8_t BATTLE_ParseCommand(const unsigned char *cmd, bool *handled,
         BATTLE_PrintStatus(io);
         *handled = TRUE;
     } else if (UTIL1_strcmp((char*)cmd, (char*)"battle on") == 0) {
-        battleState = BATTLE_STATE_FIND;
+        BATTLE_changeState(BATTLE_STATE_FIND);
         *handled = TRUE;
     } else if (UTIL1_strcmp((char*)cmd, (char*)"battle start") == 0) {
-        battleState = BATTLE_STATE_WAIT;
+        BATTLE_changeState(BATTLE_STATE_WAIT);
         *handled = TRUE;
     } else if (UTIL1_strcmp((char*)cmd, (char*)"battle off") == 0) {
-        battleState = BATTLE_STATE_NONE;
+        BATTLE_changeState(BATTLE_STATE_NONE);
         *handled = TRUE;
     } else if (UTIL1_strcmp((char*)cmd, (char*)"battle remote") == 0) {
-        battleState = BATTLE_STATE_REMOTE;
+        BATTLE_changeState(BATTLE_STATE_REMOTE);
         *handled = TRUE;
     /* Commands for entering battle states manually */
     } else if (UTIL1_strcmp((char*)cmd, (char*)"battle state INIT") == 0
             || UTIL1_strcmp((char*)cmd, (char*)"battle state init") == 0) {
-        battleState = BATTLE_STATE_INIT;
+        BATTLE_changeState(BATTLE_STATE_INIT);
         *handled = TRUE;
     } else if (UTIL1_strcmp((char*)cmd, (char*)"battle state NONE") == 0
             || UTIL1_strcmp((char*)cmd, (char*)"battle state none") == 0) {
-        battleState = BATTLE_STATE_NONE;
+        BATTLE_changeState(BATTLE_STATE_NONE);
         *handled = TRUE;
     } else if (UTIL1_strcmp((char*)cmd, (char*)"battle state REMOTE") == 0
             || UTIL1_strcmp((char*)cmd, (char*)"battle state remote") == 0) {
-        battleState = BATTLE_STATE_REMOTE;
+        BATTLE_changeState(BATTLE_STATE_REMOTE);
         *handled = TRUE;
     } else if (UTIL1_strcmp((char*)cmd, (char*)"battle state WAIT") == 0
             || UTIL1_strcmp((char*)cmd, (char*)"battle state wait") == 0) {
-        battleState = BATTLE_STATE_WAIT;
+        BATTLE_changeState(BATTLE_STATE_WAIT);
         *handled = TRUE;
     } else if (UTIL1_strcmp((char*)cmd, (char*)"battle state FIND") == 0
             || UTIL1_strcmp((char*)cmd, (char*)"battle state find") == 0) {
-        battleState = BATTLE_STATE_FIND;
+        BATTLE_changeState(BATTLE_STATE_FIND);
         *handled = TRUE;
     } else if (UTIL1_strcmp((char*)cmd, (char*)"battle state PUSH") == 0
             || UTIL1_strcmp((char*)cmd, (char*)"battle state push") == 0) {
-        battleState = BATTLE_STATE_PUSH;
+        BATTLE_changeState(BATTLE_STATE_PUSH);
         *handled = TRUE;
     } else if (UTIL1_strcmp((char*)cmd, (char*)"battle state LINE") == 0
             || UTIL1_strcmp((char*)cmd, (char*)"battle state line") == 0) {
-        battleState = BATTLE_STATE_LINE;
+        BATTLE_changeState(BATTLE_STATE_LINE);
         *handled = TRUE;
     }
     return ERR_OK;
@@ -249,7 +258,7 @@ void BATTLE_Deinit(void) {
 }
 
 void BATTLE_Init(void) {
-    battleState = BATTLE_STATE_INIT;
+    BATTLE_changeState(BATTLE_STATE_INIT);
     if (FRTOS1_xTaskCreate(BattleTask, "Battle", configMINIMAL_STACK_SIZE, NULL,
             tskIDLE_PRIORITY, NULL) != pdPASS) {
         for (;;) {

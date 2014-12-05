@@ -44,7 +44,7 @@
   #include "Tacho.h"
 #endif
 #if PL_HAS_PID
-  #include "PID.h"
+  #include "Pid.h"
 #endif
 #if PL_HAS_DRIVE
   #include "Drive.h"

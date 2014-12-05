@@ -172,8 +172,8 @@ uint8_t DRV_ParseCommand(const unsigned char *cmd, bool *handled,
 	} else if (UTIL1_strcmp((char*)cmd, (char*)"drive speed on") == 0) {
 		DRV_EnableDisable(TRUE);
 		*handled = TRUE;
-	} else if (UTIL1_strcmp((char*)cmd, (char*)"drive pos off") == 0) {
-		DRV_Pos_EnableDisable(FALSE);
+	} else if (UTIL1_strcmp((char*)cmd, (char*)"drive speed off") == 0) {
+		DRV_EnableDisable(FALSE);
 		*handled = TRUE;
 	} else if (UTIL1_strncmp((char* )cmd, (char* )"drive pos L",
 			sizeof("drive pos L") - 1)

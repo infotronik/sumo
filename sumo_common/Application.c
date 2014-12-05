@@ -48,7 +48,9 @@
 	#define Z_ACCEL_THRESHOLD 900
 #endif
 
+#if PL_HAS_LINE_SENSOR
 static LineStateType typ;
+#endif /* PL_HAS_LINE_SENSOR */
 
 void APP_DebugPrint(unsigned char *str) {
 #if PL_HAS_SHELL
