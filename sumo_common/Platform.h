@@ -71,6 +71,8 @@
 	#define PL_HAS_RADIO (1)
         /*!< Set to 1 to enable Radio support, 0 otherwise */
 
+    #define PL_HAS_REMOTE (1)
+        /*!< Set to 1 to enable Remote support, 0 otherwise */
 
 #elif PL_IS_ROBO
     #define PL_HAS_KEYS  (1)
@@ -143,8 +145,12 @@
 	#define PL_HAS_RADIO (1)
         /*!< Set to 1 to enable Radio support, 0 otherwise */
 
+    #define PL_HAS_REMOTE (1)
+        /*!< Set to 1 to enable Remote support, 0 otherwise */
+
 	#define PL_HAS_BATTLE (1)
         /*!< Set to 1 to enable Battle support, 0 otherwise */
+
 	#define PL_HAS_CONFIG_NVM (1)
         /*!< Set to 1 to enable Battle support, 0 otherwise */
 #else

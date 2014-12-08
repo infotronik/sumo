@@ -47,6 +47,9 @@
     #include "Accel.h"
 	#define Z_ACCEL_THRESHOLD 900
 #endif
+#if PL_HAS_REMOTE
+  #include "Remote.h"
+#endif
 
 #if PL_HAS_LINE_SENSOR
 static LineStateType typ;
@@ -161,6 +164,32 @@ void TaskLoop(void *pvParameters){
 			typ = Line_Detection();
 			if(typ!=LINE_STATE_NO_LINE){
 				EVNT_SetEvent(EVNT_LINE);
+			}
+			switch(typ) {
+            case LINE_STATE_LEFT:
+				EVNT_SetEvent(EVNT_LINE_LEFT);
+            	break;
+            case LINE_STATE_RIGHT:
+				EVNT_SetEvent(EVNT_LINE_RIGHT);
+            	break;
+            case LINE_STATE_AHEAD:
+				EVNT_SetEvent(EVNT_LINE);
+            	break;
+            case LINE_STATE_MIDDLE:
+				EVNT_SetEvent(EVNT_LINE);
+            	break;
+            case LINE_STATE_NO_LINE:
+				/* No event */
+            	break;
+            case LINE_STATE_LINE:
+				EVNT_SetEvent(EVNT_LINE);
+            	break;
+            case LINE_STATE_ERR:
+				EVNT_SetEvent(EVNT_LINE);
+            	break;
+            default:
+				/* No event */
+            	break;
 			}
 		#endif
 		#if PL_HAS_ACCEL

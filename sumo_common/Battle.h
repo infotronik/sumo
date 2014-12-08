@@ -12,13 +12,32 @@
 
 #if PL_HAS_BATTLE
 
+typedef enum {
+    BATTLE_STATE_INIT,
+    BATTLE_STATE_NONE,
+    BATTLE_STATE_WAIT,
+    BATTLE_STATE_FIND,
+    BATTLE_STATE_PUSH,
+    BATTLE_STATE_LINE,
+    BATTLE_STATE_LINE_LEFT,
+    BATTLE_STATE_LINE_RIGHT,
+    BATTLE_STATE_FALLDOWN,
+    BATTLE_STATE_REMOTE,
+    BATTLE_STATE_REMOTE_LINE,
+    BATTLE_STATE_REMOTE_LINE_LEFT,
+    BATTLE_STATE_REMOTE_LINE_RIGHT,
+    BATTLE_STATE_END /* not used state to mark end of states list */
+} BattleStateType;
+
+static void BATTLE_changeState(BattleStateType state);
+void BATTLE_StateMachine(void);
+bool BATTLE_EnemyInRange(void);
+
 #if PL_HAS_SHELL
 /*!
  * \brief Prints the system low power status
  * \param io I/O channel to use for printing status
  */
-void BATTLE_StateMachine(void);
-bool BATTLE_EnemyInRange(void);
 static void BATTLE_PrintStatus(const CLS1_StdIOType *io);
 static void BATTLE_PrintHelp(const CLS1_StdIOType *io);
 uint8_t BATTLE_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io);

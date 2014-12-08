@@ -20,6 +20,7 @@ typedef enum {
   RAPP_MSG_TYPE_STDERR = 0x02,
   RAPP_MSG_TYPE_ACCEL = 0x03,
   RAPP_MSG_TYPE_DATA = 0x04,
+  RAPP_MSG_TYPE_JOYSTICK_XY = 0x05,
 } RAPP_MSG_Type;
 
 #endif /* PL_HAS_RADIO */

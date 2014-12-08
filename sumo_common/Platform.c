@@ -50,6 +50,9 @@
 #if PL_HAS_BATTLE
   #include "Battle.h"
 #endif
+#if PL_HAS_REMOTE
+  #include "Remote.h"
+#endif
 
 void PL_Init(void) {
 #if PL_HAS_LED
@@ -102,6 +105,9 @@ void PL_Init(void) {
 #endif
 #if PL_HAS_BATTLE
   BATTLE_Init();
+#endif
+#if PL_HAS_REMOTE
+  REMOTE_Init();
 #endif
 }
 
@@ -156,5 +162,8 @@ void PL_Deinit(void) {
 #endif
 #if PL_HAS_BATTLE
   BATTLE_Deinit();
+#endif
+#if PL_HAS_REMOTE
+  REMOTE_Deinit();
 #endif
 }
