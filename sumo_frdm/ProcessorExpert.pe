@@ -3,8 +3,8 @@
   <Header>
     <Name>sumo_frdm</Name>
     <SavedBy>daniw</SavedBy>
-    <ModificationStamp>65</ModificationStamp>
-    <Date>2014-12-07</Date>
+    <ModificationStamp>68</ModificationStamp>
+    <Date>2014-12-12</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.10.1.RT6_b1437-1025</PEversion>
   </Header>
@@ -29,7 +29,7 @@
     <UseExistingModules>true</UseExistingModules>
     <RenamePeripheries>false</RenamePeripheries>
     <Autodependency>true</Autodependency>
-    <ProjectCompNumb>153</ProjectCompNumb>
+    <ProjectCompNumb>155</ProjectCompNumb>
     <DelUnusedPreviouslyGenFiles>true</DelUnusedPreviouslyGenFiles>
     <GeneratedCodeFrozen>false</GeneratedCodeFrozen>
     <AssignInitComponentNameToPrph>true</AssignInitComponentNameToPrph>
@@ -4510,7 +4510,7 @@
       <Value30>true</Value30>
       <ItemId31>141</ItemId31>
       <Value31>true</Value31>
-      <ItemId32>151</ItemId32>
+      <ItemId32>153</ItemId32>
       <Value32>true</Value32>
     </BoolList_BeanConfig>
     <BoolList_TaskConfig>
@@ -32429,7 +32429,7 @@
   <Bean>
     <BeanType>ADC</BeanType>
     <Name>AD1</Name>
-    <CompNumb>151</CompNumb>
+    <CompNumb>153</CompNumb>
     <CompEnabled>true</CompEnabled>
     <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
     <IconName>AD</IconName>
@@ -32474,7 +32474,7 @@
         <InheritedComponentState>
           <BeanType>ADC_LDD</BeanType>
           <Name>AdcLdd1</Name>
-          <CompNumb>152</CompNumb>
+          <CompNumb>154</CompNumb>
           <CompEnabled>true</CompEnabled>
           <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
           <IconName>ADC_LDD</IconName>
@@ -33041,23 +33041,23 @@
             </ItemState>
             <ItemState>
               <ItemSymbol>ADCClock</ItemSymbol>
-              <Value>2.659 MHz (376.068 ns)</Value>
+              <Value>2.6 MHz (384.615 ns)</Value>
             </ItemState>
             <ItemState>
               <ItemSymbol>SingleConversionTimeSE</ItemSymbol>
-              <Value>23.259 us</Value>
+              <Value>23.669 us</Value>
             </ItemState>
             <ItemState>
               <ItemSymbol>SingleConversionTimeDiff</ItemSymbol>
-              <Value>26.644 us</Value>
+              <Value>27.131 us</Value>
             </ItemState>
             <ItemState>
               <ItemSymbol>AdditionalConversionTimeSE</ItemSymbol>
-              <Value>16.923 us</Value>
+              <Value>17.307 us</Value>
             </ItemState>
             <ItemState>
               <ItemSymbol>AdditionalConversionTimeDiff</ItemSymbol>
-              <Value>20.307 us</Value>
+              <Value>20.769 us</Value>
             </ItemState>
             <ItemState>
               <ItemSymbol>StandbyFeatureGroup</ItemSymbol>

@@ -36,7 +36,8 @@
     #define PL_NOF_LEDS       (2)
         /*!< FRDM board has up to 3 LEDs (RGB) */
 
-    #define PL_HAS_JOYSTICK  (0)
+    #define PL_HAS_JOYSTICK  (1)
+    #define PL_APP_ACCEL_CONTROL_SENDER (1)
         /*!< Set to 1 to enable JOYSTICK support, 0 otherwise */
     #define PL_HAS_EVENTS  (1)
         /*!< Set to 1 to enable EVENTS support, 0 otherwise */
