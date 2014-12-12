@@ -85,7 +85,7 @@ void BATTLE_StateMachine(void) {
     BATTLE_Prove();
     switch (battleState) {
     case BATTLE_STATE_INIT:
-        BATTLE_changeState(BATTLE_STATE_NONE);
+        BATTLE_changeState(BATTLE_STATE_REMOTE);
         break;
     case BATTLE_STATE_NONE:
         DRV_EnableDisable(FALSE);

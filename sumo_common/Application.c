@@ -83,6 +83,9 @@ static void APP_EventHandler(EVNT_Handle event) {
 	    LED1_On();
 	    WAIT1_Waitms(100);
 	    LED1_Off();
+#if PL_HAS_BUZZER
+	    BUZ_Beep(1000,400);
+#endif
 	    break;
 	case EVNT_HEARTBEAT:
 		//LED1_Off();
