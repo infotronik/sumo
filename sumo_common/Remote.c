@@ -264,18 +264,18 @@ static void REMOTE_HandleMotorMsg(int16_t speedVal, int16_t directionVal, int16_
 
 #if PL_HAS_MOTOR
 static int16_t scaleJoystickTo1K(int8_t val) {
-  /* map speed from -128...127 to -1000...+1000 */
+  /* map speed from -128...127 to -5000...+5000 */
   int tmp;
 
   if (val>0) {
-    tmp = ((val*10)/127)*100;
+    tmp = ((val*50)/127)*100;
   } else {
-    tmp = ((val*10)/128)*100;
+    tmp = ((val*50)/128)*100;
   }
-  if (tmp<-1000) {
-    tmp = -1000;
-  } else if (tmp>1000) {
-    tmp = 1000;
+  if (tmp<-5000) {
+    tmp = -5000;
+  } else if (tmp>5000) {
+    tmp = 5000;
   }
   return tmp;
 }
