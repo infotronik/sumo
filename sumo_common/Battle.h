@@ -22,6 +22,7 @@ typedef enum {
     BATTLE_STATE_LINE_LEFT,
     BATTLE_STATE_LINE_RIGHT,
     BATTLE_STATE_FALLDOWN,
+    BATTLE_STATE_REMOTE_NOLINE, /* Line sensor deactivated */
     BATTLE_STATE_REMOTE,
     BATTLE_STATE_REMOTE_LINE,
     BATTLE_STATE_REMOTE_LINE_LEFT,
@@ -40,6 +41,7 @@ bool BATTLE_EnemyInRange(void);
  */
 static void BATTLE_PrintStatus(const CLS1_StdIOType *io);
 static void BATTLE_PrintHelp(const CLS1_StdIOType *io);
+static void BATTLE_PrintShortHelp(const CLS1_StdIOType *io);
 uint8_t BATTLE_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io);
 #endif /* PL_HAS_SHELL */
 

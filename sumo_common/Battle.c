@@ -162,6 +162,13 @@ void BATTLE_StateMachine(void) {
         DRV_Pos_EnableDisable(FALSE);
         BATTLE_changeState(BATTLE_STATE_FALLDOWN);
         break;
+    case BATTLE_STATE_REMOTE_NOLINE:
+    	if (battleStatePrev != BATTLE_STATE_REMOTE_NOLINE) {
+            DRV_EnableDisable(TRUE);
+            DRV_SetSpeed(0,0);
+    	}
+        BATTLE_changeState(BATTLE_STATE_REMOTE_NOLINE);
+        break;
     case BATTLE_STATE_REMOTE:
     	if (battleStatePrev != BATTLE_STATE_REMOTE) {
             DRV_EnableDisable(TRUE);
@@ -241,11 +248,29 @@ static void BATTLE_PrintStatus(const CLS1_StdIOType *io) {
     case BATTLE_STATE_LINE:
         CLS1_SendStr((unsigned char*) "  BATTLE_STATE_LINE\r\n", io->stdOut);
         break;
+    case BATTLE_STATE_LINE_LEFT:
+        CLS1_SendStr((unsigned char*) "  BATTLE_STATE_LINE_LEFT\r\n", io->stdOut);
+        break;
+    case BATTLE_STATE_LINE_RIGHT:
+        CLS1_SendStr((unsigned char*) "  BATTLE_STATE_LINE_RIGHT\r\n", io->stdOut);
+        break;
     case BATTLE_STATE_FALLDOWN:
         CLS1_SendStr((unsigned char*) "  BATTLE_STATE_FALLDOWN\r\n", io->stdOut);
         break;
+    case BATTLE_STATE_REMOTE_NOLINE:
+        CLS1_SendStr((unsigned char*) "  BATTLE_STATE_REMOTE_NOLINE\r\n", io->stdOut);
+        break;
     case BATTLE_STATE_REMOTE:
         CLS1_SendStr((unsigned char*) "  BATTLE_STATE_REMOTE\r\n", io->stdOut);
+        break;
+    case BATTLE_STATE_REMOTE_LINE:
+        CLS1_SendStr((unsigned char*) "  BATTLE_STATE_REMOTE_LINE\r\n", io->stdOut);
+        break;
+    case BATTLE_STATE_REMOTE_LINE_LEFT:
+        CLS1_SendStr((unsigned char*) "  BATTLE_STATE_REMOTE_LINE_LEFT\r\n", io->stdOut);
+        break;
+    case BATTLE_STATE_REMOTE_LINE_RIGHT:
+        CLS1_SendStr((unsigned char*) "  BATTLE_STATE_REMOTE_LINE_RIGHT\r\n", io->stdOut);
         break;
     default:
         CLS1_SendStr((unsigned char*) "  Invalid State\r\n", io->stdOut);
@@ -289,6 +314,28 @@ static void BATTLE_PrintHelp(const CLS1_StdIOType *io) {
             (unsigned char*) "BATTLE_STATE_FALLDOWN\r\n", io->stdOut);
     CLS1_SendHelpStr((unsigned char*) "    remote",
             (unsigned char*) "BATTLE_STATE_REMOTE\r\n", io->stdOut);
+    CLS1_SendHelpStr((unsigned char*) "    remotenoline",
+            (unsigned char*) "BATTLE_STATE_REMOTE_NOLINE\r\n", io->stdOut);
+    BATTLE_PrintShortHelp(io);
+}
+
+static void BATTLE_PrintShortHelp(const CLS1_StdIOType *io) {
+    CLS1_SendHelpStr((unsigned char*) "",
+            (unsigned char*) "Short battle commands\r\n", io->stdOut);
+    CLS1_SendHelpStr((unsigned char*) "  bh",
+            (unsigned char*) "battle short help\r\n", io->stdOut);
+    CLS1_SendHelpStr((unsigned char*) "  bs",
+            (unsigned char*) "battle status\r\n", io->stdOut);
+    CLS1_SendHelpStr((unsigned char*) "  bf",
+            (unsigned char*) "Starts battle instantly\r\n", io->stdOut);
+    CLS1_SendHelpStr((unsigned char*) "  bg",
+            (unsigned char*) "Starts battle after waiting period\r\n", io->stdOut);
+    CLS1_SendHelpStr((unsigned char*) "  bb",
+            (unsigned char*) "Stops battle\r\n", io->stdOut);
+    CLS1_SendHelpStr((unsigned char*) "  br",
+            (unsigned char*) "remote control\r\n", io->stdOut);
+    CLS1_SendHelpStr((unsigned char*) "  bR",
+            (unsigned char*) "remote control without line sensor\r\n", io->stdOut);
 }
 
 uint8_t BATTLE_ParseCommand(const unsigned char *cmd, bool *handled,
@@ -297,23 +344,36 @@ uint8_t BATTLE_ParseCommand(const unsigned char *cmd, bool *handled,
             || UTIL1_strcmp((char*)cmd, (char*)"battle help") == 0) {
         BATTLE_PrintHelp(io);
         *handled = TRUE;
-    } else if (UTIL1_strcmp((char*)cmd, (char*)"battle status") == 0) {
+    } else if (UTIL1_strcmp((char*)cmd, (char*)"bh") == 0) {
+        BATTLE_PrintShortHelp(io);
+        *handled = TRUE;
+    } else if (UTIL1_strcmp((char*)cmd, (char*)"battle status") == 0
+            || UTIL1_strcmp((char*)cmd, (char*)"bs") == 0) {
         BATTLE_PrintStatus(io);
         *handled = TRUE;
-    } else if (UTIL1_strcmp((char*)cmd, (char*)"battle on") == 0) {
+    } else if (UTIL1_strcmp((char*)cmd, (char*)"battle on") == 0
+            || UTIL1_strcmp((char*)cmd, (char*)"bf") == 0) {
         BATTLE_changeState(BATTLE_STATE_FIND);
         BATTLE_StateMachine();
         *handled = TRUE;
-    } else if (UTIL1_strcmp((char*)cmd, (char*)"battle start") == 0) {
+    } else if (UTIL1_strcmp((char*)cmd, (char*)"battle start") == 0
+            || UTIL1_strcmp((char*)cmd, (char*)"bg") == 0) {
         BATTLE_changeState(BATTLE_STATE_WAIT);
         BATTLE_StateMachine();
         *handled = TRUE;
-    } else if (UTIL1_strcmp((char*)cmd, (char*)"battle off") == 0) {
+    } else if (UTIL1_strcmp((char*)cmd, (char*)"battle off") == 0
+            || UTIL1_strcmp((char*)cmd, (char*)"bb") == 0) {
         BATTLE_changeState(BATTLE_STATE_NONE);
         BATTLE_StateMachine();
         *handled = TRUE;
-    } else if (UTIL1_strcmp((char*)cmd, (char*)"battle remote") == 0) {
+    } else if (UTIL1_strcmp((char*)cmd, (char*)"battle remote") == 0
+            || UTIL1_strcmp((char*)cmd, (char*)"br") == 0) {
         BATTLE_changeState(BATTLE_STATE_REMOTE);
+        BATTLE_StateMachine();
+        *handled = TRUE;
+    } else if (UTIL1_strcmp((char*)cmd, (char*)"battle remote noline") == 0
+            || UTIL1_strcmp((char*)cmd, (char*)"bR") == 0) {
+        BATTLE_changeState(BATTLE_STATE_REMOTE_NOLINE);
         BATTLE_StateMachine();
         *handled = TRUE;
     /* Commands for entering battle states manually */
@@ -355,6 +415,11 @@ uint8_t BATTLE_ParseCommand(const unsigned char *cmd, bool *handled,
     } else if (UTIL1_strcmp((char*)cmd, (char*)"battle state REMOTE") == 0
             || UTIL1_strcmp((char*)cmd, (char*)"battle state remote") == 0) {
         BATTLE_changeState(BATTLE_STATE_REMOTE);
+        BATTLE_StateMachine();
+        *handled = TRUE;
+    } else if (UTIL1_strcmp((char*)cmd, (char*)"battle state REMOTENOLINE") == 0
+            || UTIL1_strcmp((char*)cmd, (char*)"battle state remotenoline") == 0) {
+        BATTLE_changeState(BATTLE_STATE_REMOTE_NOLINE);
         BATTLE_StateMachine();
         *handled = TRUE;
     }
