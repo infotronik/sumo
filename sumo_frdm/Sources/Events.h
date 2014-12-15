@@ -78,7 +78,7 @@
 #include "SM1.h"
 #include "SMasterLdd1.h"
 #include "AD1.h"
-#include "AdcLdd2.h"
+#include "AdcLdd1.h"
 #include "SW_C.h"
 #include "SW_D.h"
 #include "SW_E.h"

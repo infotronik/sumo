@@ -3,8 +3,8 @@
   <Header>
     <Name>sumo_frdm</Name>
     <SavedBy>daniw</SavedBy>
-    <ModificationStamp>69</ModificationStamp>
-    <Date>2014-12-14</Date>
+    <ModificationStamp>70</ModificationStamp>
+    <Date>2014-12-15</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.10.1.RT6_b1437-1025</PEversion>
   </Header>
@@ -29,7 +29,7 @@
     <UseExistingModules>true</UseExistingModules>
     <RenamePeripheries>false</RenamePeripheries>
     <Autodependency>true</Autodependency>
-    <ProjectCompNumb>157</ProjectCompNumb>
+    <ProjectCompNumb>160</ProjectCompNumb>
     <DelUnusedPreviouslyGenFiles>true</DelUnusedPreviouslyGenFiles>
     <GeneratedCodeFrozen>false</GeneratedCodeFrozen>
     <AssignInitComponentNameToPrph>true</AssignInitComponentNameToPrph>
@@ -32432,7 +32432,7 @@
     <BeanType>ADC</BeanType>
     <Name>AD1</Name>
     <CompNumb>153</CompNumb>
-    <CompEnabled>false</CompEnabled>
+    <CompEnabled>true</CompEnabled>
     <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
     <IconName>AD</IconName>
     <UserFolderName>Joystick</UserFolderName>
@@ -33005,7 +33005,7 @@
               <ItemSymbol>_CnvTmg</ItemSymbol>
               <ReadOnly>false</ReadOnly>
               <UserReadOnly>false</UserReadOnly>
-              <Value>17.307692 µs</Value>
+              <Value>init:17.307692 µs;prec:5%;RTS:none;clksrc_presc[SpeedMode0]ADC0AsynchroClock;extcomp_presc[SpeedMode0]45;clksrc_presc[SpeedMode1]Auto select;clksrc_presc[SpeedMode2]Auto select;clksrc_presc[SpeedMode3]Auto select;clksrc_presc[SpeedMode4]Auto select;clksrc_presc[SpeedMode5]Auto select;clksrc_presc[SpeedMode6]Auto select;clksrc_presc[SpeedMode7]Auto select</Value>
               <RuntimeSetting>0</RuntimeSetting>
               <ReqDevPrescHigh>25483472622</ReqDevPrescHigh>
               <ReqStrDevPrescHigh>ADC0AsynchroClock</ReqStrDevPrescHigh>
@@ -36134,7 +36134,7 @@
     <BeanType>ADC</BeanType>
     <Name>AD1</Name>
     <CompNumb>155</CompNumb>
-    <CompEnabled>true</CompEnabled>
+    <CompEnabled>false</CompEnabled>
     <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
     <IconName>AD</IconName>
     <UserFolderName>Joystick</UserFolderName>
@@ -36709,7 +36709,7 @@
               <ItemSymbol>_CnvTmg</ItemSymbol>
               <ReadOnly>false</ReadOnly>
               <UserReadOnly>false</UserReadOnly>
-              <Value>init:17.307692 µs;prec:5%;RTS:none;clksrc_presc[SpeedMode0]ADC0AsynchroClock;extcomp_presc[SpeedMode0]25;clksrc_presc[SpeedMode1]Auto select;clksrc_presc[SpeedMode2]Auto select;clksrc_presc[SpeedMode3]Auto select;clksrc_presc[SpeedMode4]Auto select;clksrc_presc[SpeedMode5]Auto select;clksrc_presc[SpeedMode6]Auto select;clksrc_presc[SpeedMode7]Auto select</Value>
+              <Value>17.307692 µs</Value>
               <RuntimeSetting>0</RuntimeSetting>
               <ReqDevPrescHigh>25483472622</ReqDevPrescHigh>
               <ReqStrDevPrescHigh>ADC0AsynchroClock</ReqStrDevPrescHigh>
