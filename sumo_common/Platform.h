@@ -154,6 +154,10 @@
 
 	#define PL_HAS_CONFIG_NVM (1)
         /*!< Set to 1 to enable Battle support, 0 otherwise */
+
+	#define PL_HAS_SERVO (1)
+        /*!< Set to 1 to enable Servo support, 0 otherwise */
+
 #else
     //#error "unknown configuration?"
 #endif
