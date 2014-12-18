@@ -3,8 +3,8 @@
   <Header>
     <Name>sumo_frdm</Name>
     <SavedBy>daniw</SavedBy>
-    <ModificationStamp>70</ModificationStamp>
-    <Date>2014-12-15</Date>
+    <ModificationStamp>73</ModificationStamp>
+    <Date>2014-12-18</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.10.1.RT6_b1437-1025</PEversion>
   </Header>
@@ -36684,7 +36684,7 @@
               <UserReadOnly>false</UserReadOnly>
               <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
               <TypeSpecNameState>typeSampleTime</TypeSpecNameState>
-              <Index>13</Index>
+              <Index>2</Index>
               <EnumSymbVal>4</EnumSymbVal>
             </ItemState>
             <ItemState>
@@ -37234,7 +37234,7 @@
             </ItemState>
             <ItemState>
               <ItemSymbol>Deinit</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
+              <ReadOnly>true</ReadOnly>
               <UserReadOnly>false</UserReadOnly>
               <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
               <Index>1</Index>
@@ -37512,7 +37512,7 @@
             </ItemState>
             <ItemState>
               <ItemSymbol>ConnectPin</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
+              <ReadOnly>true</ReadOnly>
               <UserReadOnly>false</UserReadOnly>
               <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
               <Index>1</Index>

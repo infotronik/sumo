@@ -29,6 +29,10 @@ static void BATTLE_changeState(BattleStateType state) {
     battleState = state;
 }
 
+static BattleStateType BATTLE_GetState(void) {
+	return battleState;
+}
+
 static void changeState(void *state) {
     battleStatePrev = battleState;
     battleState = *((BattleStateType *) state);

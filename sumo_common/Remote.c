@@ -32,12 +32,26 @@
 #if PL_HAS_LED
   #include "LED.h"
 #endif
+#if PL_HAS_KEYS
+#if PL_NOF_KEYS >= 7
+  #include "SW_A.h"
+  #include "SW_B.h"
+  #include "SW_C.h"
+  #include "SW_D.h"
+  #include "SW_E.h"
+  #include "SW_F.h"
+  #include "SW_G.h"
+#endif /* PL_NOF_KEYS >= 7 */
+#endif /* PL_HAS_KEYS */
 #if PL_HAS_JOYSTICK
   #include "AD1.h"
 #endif
 #if PL_HAS_WATCHDOG
   #include "Watchdog.h"
 #endif
+#if PL_HAS_BATTLE
+  #include "Battle.h"
+#endif /* PL_HAS_BATTLE */
 
 static bool REMOTE_isOn = FALSE;
 static bool REMOTE_isVerbose = FALSE;
@@ -69,6 +83,20 @@ static int8_t ToSigned8Bit(uint16_t val, bool isX) {
   }
   return (int8_t)tmp;
 }
+
+#if PL_HAS_KEYS
+#if PL_NOF_KEYS >= 7
+static uint8_t APP_GetKeys(uint8_t *keys) {
+  *keys = SW_A_GetVal() << 0 |
+		  SW_B_GetVal() << 1 |
+		  SW_C_GetVal() << 2 |
+		  SW_D_GetVal() << 3 |
+		  SW_E_GetVal() << 4 |
+		  SW_F_GetVal() << 5 |
+		  SW_G_GetVal() << 6 ;
+}
+#endif /* PL_NOF_KEYS >= 7 */
+#endif /* PL_HAS_KEYS */
 
 static uint8_t APP_GetXY(uint16_t *x, uint16_t *y, int8_t *x8, int8_t *y8) {
   uint8_t res;
@@ -111,10 +139,18 @@ static portTASK_FUNCTION(RemoteTask, pvParameters) {
     if (REMOTE_isOn) {
 #if PL_HAS_ACCEL
       if (REMOTE_useAccelerometer) {
-        uint8_t buf[6];
+        #if PL_HAS_KEYS
+          uint8_t buf[7];
+          uint8_t keys;
+        #else /* PL_HAS_KEYS */
+          uint8_t buf[6];
+        #endif /* PL_HAS_KEYS */
         int16_t x, y, z;
 
         /* send periodically accelerometer messages */
+        #if PL_HAS_KEYS
+          APP_GetKeys(&keys);
+        #endif /* PL_HAS_KEYS */
         ACCEL_GetValues(&x, &y, &z);
         buf[0] = (uint8_t)(x&0xFF);
         buf[1] = (uint8_t)(x>>8);
@@ -122,6 +158,9 @@ static portTASK_FUNCTION(RemoteTask, pvParameters) {
         buf[3] = (uint8_t)(y>>8);
         buf[4] = (uint8_t)(z&0xFF);
         buf[5] = (uint8_t)(z>>8);
+        #if PL_HAS_KEYS
+          buf[6] = keys;
+        #endif /* PL_HAS_KEYS */
         if (REMOTE_isVerbose) {
           uint8_t txtBuf[48];
 
@@ -146,14 +185,25 @@ static portTASK_FUNCTION(RemoteTask, pvParameters) {
 #endif
 #if PL_HAS_JOYSTICK
       if (REMOTE_useJoystick) {
-        uint8_t buf[2];
+        #if PL_HAS_KEYS
+          uint8_t buf[3];
+          uint8_t keys;
+        #else /* PL_HAS_KEYS */
+          uint8_t buf[2];
+        #endif /* PL_HAS_KEYS */
         int16_t x, y;
         int8_t x8, y8;
 
         /* send periodically accelerometer messages */
+        #if PL_HAS_KEYS
+          APP_GetKeys(&keys);
+        #endif /* PL_HAS_KEYS */
         APP_GetXY(&x, &y, &x8, &y8);
         buf[0] = x8;
         buf[1] = y8;
+        #if PL_HAS_KEYS
+          buf[2] = keys;
+        #endif /* PL_HAS_KEYS */
         if (REMOTE_isVerbose) {
           uint8_t txtBuf[48];
 
@@ -195,6 +245,32 @@ static portTASK_FUNCTION(RemoteTask, pvParameters) {
   } /* for */
 }
 #endif
+
+static void REMOTE_HandleKeyMsg(uint8_t keys) {
+  #if PL_HAS_BATTLE
+    static uint8_t oldKeys;
+    if ((keys & 1 << 0) && !(oldKeys & 1 << 0)) {
+        BATTLE_changeState(BATTLE_STATE_FIND);
+    } else if ((keys & 1 << 1) && !(oldKeys & 1 << 1)) {
+        BATTLE_changeState(BATTLE_STATE_REMOTE);
+    } else if ((keys & 1 << 2) && !(oldKeys & 1 << 2)) {
+        BATTLE_changeState(BATTLE_STATE_REMOTE_NOLINE);
+    } else if ((keys & 1 << 3) && !(oldKeys & 1 << 3)) {
+        /* Do nothing */
+    } else if ((keys & 1 << 4) && !(oldKeys & 1 << 4)) {
+        /* Do nothing */
+    } else if ((keys & 1 << 5) && !(oldKeys & 1 << 5)) {
+        /* Do nothing */
+    } else if ((keys & 1 << 6) && !(oldKeys & 1 << 6)) {
+        /* Do nothing */
+    } else if ((keys & 1 << 7) && !(oldKeys & 1 << 7)) {
+        /* Do nothing */
+    } else {
+        /* Do nothing */
+    }
+    oldKeys = keys;
+  #endif /* PL_HAS_BATTLE */
+}
 
 #if PL_HAS_MOTOR
 static void REMOTE_HandleMotorMsg(int16_t speedVal, int16_t directionVal, int16_t z) {
@@ -286,6 +362,7 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
   uint8_t buf[48];
 #endif
   int16_t x, y, z;
+  uint8_t keys;
   
   (void)size;
   (void)packet;
@@ -297,6 +374,9 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
       x = (data[0])|(data[1]<<8);
       y = (data[2])|(data[3]<<8);
       z = (data[4])|(data[5]<<8);
+      if (size == 7) {
+        keys = data[6];
+      }
       if (REMOTE_isVerbose) {
         UTIL1_strcpy(buf, sizeof(buf), (unsigned char*)"RX: x: ");
         UTIL1_strcatNum16s(buf, sizeof(buf), x);
@@ -330,6 +410,9 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
         *handled = TRUE;
         x = *data; /* get x data value */
         y = *(data+1); /* get y data value */
+        if (size == 3) {
+          keys = *(data+2);
+        }
         if (REMOTE_isVerbose) {
           UTIL1_strcpy(buf, sizeof(buf), (unsigned char*)"x/y: ");
           UTIL1_strcatNum8s(buf, sizeof(buf), (int8_t)x);

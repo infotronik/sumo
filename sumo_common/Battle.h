@@ -31,6 +31,7 @@ typedef enum {
 } BattleStateType;
 
 static void BATTLE_changeState(BattleStateType state);
+static BattleStateType BATTLE_GetState(void);
 void BATTLE_StateMachine(void);
 bool BATTLE_EnemyInRange(void);
 

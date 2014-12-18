@@ -3,8 +3,8 @@
   <Header>
     <Name>sumo_robo</Name>
     <SavedBy>daniw</SavedBy>
-    <ModificationStamp>104</ModificationStamp>
-    <Date>2014-12-17</Date>
+    <ModificationStamp>105</ModificationStamp>
+    <Date>2014-12-18</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.10.1.RT6_b1437-1025</PEversion>
   </Header>
@@ -21103,7 +21103,7 @@
             </ItemState>
             <ItemState>
               <ItemSymbol>DividerInputFreq</ItemSymbol>
-              <Value>120 MHz</Value>
+              <Value>unknown</Value>
             </ItemState>
             <ItemState>
               <ItemSymbol>DividerClockFraction</ItemSymbol>
@@ -21133,7 +21133,7 @@
             </ItemState>
             <ItemState>
               <ItemSymbol>ModuleClockFreq</ItemSymbol>
-              <Value>48 MHz</Value>
+              <Value>unknown</Value>
             </ItemState>
             <ItemState>
               <ItemSymbol>PullUpDownGrp</ItemSymbol>
