@@ -33,15 +33,7 @@
   #include "LED.h"
 #endif
 #if PL_HAS_KEYS
-#if PL_NOF_KEYS >= 7
-  #include "SW_A.h"
-  #include "SW_B.h"
-  #include "SW_C.h"
-  #include "SW_D.h"
-  #include "SW_E.h"
-  #include "SW_F.h"
-  #include "SW_G.h"
-#endif /* PL_NOF_KEYS >= 7 */
+  #include "Keys.h"
 #endif /* PL_HAS_KEYS */
 #if PL_HAS_JOYSTICK
   #include "AD1.h"
@@ -87,13 +79,13 @@ static int8_t ToSigned8Bit(uint16_t val, bool isX) {
 #if PL_HAS_KEYS
 #if PL_NOF_KEYS >= 7
 static uint8_t APP_GetKeys(uint8_t *keys) {
-  *keys = SW_A_GetVal() << 0 |
-		  SW_B_GetVal() << 1 |
-		  SW_C_GetVal() << 2 |
-		  SW_D_GetVal() << 3 |
-		  SW_E_GetVal() << 4 |
-		  SW_F_GetVal() << 5 |
-		  SW_G_GetVal() << 6 ;
+  *keys = KEY1_Get() << KEY_BTN1 |
+		  KEY2_Get() << KEY_BTN2 |
+		  KEY3_Get() << KEY_BTN3 |
+		  KEY4_Get() << KEY_BTN4 |
+		  KEY5_Get() << KEY_BTN5 |
+		  KEY6_Get() << KEY_BTN6 |
+		  KEY7_Get() << KEY_BTN7 ;
 }
 #endif /* PL_NOF_KEYS >= 7 */
 #endif /* PL_HAS_KEYS */
@@ -249,21 +241,19 @@ static portTASK_FUNCTION(RemoteTask, pvParameters) {
 static void REMOTE_HandleKeyMsg(uint8_t keys) {
   #if PL_HAS_BATTLE
     static uint8_t oldKeys;
-    if ((keys & 1 << 0) && !(oldKeys & 1 << 0)) {
+    if        ((keys & 1 << KEY_BTN1) && !(oldKeys & 1 << KEY_BTN1)) {
         BATTLE_changeState(BATTLE_STATE_FIND);
-    } else if ((keys & 1 << 1) && !(oldKeys & 1 << 1)) {
+    } else if ((keys & 1 << KEY_BTN2) && !(oldKeys & 1 << KEY_BTN2)) {
         BATTLE_changeState(BATTLE_STATE_REMOTE);
-    } else if ((keys & 1 << 2) && !(oldKeys & 1 << 2)) {
+    } else if ((keys & 1 << KEY_BTN3) && !(oldKeys & 1 << KEY_BTN3)) {
         BATTLE_changeState(BATTLE_STATE_REMOTE_NOLINE);
-    } else if ((keys & 1 << 3) && !(oldKeys & 1 << 3)) {
+    } else if ((keys & 1 << KEY_BTN4) && !(oldKeys & 1 << KEY_BTN4)) {
         /* Do nothing */
-    } else if ((keys & 1 << 4) && !(oldKeys & 1 << 4)) {
+    } else if ((keys & 1 << KEY_BTN5) && !(oldKeys & 1 << KEY_BTN5)) {
         /* Do nothing */
-    } else if ((keys & 1 << 5) && !(oldKeys & 1 << 5)) {
+    } else if ((keys & 1 << KEY_BTN6) && !(oldKeys & 1 << KEY_BTN6)) {
         /* Do nothing */
-    } else if ((keys & 1 << 6) && !(oldKeys & 1 << 6)) {
-        /* Do nothing */
-    } else if ((keys & 1 << 7) && !(oldKeys & 1 << 7)) {
+    } else if ((keys & 1 << KEY_BTN7) && !(oldKeys & 1 << KEY_BTN7)) {
         /* Do nothing */
     } else {
         /* Do nothing */
