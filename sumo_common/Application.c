@@ -50,6 +50,9 @@
 #if PL_HAS_REMOTE
   #include "Remote.h"
 #endif
+#if PL_HAS_BATTLE
+  #include "Battle.h"
+#endif /* PL_HAS_BATTLE */
 
 #if PL_HAS_LINE_SENSOR
 static LineStateType typ;
@@ -96,6 +99,9 @@ static void APP_EventHandler(EVNT_Handle event) {
 	case EVNT_SW_A_PRESSED:
 		#if PL_HAS_BUZZER
 			BUZ_Beep(1000,10);
+            #if PL_HAS_BATTLE
+			    BATTLE_changeState(BATTLE_STATE_WAIT);
+            #endif /* PL_HAS_BATTLE */
 		#endif
 		break;
 	case EVNT_SW_A_LPRESSED:

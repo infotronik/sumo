@@ -30,7 +30,7 @@ typedef enum {
     BATTLE_STATE_END /* not used state to mark end of states list */
 } BattleStateType;
 
-static void BATTLE_changeState(BattleStateType state);
+void BATTLE_changeState(BattleStateType state);
 static BattleStateType BATTLE_GetState(void);
 void BATTLE_StateMachine(void);
 bool BATTLE_EnemyInRange(void);

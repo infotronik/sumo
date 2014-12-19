@@ -24,7 +24,7 @@ static BattleStateType batstate = BATTLE_STATE_FIND;
 static volatile BattleStateType battleState = BATTLE_STATE_INIT; /* state machine state */
 static volatile BattleStateType battleStatePrev = BATTLE_STATE_INIT; /* previous state machine state */
 
-static void BATTLE_changeState(BattleStateType state) {
+void BATTLE_changeState(BattleStateType state) {
     battleStatePrev = battleState;
     battleState = state;
 }
