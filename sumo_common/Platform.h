@@ -140,6 +140,9 @@
     #define PL_HAS_ULTRASONIC (1)
         /*!< Set to 1 to enable Ultrasonic support, 0 otherwise */
 
+    #define PL_NOF_ULTRASONIC (2)
+        /*!< Number of ultrasonic sensors */
+
     #define PL_HAS_ACCEL (1)
         /*!< Set to 1 to enable Acceleration support, 0 otherwise */
 

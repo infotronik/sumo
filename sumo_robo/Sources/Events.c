@@ -1,7 +1,7 @@
 /* ###################################################################
 **     Filename    : Events.c
 **     Project     : sumo_robo
-**     Processor   : MK22FX512VLQ12
+**     Processor   : MK22FX512VLK12
 **     Component   : Events
 **     Version     : Driver 01.00
 **     Compiler    : GNU C Compiler
@@ -420,6 +420,35 @@ void TU_MCP4728_OnCounterRestart(LDD_TUserData *UserDataPtr)
 #if PL_HAS_SERVO
   Servo1_SetVal();
 #endif /* PL_HAS_SERVO */
+}
+
+/*
+** ===================================================================
+**     Event       :  TU_US_OnChannel1 (module Events)
+**
+**     Component   :  TU_US [TimerUnit_LDD]
+*/
+/*!
+**     @brief
+**         Called if compare register match the counter registers or
+**         capture register has a new content. OnChannel1 event and
+**         Timer unit must be enabled. See [SetEventMask] and
+**         [GetEventMask] methods. This event is available only if a
+**         [Interrupt] is enabled.
+**     @param
+**         UserDataPtr     - Pointer to the user or
+**                           RTOS specific data. The pointer passed as
+**                           the parameter of Init method.
+*/
+/* ===================================================================*/
+void TU_US_OnChannel1(LDD_TUserData *UserDataPtr)
+{
+  /* Write your code here ... */
+  #if PL_HAS_ULTRASONIC
+    #if PL_NOF_ULTRASONIC == 2
+      US_EventEchoCapture2(UserDataPtr);
+    #endif /* PL_NOF_ULTRASONIC == 2 */
+  #endif
 }
 
 /* END Events */

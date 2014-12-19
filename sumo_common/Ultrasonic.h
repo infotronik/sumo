@@ -20,12 +20,18 @@ void US_EventEchoOverflow(LDD_TUserData *UserDataPtr);
  * \param UserDataPtr Pointer to user structure
  */
 void US_EventEchoCapture(LDD_TUserData *UserDataPtr);
+#if PL_NOF_ULTRASONIC == 2
+void US_EventEchoCapture2(LDD_TUserData *UserDataPtr);
+#endif /* PL_NOF_ULTRASONIC == 2 */
 
 /*!
  * \brief Returns the last measured value in centimeters
  * \return distance in centimeters
  */
 uint16_t US_GetLastCentimeterValue(void);
+#if PL_NOF_ULTRASONIC == 2
+uint16_t US2_GetLastCentimeterValue(void);
+#endif /* PL_NOF_ULTRASONIC == 2 */
 
 /*! 
  * \brief Convert measured microseconds to centimeters.
@@ -38,6 +44,9 @@ uint16_t US_usToCentimeters(uint16_t microseconds, uint8_t temperatureCelsius);
  * \return Time of the echo (forward and backward time).
  */
 uint16_t US_Measure_us(void);
+#if PL_NOF_ULTRASONIC == 2
+uint16_t US_Get_Measure_us2(void);
+#endif /* PL_NOF_ULTRASONIC == 2 */
 
 #if PL_HAS_SHELL
 #include "CLS1.h"

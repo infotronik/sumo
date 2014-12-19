@@ -27,6 +27,12 @@ typedef struct {
   volatile US_EchoState state; /* state */
   TU_US_TValueType capture; /* input capture value */
   uint16_t lastValue_us; /* last captured echo, in us */
+#if PL_NOF_ULTRASONIC == 2
+  LDD_TDeviceData *echoDevice2; /* input capture device handle (echo pin) */
+  volatile US_EchoState state2; /* state */
+  TU_US_TValueType capture2; /* input capture value */
+  uint16_t lastValue_us2; /* last captured echo, in us */
+#endif /* PL_NOF_ULTRASONIC == 2 */
 } US_DeviceType;
 
 static US_DeviceType usDevice; /* device handle for the ultrasonic device */
@@ -50,6 +56,20 @@ void US_EventEchoCapture(LDD_TUserData *UserDataPtr) {
   }
 }
 
+#if PL_NOF_ULTRASONIC == 2
+void US_EventEchoCapture2(LDD_TUserData *UserDataPtr) {
+  US_DeviceType *ptr = (US_DeviceType*)UserDataPtr;
+
+  if (usDevice.state2==ECHO_TRIGGERED) { /* 1st edge, this is the raising edge, start measurement */
+    TU_US_ResetCounter(ptr->echoDevice2);
+    usDevice.state2 = ECHO_MEASURE;
+  } else if (usDevice.state2==ECHO_MEASURE) { /* 2nd edge, this is the falling edge: use measurement */
+    (void)TU_US_GetCaptureValue(usDevice.echoDevice, 1, &usDevice.capture2);
+    ptr->state2 = ECHO_FINISHED;
+  }
+}
+#endif /* PL_NOF_ULTRASONIC == 2 */
+
 static uint16_t calcAirspeed_dms(uint8_t temperatureCelsius) {
   /* Return the airspeed depending on the temperature, in deci-meter per second */
   unsigned int airspeed; /* decimeters per second */
@@ -66,20 +86,34 @@ uint16_t US_usToCentimeters(uint16_t microseconds, uint8_t temperatureCelsius) {
 /* measure and return the microseconds */
 uint16_t US_Measure_us(void) {
   int timeout;
-  
+
   FRTOS1_xSemaphoreTake(mutexHandle, portMAX_DELAY);
   /* send 10us pulse on TRIG line. */
   TRIG_SetVal(usDevice.trigDevice);
   WAIT1_Waitus(10);
   usDevice.state = ECHO_TRIGGERED;
+  usDevice.state2 = ECHO_TRIGGERED;
   TRIG_ClrVal(usDevice.trigDevice);
   timeout = 30;
+#if PL_NOF_ULTRASONIC == 1
   while(usDevice.state!=ECHO_FINISHED && timeout>0) {
+#endif /* PL_NOF_ULTRASONIC == 1 */
+#if PL_NOF_ULTRASONIC == 2
+  while((usDevice.state!=ECHO_FINISHED || usDevice.state2!=ECHO_FINISHED ) && timeout>0) {
+#endif /* PL_NOF_ULTRASONIC == 2 */
     /* measure echo pulse */
     if (usDevice.state==ECHO_OVERFLOW) { /* measurement took too long? */
-      usDevice.state = ECHO_IDLE; /* go back to idle */
+      //usDevice.state = ECHO_IDLE; /* go back to idle */
+      usDevice.state = ECHO_FINISHED; /* go back to idle */
       break; /* no echo, error case */
     }
+#if PL_NOF_ULTRASONIC == 2
+    if (usDevice.state2==ECHO_OVERFLOW) { /* measurement took too long? */
+      //usDevice.state2 = ECHO_IDLE; /* go back to idle */
+      usDevice.state2 = ECHO_FINISHED; /* go back to idle */
+      break; /* no echo, error case */
+    }
+#endif /* PL_NOF_ULTRASONIC == 2 */
     WAIT1_WaitOSms(1);
     timeout--;
   } /* while */
@@ -88,14 +122,36 @@ uint16_t US_Measure_us(void) {
   } else {
     usDevice.lastValue_us = 0; /* error case */
   }
+#if PL_NOF_ULTRASONIC == 2
+  if (usDevice.state2==ECHO_FINISHED) {
+    usDevice.lastValue_us2 = (usDevice.capture2*1000UL)/(TU_US_CNT_INP_FREQ_U_0/1000);
+  } else {
+    usDevice.lastValue_us2 = 0; /* error case */
+  }
+#endif /* PL_NOF_ULTRASONIC == 2 */
   usDevice.state = ECHO_IDLE;
+#if PL_NOF_ULTRASONIC == 2
+  usDevice.state2 = ECHO_IDLE;
+#endif /* PL_NOF_ULTRASONIC == 2 */
   FRTOS1_xSemaphoreGive(mutexHandle);
   return usDevice.lastValue_us;
 }
 
+#if PL_NOF_ULTRASONIC == 2
+uint16_t US_Get_Measure_us2(void) {
+  return usDevice.lastValue_us2;
+}
+#endif /* PL_NOF_ULTRASONIC == 2 */
+
 uint16_t US_GetLastCentimeterValue(void) {
   return US_usToCentimeters(usDevice.lastValue_us, 22);
 }
+
+#if PL_NOF_ULTRASONIC == 2
+uint16_t US2_GetLastCentimeterValue(void) {
+  return US_usToCentimeters(usDevice.lastValue_us2, 22);
+}
+#endif /* PL_NOF_ULTRASONIC == 2 */
 
 #if PL_HAS_SHELL
 static void US_PrintHelp(const CLS1_StdIOType *io) {
@@ -105,10 +161,14 @@ static void US_PrintHelp(const CLS1_StdIOType *io) {
 
 static void US_PrintStatus(const CLS1_StdIOType *io) {
   uint8_t buf[16];
-  uint16_t cm, us;
+  uint16_t cm, us, cm2, us2;
   
   us = US_Measure_us();
+#if PL_NOF_ULTRASONIC == 2
+  us2 = US_Get_Measure_us2();
+#endif /* PL_NOF_ULTRASONIC == 2 */
   cm = US_usToCentimeters(us, 22);
+  cm2 = US_usToCentimeters(us2, 22);
   CLS1_SendStatusStr((unsigned char*)"ultrasonic", (unsigned char*)"\r\n", io->stdOut);
   UTIL1_Num16uToStr(buf, sizeof(buf), usDevice.lastValue_us);
   UTIL1_strcat(buf, sizeof(buf), (unsigned char*)"\r\n");
@@ -116,6 +176,14 @@ static void US_PrintStatus(const CLS1_StdIOType *io) {
   UTIL1_Num16uToStr(buf, sizeof(buf), cm);
   UTIL1_strcat(buf, sizeof(buf), (unsigned char*)"\r\n");
   CLS1_SendStatusStr((unsigned char*)"  cm", buf, io->stdOut);
+#if PL_NOF_ULTRASONIC == 2
+  UTIL1_Num16uToStr(buf, sizeof(buf), usDevice.lastValue_us2);
+  UTIL1_strcat(buf, sizeof(buf), (unsigned char*)"\r\n");
+  CLS1_SendStatusStr((unsigned char*)"  us2", buf, io->stdOut);
+  UTIL1_Num16uToStr(buf, sizeof(buf), cm2);
+  UTIL1_strcat(buf, sizeof(buf), (unsigned char*)"\r\n");
+  CLS1_SendStatusStr((unsigned char*)"  cm2", buf, io->stdOut);
+#endif /* PL_NOF_ULTRASONIC == 2 */
 }
 
 uint8_t US_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io) {
@@ -140,6 +208,10 @@ void US_Deinit(void) {
 void US_Init(void) {
   usDevice.state = ECHO_IDLE;
   usDevice.capture = 0;
+#if PL_NOF_ULTRASONIC == 2
+  usDevice.state2 = ECHO_IDLE;
+  usDevice.capture2 = 0;
+#endif /* PL_NOF_ULTRASONIC == 2 */
   usDevice.trigDevice = TRIG_Init(NULL);
   usDevice.echoDevice = TU_US_Init(&usDevice);
   mutexHandle = FRTOS1_xSemaphoreCreateMutex();

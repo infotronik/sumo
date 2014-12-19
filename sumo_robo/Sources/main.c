@@ -1,7 +1,7 @@
 /* ###################################################################
 **     Filename    : main.c
 **     Project     : sumo_robo
-**     Processor   : MK22FX512VLQ12
+**     Processor   : MK22FX512VLK12
 **     Version     : Driver 01.01
 **     Compiler    : GNU C Compiler
 **     Date/Time   : 2014-09-24, 16:09, # CodeGen: 0

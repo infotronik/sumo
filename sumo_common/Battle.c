@@ -15,7 +15,7 @@
 
 #if PL_HAS_BATTLE
 
-#define MAX_US_RANGE_CM 60
+#define MAX_US_RANGE_CM 50
 
 #define BACKWARDDISTANCE 500
 
@@ -38,15 +38,40 @@ static void changeState(void *state) {
     battleState = *((BattleStateType *) state);
 }
 
-bool BATTLE_EnemyInRange(){
-      uint16_t cm;
+uint8_t BATTLE_EnemyInRange(){
+      uint16_t cm, cm2;
       cm = US_usToCentimeters(US_Measure_us(), 22);
-      return(cm <= MAX_US_RANGE_CM);
+#if PL_NOF_ULTRASONIC == 2
+      cm2= US_usToCentimeters(US_Get_Measure_us2(), 22);
+#endif /* PL_NOF_ULTRASONIC == 2 */
+#if PL_NOF_ULTRASONIC == 2
+      if ((cm <= MAX_US_RANGE_CM) && (cm2 <= MAX_US_RANGE_CM)) {
+    	  return 3;
+      }
+      if((cm <= MAX_US_RANGE_CM) && !(cm2 <= MAX_US_RANGE_CM)) {
+    	  return 2;
+      }
+      if (!(cm <= MAX_US_RANGE_CM) && (cm2 <= MAX_US_RANGE_CM)) {
+    	  return 1;
+      }
+      return 0;
+#else
+      if (cm <= MAX_US_RANGE_CM) {
+    	  return 3;
+      }
+      else {
+    	  return 0;
+      }
+#endif /* PL_NOF_ULTRASONIC == 2 */
 }
 
 void BATTLE_Prove(void){
 	if (battleState == BATTLE_STATE_FIND
+	 || battleState == BATTLE_STATE_FIND_LEFT
+	 || battleState == BATTLE_STATE_FIND_RIGHT
 	 || battleState == BATTLE_STATE_PUSH
+	 || battleState == BATTLE_STATE_PUSH_LEFT
+	 || battleState == BATTLE_STATE_PUSH_RIGHT
 	 || battleState == BATTLE_STATE_LINE
 	 || battleState == BATTLE_STATE_LINE_LEFT
 	 || battleState == BATTLE_STATE_LINE_RIGHT) {
@@ -86,6 +111,7 @@ void BATTLE_Prove(void){
 }
 
 void BATTLE_StateMachine(void) {
+	uint8_t enem;
     BATTLE_Prove();
     switch (battleState) {
     case BATTLE_STATE_INIT:
@@ -110,7 +136,40 @@ void BATTLE_StateMachine(void) {
         break;
     case BATTLE_STATE_FIND:
         if(BATTLE_EnemyInRange()){
+        enem = BATTLE_EnemyInRange();
+        switch (enem) {
+        case 3:
+        	BATTLE_changeState(BATTLE_STATE_PUSH);
+        	break;
+        case 2:
+        	BATTLE_changeState(BATTLE_STATE_PUSH_LEFT);
+        	break;
+        case 1:
+        	BATTLE_changeState(BATTLE_STATE_PUSH_RIGHT);
+        	break;
+        default:
+        	break;
+        }
+        }
+        else{
+            DRV_EnableDisable(TRUE);
+            DRV_SetSpeed(2000,-2000);
+            BATTLE_changeState(BATTLE_STATE_FIND);
+        }
+        break;
+    case BATTLE_STATE_FIND_LEFT:
+        if(BATTLE_EnemyInRange()){
             BATTLE_changeState(BATTLE_STATE_PUSH);
+        }
+        else{
+            DRV_EnableDisable(TRUE);
+            DRV_SetSpeed(-2000,2000);
+            BATTLE_changeState(BATTLE_STATE_FIND_LEFT);
+        }
+        break;
+    case BATTLE_STATE_FIND_RIGHT:
+        if(BATTLE_EnemyInRange()){
+            BATTLE_changeState(BATTLE_STATE_PUSH_RIGHT);
         }
         else{
             DRV_EnableDisable(TRUE);
@@ -126,6 +185,26 @@ void BATTLE_StateMachine(void) {
         }
         else{
             BATTLE_changeState(BATTLE_STATE_FIND);
+        }
+        break;
+    case BATTLE_STATE_PUSH_LEFT:
+        if(BATTLE_EnemyInRange()){
+            DRV_EnableDisable(TRUE);
+            DRV_SetSpeed(4000, 5000);
+            BATTLE_changeState(BATTLE_STATE_PUSH_LEFT);
+        }
+        else{
+            BATTLE_changeState(BATTLE_STATE_FIND_LEFT);
+        }
+        break;
+    case BATTLE_STATE_PUSH_RIGHT:
+        if(BATTLE_EnemyInRange()){
+            DRV_EnableDisable(TRUE);
+            DRV_SetSpeed(5000, 4000);
+            BATTLE_changeState(BATTLE_STATE_PUSH_RIGHT);
+        }
+        else{
+            BATTLE_changeState(BATTLE_STATE_FIND_RIGHT);
         }
         break;
     case BATTLE_STATE_LINE:
@@ -246,8 +325,20 @@ static void BATTLE_PrintStatus(const CLS1_StdIOType *io) {
     case BATTLE_STATE_FIND:
         CLS1_SendStr((unsigned char*) "  BATTLE_STATE_FIND\r\n", io->stdOut);
         break;
+    case BATTLE_STATE_FIND_LEFT:
+        CLS1_SendStr((unsigned char*) "  BATTLE_STATE_FIND_LEFT\r\n", io->stdOut);
+        break;
+    case BATTLE_STATE_FIND_RIGHT:
+        CLS1_SendStr((unsigned char*) "  BATTLE_STATE_FIND_RIGHT\r\n", io->stdOut);
+        break;
     case BATTLE_STATE_PUSH:
         CLS1_SendStr((unsigned char*) "  BATTLE_STATE_PUSH\r\n", io->stdOut);
+        break;
+    case BATTLE_STATE_PUSH_LEFT:
+        CLS1_SendStr((unsigned char*) "  BATTLE_STATE_PUSH_LEFT\r\n", io->stdOut);
+        break;
+    case BATTLE_STATE_PUSH_RIGHT:
+        CLS1_SendStr((unsigned char*) "  BATTLE_STATE_PUSH_RIGHT\r\n", io->stdOut);
         break;
     case BATTLE_STATE_LINE:
         CLS1_SendStr((unsigned char*) "  BATTLE_STATE_LINE\r\n", io->stdOut);
